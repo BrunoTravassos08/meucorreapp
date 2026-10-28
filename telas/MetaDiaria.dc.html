@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Meta diária</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+input::placeholder{color:#7E8696}
+input:focus,select:focus{outline:2px solid #FFC629;outline-offset:1px}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+    <a href="Dashboard.dc.html" aria-label="Voltar para o início" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-size: 13px; color: #9AA2B1">Planejamento do mês</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Meta diária</h1>
+    </div>
+  </div>
+
+  <div class="mc-cascata" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+
+    <sc-if value="{{ok}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 22px; overflow: hidden">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 0">
+          <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Faturar por dia</span>
+          <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 44px; line-height: 1.05; color: #FFFFFF; font-variant-numeric: tabular-nums"><span style="font-size: 20px; font-weight: 800; margin-right: 4px">R$</span>{{fatDia}}</div>
+          <span style="font-size: 13px; color: #9AA2B1">em cada um dos {{diasSemana}} dias da semana</span>
+        </div>
+        <div class="mc-estrada" aria-hidden="true" style="height: 5px; margin-top: 14px; background: repeating-linear-gradient(90deg, #FFC629 0 22px, transparent 22px 36px)"></div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #333A46">
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 14px">
+            <span style="font-size: 12px; color: #9AA2B1">Semana</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{fatSemana}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-left: 1px solid #333A46">
+            <span style="font-size: 12px; color: #9AA2B1">Mês</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{fatMes}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-left: 1px solid #333A46">
+            <span style="font-size: 12px; color: #9AA2B1">Rodando</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: {{horasCor}}">{{horasDia}}/dia</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 18px 18px">
+          <div class="mc-cresce" aria-hidden="true" style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; gap: 2px">
+            <div style="flex: {{barFixas}}; background: #FF7A7E"></div>
+            <div style="flex: {{barVar}}; background: #B85A5E"></div>
+            <div style="flex: {{barLucro}}; background: #3DD598"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; font-size: 13.5px; font-variant-numeric: tabular-nums">
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #FF7A7E"></span>Despesas fixas</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">{{despFixas}}</span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #B85A5E"></span>Custos variáveis</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">{{despVar}}</span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #3DD598"></span>Lucro estimado</span><span style="font-family: 'DM Mono', monospace; color: #3DD598">{{lucroMes}}</span>
+          </div>
+          <p style="margin: 0; font-size: 13px; color: #C9CED7">De cada R$ 100 que entram, R$ {{fatiaDesp}} pagam despesas ({{despDia}} por dia) e R$ {{fatiaLucro}} ficam com você ({{lucroDia}} por dia).</p>
+          <sc-if value="{{acimaLimite}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 8px 10px; border: 1px solid #FF7A7E; border-radius: 10px; font-size: 12.5px; color: #FF7A7E">Passa de 12h por dia. Depois de 12h online a Uber pede 6h de pausa.</p>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{temErro}}" hint-placeholder-val="{{ false }}">
+      <p style="margin: 0; padding: 14px; background: #262B35; border: 1px solid #FF7A7E; border-radius: 16px; color: #FF7A7E; font-size: 14px">{{erro}}</p>
+    </sc-if>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <label for="meta-lucro" style="font-size: 14px; font-weight: 600">Quanto quer ganhar limpo no mês?</label>
+      <div style="display: flex; align-items: center; gap: 8px; height: 56px; padding: 0 14px; border-radius: 14px; border: 1px solid #3A414D; background: #262B35">
+        <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #9AA2B1">R$</span>
+        <input id="meta-lucro" inputmode="decimal" value="{{lucroStr}}" onChange="{{onLucro}}" style="flex-grow: 1; min-width: 0; width: 0; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 24px">
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-size: 14px; font-weight: 600">Dias de trabalho</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #9AA2B1">≈ {{diasMes}} dias no mês</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px">
+        <sc-for list="{{dias}}" as="d" hint-placeholder-count="7">
+          <button type="button" aria-pressed="{{d.on}}" onClick="{{d.toggle}}" style="height: 44px; border-radius: 12px; border: 1px solid {{d.borda}}; background: {{d.fundo}}; color: {{d.cor}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 12.5px; cursor: pointer; padding: 0">{{d.nome}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <label for="meta-hora" style="font-size: 14px; font-weight: 600">Sua média por hora</label>
+      <div style="display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px; border-radius: 14px; border: 1px solid #3A414D; background: #262B35">
+        <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #9AA2B1">R$</span>
+        <input id="meta-hora" inputmode="decimal" value="{{porHoraStr}}" onChange="{{onPorHora}}" style="flex-grow: 1; min-width: 0; width: 0; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 16px">
+        <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #9AA2B1">/hora</span>
+      </div>
+      <span style="font-size: 12.5px; color: #9AA2B1">Quanto entra, em média, a cada hora online nos apps.</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: #262B35; border-radius: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 16px; color: #FFFFFF">Despesas fixas</h2>
+        <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #9AA2B1">{{totalFixas}}/mês</span>
+      </div>
+      <span style="font-size: 12.5px; color: #9AA2B1">Vêm todo mês, rodando ou não. IPVA e seguro anual: divida por 12.</span>
+      <sc-for list="{{fixas}}" as="f" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 104px 36px; gap: 6px; align-items: center">
+          <input aria-label="Nome da despesa" value="{{f.nome}}" onChange="{{f.onNome}}" placeholder="Nome" style="min-width: 0; height: 42px; box-sizing: border-box; padding: 0 10px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 14px">
+          <div style="display: flex; align-items: center; gap: 4px; height: 42px; box-sizing: border-box; padding: 0 8px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26">
+            <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #9AA2B1">R$</span>
+            <input aria-label="Valor por mês" inputmode="decimal" value="{{f.valor}}" onChange="{{f.onValor}}" style="flex-grow: 1; min-width: 0; width: 0; border: 0; background: transparent; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 14px">
+          </div>
+          <button type="button" aria-label="Remover despesa" onClick="{{f.remover}}" style="width: 36px; height: 42px; border: 0; border-radius: 10px; background: transparent; color: #9AA2B1; font-size: 20px; cursor: pointer">×</button>
+        </div>
+      </sc-for>
+      <button type="button" onClick="{{addFixa}}" style="align-self: flex-start; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px dashed #4A5261; background: transparent; color: #FFC629; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer">+ Adicionar despesa</button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: #262B35; border-radius: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 16px; color: #FFFFFF">Custos variáveis</h2>
+        <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #9AA2B1">{{totalVar}}</span>
+      </div>
+      <span style="font-size: 12.5px; color: #9AA2B1">Crescem quanto mais você roda. Combustível e desgaste em % do faturamento; comida e lavagem em R$ por dia.</span>
+      <sc-for list="{{variaveis}}" as="v" hint-placeholder-count="3">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 36px; gap: 6px; align-items: center">
+          <input aria-label="Nome do custo" value="{{v.nome}}" onChange="{{v.onNome}}" placeholder="Nome" style="grid-column: 1 / 3; min-width: 0; height: 42px; box-sizing: border-box; padding: 0 10px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 14px">
+          <button type="button" aria-label="Remover custo" onClick="{{v.remover}}" style="width: 36px; height: 42px; border: 0; border-radius: 10px; background: transparent; color: #9AA2B1; font-size: 20px; cursor: pointer">×</button>
+          <div style="display: flex; align-items: center; gap: 4px; height: 42px; box-sizing: border-box; padding: 0 8px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26">
+            <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #9AA2B1">{{v.unidade}}</span>
+            <input aria-label="Valor" inputmode="decimal" value="{{v.valor}}" onChange="{{v.onValor}}" style="flex-grow: 1; min-width: 0; width: 0; border: 0; background: transparent; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 14px">
+          </div>
+          <select aria-label="Como cobrar" value="{{v.tipo}}" onChange="{{v.onTipo}}" style="min-width: 0; height: 42px; padding: 0 4px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', sans-serif; font-size: 12.5px">
+            <option value="percentual">% do faturado</option>
+            <option value="porDia">R$ por dia</option>
+          </select>
+          <span></span>
+        </div>
+      </sc-for>
+      <button type="button" onClick="{{addVar}}" style="align-self: flex-start; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px dashed #4A5261; background: transparent; color: #FFC629; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer">+ Adicionar custo</button>
+    </div>
+
+    <p style="margin: 0; font-size: 12px; color: #9AA2B1">O mês conta 52 semanas ÷ 12. A conta parte do lucro que você quer e soma as despesas por cima.</p>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Plano de exemplo (moto). Mesma lógica de meta-diaria.js.
+  padrao() {
+    return {
+      lucro: '3.000', porHora: '28', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [
+        { nome: 'Parcela da moto', valor: '450' },
+        { nome: 'Seguro', valor: '90' },
+        { nome: 'IPVA e licenciamento (÷12)', valor: '40' },
+        { nome: 'Plano de celular', valor: '50' },
+        { nome: 'MEI (DAS)', valor: '82' }
+      ],
+      variaveis: [
+        { nome: 'Combustível', valor: '12', tipo: 'percentual' },
+        { nome: 'Óleo, relação e pneus', valor: '6', tipo: 'percentual' },
+        { nome: 'Alimentação', valor: '20', tipo: 'porDia' }
+      ]
+    };
+  }
+
+  carregar() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return this.padrao();
+  }
+
+  state = { mcAnim: true, mcK: 0, plano: this.carregar() };
+
+  mudar(fn) {
+    var p = JSON.parse(JSON.stringify(this.state.plano));
+    fn(p);
+    try { window.localStorage.setItem('meucorre.plano', JSON.stringify(p)); } catch (e) {}
+    this.setState({ plano: p });
+  }
+
+  num(s) {
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+
+  calcular(p) {
+    var self = this;
+    var semanas = 52 / 12;
+    var diasSemana = p.dias.reduce(function (a, b) { return a + b; }, 0);
+    var lucro = this.num(p.lucro), porHora = this.num(p.porHora);
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    if (diasSemana < 1) return { erro: 'Escolha pelo menos um dia de trabalho na semana.' };
+    if (pct >= 1) return { erro: 'Os custos em % somam 100% ou mais do faturamento. Assim não sobra lucro.' };
+    var diasMes = diasSemana * semanas;
+    var fatMes = (lucro + fixas + porDia * diasMes) / (1 - pct);
+    var varMes = fatMes * pct + porDia * diasMes;
+    var fatDia = fatMes / diasMes;
+    return {
+      diasSemana: diasSemana, diasMes: diasMes, pct: pct, porDia: porDia,
+      fatDia: fatDia, fatSemana: fatDia * diasSemana, fatMes: fatMes,
+      fixas: fixas, varMes: varMes, despMes: fixas + varMes, lucro: lucro,
+      horasDia: porHora > 0 ? fatDia / porHora : null
+    };
+  }
+
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  componentDidMount() { this.mcIniciar(); }
+  componentWillUnmount() { this.mcParar(); }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    ['fatDia'].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, p = this.state.plano, r = this.calcular(p);
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+    var rs0 = function (v) { return 'R$ ' + n0.format(Math.round(v)); };
+    var hm = function (h) { var t = Math.round(h * 60); return Math.floor(t / 60) + 'h' + String(t % 60).padStart(2, '0'); };
+    var nomes = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+    var ok = !r.erro;
+    var fatiaDesp = ok && r.fatMes > 0 ? Math.round(r.despMes / r.fatMes * 100) : 0;
+
+    return {
+      ok: ok, temErro: !ok, erro: r.erro || '',
+      fatDia: ok ? nf.format(r.fatDia) : '–',
+      fatSemana: ok ? rs0(r.fatSemana) : '–',
+      fatMes: ok ? rs0(r.fatMes) : '–',
+      diasSemana: ok ? r.diasSemana : 0,
+      diasMes: ok ? Math.round(r.diasMes) : 0,
+      horasDia: ok && r.horasDia !== null ? hm(r.horasDia) : '–',
+      horasCor: ok && r.horasDia > 12 ? '#FF7A7E' : '#FFC629',
+      acimaLimite: ok && r.horasDia > 12,
+      barFixas: ok ? r.fixas : 0, barVar: ok ? r.varMes : 0, barLucro: ok ? r.lucro : 0,
+      despFixas: ok ? rs(r.fixas) : '–', despVar: ok ? rs(r.varMes) : '–', lucroMes: ok ? rs(r.lucro) : '–',
+      despDia: ok ? rs(r.despMes / r.diasMes) : '–', lucroDia: ok ? rs(r.lucro / r.diasMes) : '–',
+      fatiaDesp: fatiaDesp, fatiaLucro: 100 - fatiaDesp,
+      totalFixas: rs(p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0)),
+      totalVar: ok ? n0.format(r.pct * 100) + '% + ' + rs(r.porDia) + '/dia' : '',
+      lucroStr: p.lucro, porHoraStr: p.porHora,
+      onLucro: function (e) { var v = e.target.value; self.mudar(function (q) { q.lucro = v; }); },
+      onPorHora: function (e) { var v = e.target.value; self.mudar(function (q) { q.porHora = v; }); },
+      dias: nomes.map(function (nome, i) {
+        var on = !!p.dias[i];
+        return {
+          nome: nome, on: on ? 'true' : 'false',
+          fundo: on ? '#FFC629' : '#262B35', cor: on ? '#1A1E26' : '#C9CED7', borda: on ? '#FFC629' : '#333A46',
+          toggle: function () { self.mudar(function (q) { q.dias[i] = q.dias[i] ? 0 : 1; }); }
+        };
+      }),
+      fixas: p.fixas.map(function (f, i) {
+        return {
+          nome: f.nome, valor: f.valor,
+          onNome: function (e) { var v = e.target.value; self.mudar(function (q) { q.fixas[i].nome = v; }); },
+          onValor: function (e) { var v = e.target.value; self.mudar(function (q) { q.fixas[i].valor = v; }); },
+          remover: function () { self.mudar(function (q) { q.fixas.splice(i, 1); }); }
+        };
+      }),
+      variaveis: p.variaveis.map(function (c, i) {
+        return {
+          nome: c.nome, valor: c.valor, tipo: c.tipo, unidade: c.tipo === 'percentual' ? '%' : 'R$',
+          onNome: function (e) { var v = e.target.value; self.mudar(function (q) { q.variaveis[i].nome = v; }); },
+          onValor: function (e) { var v = e.target.value; self.mudar(function (q) { q.variaveis[i].valor = v; }); },
+          onTipo: function (e) { var v = e.target.value; self.mudar(function (q) { q.variaveis[i].tipo = v; }); },
+          remover: function () { self.mudar(function (q) { q.variaveis.splice(i, 1); }); }
+        };
+      }),
+      addFixa: function () { self.mudar(function (q) { q.fixas.push({ nome: '', valor: '' }); }); },
+      addVar: function () { self.mudar(function (q) { q.variaveis.push({ nome: '', valor: '', tipo: 'porDia' }); }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

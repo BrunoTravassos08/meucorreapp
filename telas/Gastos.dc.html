@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Gastos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+input::placeholder{color:#7E8696}
+input:focus{outline:2px solid #FFC629;outline-offset:1px}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+    <a href="Dashboard.dc.html" aria-label="Voltar para o início" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-size: 13px; color: #9AA2B1">Terça, 27 de outubro</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Gastos</h1>
+    </div>
+    <a href="Dias.dc.html" aria-label="Dias anteriores" title="Dias anteriores" style="margin-left: auto; width: 44px; height: 44px; border-radius: 14px; background: #262B35; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FFC629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M7 14h3M7 17h6"></path></svg>
+    </a>
+  </div>
+
+  <div role="group" aria-label="Tipo de gasto" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 0 20px 10px; padding: 4px; background: #262B35; border-radius: 14px">
+    <sc-for list="{{abas}}" as="t" hint-placeholder-count="2">
+      <button type="button" aria-pressed="{{t.on}}" onClick="{{t.escolher}}" style="height: 38px; border: 0; border-radius: 10px; background: {{t.fundo}}; color: {{t.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">{{t.nome}}</button>
+    </sc-for>
+  </div>
+
+  <div style="flex-grow: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+
+    <sc-if value="{{abaDia}}" hint-placeholder-val="{{ true }}">
+      <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 14px">
+
+        <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 22px; overflow: hidden">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 0">
+            <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Gastos de hoje</span>
+            <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 44px; line-height: 1.05; color: #FF7A7E; font-variant-numeric: tabular-nums"><span style="font-size: 20px; font-weight: 800; margin-right: 4px">R$</span>{{total}}</div>
+            <span style="font-size: 13px; color: #9AA2B1">{{fatiaFrase}}</span>
+          </div>
+          <div class="mc-estrada" aria-hidden="true" style="height: 5px; margin-top: 14px; background: repeating-linear-gradient(90deg, #FFC629 0 22px, transparent 22px 36px)"></div>
+          <sc-if value="{{temCats}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 18px; border-bottom: 1px solid #333A46">
+              <div class="mc-cresce" aria-hidden="true" style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; gap: 2px">
+                <sc-for list="{{porCat}}" as="c" hint-placeholder-count="2">
+                  <div style="flex: {{c.peso}}; background: {{c.cor}}"></div>
+                </sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; font-size: 13.5px; font-variant-numeric: tabular-nums">
+                <sc-for list="{{porCat}}" as="c" hint-placeholder-count="2">
+                  <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><span style="flex-shrink: 0; width: 8px; height: 8px; border-radius: 2px; background: {{c.cor}}"></span>{{c.nome}}</span>
+                  <span style="font-family: 'DM Mono', monospace; color: #FF7A7E">{{c.valor}}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 18px 18px; background: #20252E">
+            <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Lucro do dia</span>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; font-size: 14px; font-variant-numeric: tabular-nums">
+              <a href="GanhosDia.dc.html" style="color: #C9CED7">Faturamento</a><span style="font-family: 'DM Mono', monospace; color: #3DD598">{{faturamento}}</span>
+              <span style="color: #C9CED7">Gastos do dia</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{totalRs}}</span>
+              <span style="font-weight: 700; color: #FFFFFF">Lucro</span><span style="font-family: 'DM Mono', monospace; font-weight: 500; color: {{lucroCor}}">{{lucro}}</span>
+            </div>
+            <sc-if value="{{temPrevisto}}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 12.5px; color: #C9CED7">{{previstoFrase}} <a href="MetaDiaria.dc.html" style="font-weight: 600">Ver a meta</a></p>
+            </sc-if>
+            <sc-if value="{{temComb}}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 12.5px; color: #9AA2B1">{{combFrase}}</p>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Registrar gasto</h2>
+          <div role="group" aria-label="Categoria" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{cats}}" as="c" hint-placeholder-count="6">
+              <button type="button" aria-pressed="{{c.on}}" onClick="{{c.escolher}}" style="min-width: 0; min-height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 6px 4px; border-radius: 12px; border: 1px solid {{c.borda}}; background: {{c.fundo}}; color: {{c.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 12px; line-height: 1.15; text-align: center; cursor: pointer">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.icone}}"></path></svg>
+                {{c.curto}}
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size: 12.5px; color: #9AA2B1">{{dicaCat}}</span>
+          <div style="display: flex; gap: 8px">
+            <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <label for="gasto-valor" style="font-size: 12.5px; font-weight: 600">Valor</label>
+              <input id="gasto-valor" inputmode="decimal" value="{{fValor}}" onChange="{{onValor}}" placeholder="R$ 0,00" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+            </div>
+            <sc-if value="{{ehComb}}" hint-placeholder-val="{{ true }}">
+              <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+                <label for="gasto-litros" style="font-size: 12.5px; font-weight: 600">Litros (opcional)</label>
+                <input id="gasto-litros" inputmode="decimal" value="{{fLitros}}" onChange="{{onLitros}}" placeholder="0,0" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+              </div>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="gasto-desc" style="font-size: 12.5px; font-weight: 600">Onde ou o quê (opcional)</label>
+            <input id="gasto-desc" value="{{fDesc}}" onChange="{{onDesc}}" placeholder="{{descExemplo}}" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 15px">
+          </div>
+          <span style="font-size: 13px; color: {{previaCor}}">{{previa}}</span>
+          <button type="button" onClick="{{adicionar}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; border: 0; border-radius: 14px; background: #FFC629; color: #1A1E26; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            Adicionar gasto
+          </button>
+        </div>
+
+        <div class="mc-linhas" style="display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+            <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Gastos lançados hoje</h2>
+            <span style="font-size: 12.5px; color: #9AA2B1">{{qtdLanc}}</span>
+          </div>
+          <sc-for list="{{lancamentos}}" as="l" hint-placeholder-count="2">
+            <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto 36px; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid #2D333E">
+              <span style="width: 40px; height: 40px; border-radius: 12px; background: #3A2A2F; color: #FF7A7E; display: flex; align-items: center; justify-content: center">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{l.icone}}"></path></svg>
+              </span>
+              <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+                <span style="font-weight: 600; font-size: 15px; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{l.titulo}}</span>
+                <span style="font-size: 12.5px; color: #9AA2B1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{l.detalhe}}</span>
+              </div>
+              <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #FF7A7E">−{{l.valor}}</span>
+              <button type="button" aria-label="Remover gasto" onClick="{{l.remover}}" style="width: 36px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #9AA2B1; font-size: 20px; cursor: pointer">×</button>
+            </div>
+          </sc-for>
+          <sc-if value="{{semLanc}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 14px 0; font-size: 14px; color: #9AA2B1">Nenhum gasto hoje. Lance o abastecimento, a comida e o que mais sair do bolso no corre.</p>
+          </sc-if>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <button type="button" onClick="{{novoDia}}" style="align-self: flex-start; height: 44px; padding: 0 14px; border-radius: 12px; border: 1px dashed #4A5261; background: transparent; color: #C9CED7; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer">Começar um dia novo</button>
+          <span style="font-size: 12.5px; color: #9AA2B1">Fecha o dia no Painel e zera os ganhos e os gastos.</span>
+          <sc-if value="{{fechado}}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 13.5px; color: #3DD598">Dia fechado e salvo. <a href="Painel.dc.html" style="font-weight: 600">Ver no Painel</a></span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{abaMes}}" hint-placeholder-val="{{ false }}">
+      <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 14px">
+
+        <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 22px; overflow: hidden">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 0">
+            <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Contas de {{mesNome}}</span>
+            <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 44px; line-height: 1.05; color: #FF7A7E; font-variant-numeric: tabular-nums"><span style="font-size: 20px; font-weight: 800; margin-right: 4px">R$</span>{{contasTotal}}</div>
+            <span style="font-size: 13px; color: #9AA2B1">vêm todo mês, rodando ou não</span>
+          </div>
+          <div class="mc-estrada" aria-hidden="true" style="height: 5px; margin-top: 14px; background: repeating-linear-gradient(90deg, #FFC629 0 22px, transparent 22px 36px)"></div>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; border-bottom: 1px solid #333A46">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13px; font-variant-numeric: tabular-nums">
+              <span style="color: #C9CED7">Pagas {{contasPago}}</span><span style="color: #C9CED7">Faltam {{contasFalta}}</span>
+            </div>
+            <div role="progressbar" aria-label="Contas pagas no mês" aria-valuenow="{{contasPct}}" aria-valuemin="0" aria-valuemax="100" style="height: 8px; border-radius: 999px; background: #1A1E26; overflow: hidden">
+              <div style="width: {{contasPct}}%; height: 100%; border-radius: 999px; background: #FFC629"></div>
+            </div>
+          </div>
+          <div style="padding: 14px 18px 18px; background: #20252E">
+            <p style="margin: 0; font-size: 13px; color: #C9CED7">{{porDiaFrase}}</p>
+          </div>
+        </div>
+
+        <div class="mc-linhas" style="display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+            <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Contas fixas</h2>
+            <a href="MetaDiaria.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">Editar na meta</a>
+          </div>
+          <sc-for list="{{contas}}" as="c" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 36px; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid #2D333E">
+              <button type="button" aria-pressed="{{c.on}}" aria-label="{{c.rotulo}}" onClick="{{c.alternar}}" style="width: 44px; height: 44px; padding: 0; border-radius: 12px; border: 1px solid {{c.borda}}; background: {{c.fundo}}; color: #1A1E26; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="{{c.marca}}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+              </button>
+              <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+                <span style="font-weight: 600; font-size: 15px; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{c.nome}}</span>
+                <span style="font-size: 12.5px; color: {{c.estadoCor}}">{{c.estado}}</span>
+              </div>
+              <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #FF7A7E">{{c.valor}}</span>
+              <button type="button" aria-label="Remover conta" onClick="{{c.remover}}" style="width: 36px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #9AA2B1; font-size: 20px; cursor: pointer">×</button>
+            </div>
+          </sc-for>
+          <sc-if value="{{semContas}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 14px 0; font-size: 14px; color: #9AA2B1">Nenhuma conta fixa. Lance o aluguel ou a parcela do carro, o seguro e a documentação.</p>
+          </sc-if>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Adicionar conta do mês</h2>
+          <div role="group" aria-label="Tipo de conta" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{sugestoes}}" as="s" hint-placeholder-count="5">
+              <button type="button" onClick="{{s.usar}}" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #3A414D; background: #1A1E26; color: #C9CED7; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer">{{s.nome}}</button>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <label for="conta-nome" style="font-size: 12.5px; font-weight: 600">Conta</label>
+              <input id="conta-nome" value="{{cNome}}" onChange="{{onCNome}}" placeholder="Aluguel do carro" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 15px">
+            </div>
+            <div style="flex: 0 0 112px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <label for="conta-valor" style="font-size: 12.5px; font-weight: 600">Por mês</label>
+              <input id="conta-valor" inputmode="decimal" value="{{cValor}}" onChange="{{onCValor}}" placeholder="R$ 0,00" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+            </div>
+          </div>
+          <span style="font-size: 13px; color: {{contaPreviaCor}}">{{contaPrevia}}</span>
+          <button type="button" onClick="{{addConta}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; border: 0; border-radius: 14px; background: #FFC629; color: #1A1E26; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            Adicionar conta
+          </button>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Mesma lógica de gastos.js. Gastos do dia em meucorre.gastos; as contas do mês são as
+  // despesas fixas de meucorre.plano (a Meta diária já conta com elas).
+  CATS = [
+    { id: 'combustivel', nome: 'Combustível', curto: 'Combustível', cor: '#FF7A7E', exemplo: 'Posto Ipiranga',
+      dica: 'Gasolina, etanol ou GNV. Com os litros, o app mostra o preço por litro.',
+      icone: 'M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 8h4' },
+    { id: 'manutencao', nome: 'Manutenção', curto: 'Manutenção', cor: '#C9555A', exemplo: 'Troca de óleo',
+      dica: 'Óleo, pneus, revisões, freio, relação e outros reparos.',
+      icone: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z' },
+    { id: 'lavagem', nome: 'Lavagem e estacionamento', curto: 'Lavagem e estac.', cor: '#FFB3B5', exemplo: 'Lava-rápido',
+      dica: 'Lavagem, aspiração, estacionamento e zona azul.',
+      icone: 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 17V7h4a3 3 0 0 1 0 6H9' },
+    { id: 'pedagio', nome: 'Pedágio', curto: 'Pedágio', cor: '#E89A5B', exemplo: 'Rodovia dos Bandeirantes',
+      dica: 'Só os pedágios que o passageiro ou o app não reembolsaram.',
+      icone: 'M4 21V7M20 21V7M2 7h20M4 12h16M8 7l-4 5M14 7l-4 5M20 7l-4 5' },
+    { id: 'alimentacao', nome: 'Alimentação', curto: 'Alimentação', cor: '#B85A5E', exemplo: 'Marmita',
+      dica: 'Almoço, lanche, água e café durante o expediente.',
+      icone: 'M6 2v8a3 3 0 0 0 6 0V2M9 2v20M17 22V2c-2 2-3 5-3 8h3' },
+    { id: 'pessoal', nome: 'Pessoais e outras', curto: 'Pessoais e outras', cor: '#9AA2B1', exemplo: 'Recarga do celular',
+      dica: 'Despesas pessoais e outras contas que saem do dinheiro do dia.',
+      icone: 'M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M16 14h2' }
+  ];
+  SUGESTOES = ['Aluguel do carro', 'Financiamento', 'Seguro', 'Documentação e IPVA (÷12)', 'Plano de celular'];
+  MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+  mesChave() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+  }
+
+  padrao() {
+    var pagas = {};
+    pagas[this.mesChave()] = ['Parcela da moto', 'Seguro'];
+    return {
+      lancamentos: [
+        { id: 1, categoria: 'combustivel', valor: '42,00', litros: '6,8', desc: 'Posto Ipiranga', hora: '07:40' },
+        { id: 2, categoria: 'alimentacao', valor: '18,50', litros: '', desc: 'Marmita', hora: '12:15' }
+      ],
+      pagas: pagas
+    };
+  }
+
+  carregar() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) { s.pagas = s.pagas || {}; return s; }
+    } catch (e) {}
+    return this.padrao();
+  }
+
+  // Mesmo plano de exemplo da Meta diária
+  carregarPlano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', porHora: '28', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [
+        { nome: 'Parcela da moto', valor: '450' },
+        { nome: 'Seguro', valor: '90' },
+        { nome: 'IPVA e licenciamento (÷12)', valor: '40' },
+        { nome: 'Plano de celular', valor: '50' },
+        { nome: 'MEI (DAS)', valor: '82' }
+      ],
+      variaveis: [
+        { nome: 'Combustível', valor: '12', tipo: 'percentual' },
+        { nome: 'Óleo, relação e pneus', valor: '6', tipo: 'percentual' },
+        { nome: 'Alimentação', valor: '20', tipo: 'porDia' }
+      ]
+    };
+  }
+
+  // Ganhos completos do dia, da tela Ganhos do dia (mesmo exemplo de lá), para fechar o dia
+  ganhosDoDia() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00' },
+        { app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60' },
+        { app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '' },
+        { app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50' },
+        { app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '' }
+      ]
+    };
+  }
+
+  // Fecha o dia: grava o resumo em meucorre.historico (o Painel lê de lá). O primeiro dia de verdade
+  // substitui os dias de exemplo do Painel. Mesma lógica de painel.js (fecharDia).
+  fecharDia(g, gastos, p) {
+    var self = this, bruto = 0, taxas = 0, corridas = 0, total = 0, comb = 0;
+    g.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      bruto += b; taxas += t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    gastos.forEach(function (x) { var v = self.num(x.valor); total += v; if (x.categoria === 'combustivel') comb += v; });
+    if (bruto === 0 && total === 0) return false;
+    var t0 = g.turno || {}, ini = this.hhmm(t0.inicio), fim = this.hhmm(t0.fim);
+    var k0 = this.num(t0.kmInicial), k1 = this.num(t0.kmFinal);
+    var diasMes = p.dias.reduce(function (a, b) { return a + (b ? 1 : 0); }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (s, f) { return s + self.num(f.valor); }, 0), pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    var r2 = function (v) { return Math.round(v * 100) / 100; }, d = new Date();
+    var dia = {
+      data: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'),
+      faturamento: r2(bruto - taxas), bruto: r2(bruto), taxas: r2(taxas), gastos: r2(total), combustivel: r2(comb),
+      km: String(t0.kmInicial || '').trim() && String(t0.kmFinal || '').trim() && k1 >= k0 ? k1 - k0 : null,
+      minutos: ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null,
+      corridas: corridas,
+      inicio: t0.inicio || '', fim: t0.fim || '', itensGanhos: g.lancamentos, itensGastos: gastos,
+      meta: diasMes > 0 && pct < 1 ? r2((this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes) : 0
+    };
+    var h = null;
+    try { h = JSON.parse(window.localStorage.getItem('meucorre.historico') || 'null'); } catch (e) {}
+    if (!h || h.exemplo !== false || !Array.isArray(h.dias)) h = { exemplo: false, dias: [] };
+    h.dias.push(dia);
+    try { window.localStorage.setItem('meucorre.historico', JSON.stringify(h)); } catch (e) {}
+    return true;
+  }
+  hhmm(s) { var m = /^(\d{1,2}):(\d{2})$/.exec(String(s || '')); return m ? Number(m[1]) * 60 + Number(m[2]) : null; }
+
+  // Faturamento e km do dia, da tela Ganhos do dia (mesmo exemplo de lá)
+  ganhos() {
+    var self = this, d = null;
+    try { d = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null'); } catch (e) {}
+    if (!d || !d.turno || !d.lancamentos) {
+      d = {
+        turno: { kmInicial: '12340', kmFinal: '12436' },
+        lancamentos: [
+          { app: 'uber', tipo: 'corrida', bruto: '112,00', taxa: '28,00' },
+          { app: '99', tipo: 'corrida', bruto: '68,00', taxa: '13,60' },
+          { app: 'uber', tipo: 'bonus', bruto: '10,00', taxa: '' },
+          { app: 'indrive', tipo: 'corrida', bruto: '15,00', taxa: '1,50' },
+          { app: 'particular', tipo: 'corrida', bruto: '20,00', taxa: '' }
+        ]
+      };
+    }
+    var recebido = 0;
+    d.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      recebido += b - t;
+    });
+    var k0 = this.num(d.turno.kmInicial), k1 = this.num(d.turno.kmFinal);
+    var km = String(d.turno.kmInicial || '').trim() && String(d.turno.kmFinal || '').trim() && k1 > k0 ? k1 - k0 : null;
+    return { recebido: recebido, km: km };
+  }
+
+  state = { mcAnim: true, mcK: 0, gastos: this.carregar(), plano: this.carregarPlano(), aba: 'dia', form: { categoria: 'combustivel', valor: '', litros: '', desc: '' }, erroForm: '', conta: { nome: '', valor: '' }, erroConta: '' };
+
+  mudar(fn) {
+    var g = JSON.parse(JSON.stringify(this.state.gastos));
+    fn(g);
+    try { window.localStorage.setItem('meucorre.gastos', JSON.stringify(g)); } catch (e) {}
+    this.setState({ gastos: g });
+  }
+
+  // As contas do mês são as despesas fixas do plano: mudar aqui muda a meta diária
+  mudarPlano(fn) {
+    var p = JSON.parse(JSON.stringify(this.state.plano));
+    fn(p);
+    try { window.localStorage.setItem('meucorre.plano', JSON.stringify(p)); } catch (e) {}
+    this.setState({ plano: p });
+  }
+
+  mudarForm(campo, valor) {
+    var f = Object.assign({}, this.state.form);
+    f[campo] = valor;
+    this.setState({ form: f, erroForm: '' });
+  }
+
+  mudarConta(campo, valor) {
+    var c = Object.assign({}, this.state.conta);
+    c[campo] = valor;
+    this.setState({ conta: c, erroConta: '' });
+  }
+
+  num(s) {
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+
+  cat(id) {
+    return this.CATS.filter(function (c) { return c.id === id; })[0] || this.CATS[this.CATS.length - 1];
+  }
+
+  componentDidMount() {
+    this.mcIniciar();
+    var self = this;
+    this.aoMudar = function (e) {
+      if (e.key === 'meucorre.gastos') self.setState({ gastos: self.carregar() });
+      if (e.key === 'meucorre.plano') self.setState({ plano: self.carregarPlano() });
+      if (e.key === 'meucorre.ganhos') self.forceUpdate();
+    };
+    window.addEventListener('storage', this.aoMudar);
+  }
+
+  componentWillUnmount() { this.mcParar();
+    window.removeEventListener('storage', this.aoMudar);
+  }
+
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    ['total', 'contasTotal'].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, g = this.state.gastos, p = this.state.plano, f = this.state.form, ct = this.state.conta;
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var n1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+
+    // Gastos do dia
+    var porCat = {}, total = 0, comb = 0, litros = 0, combComLitros = 0;
+    g.lancamentos.forEach(function (l) {
+      var v = self.num(l.valor);
+      porCat[l.categoria] = (porCat[l.categoria] || 0) + v;
+      total += v;
+      if (l.categoria === 'combustivel') {
+        comb += v;
+        if (self.num(l.litros) > 0) { litros += self.num(l.litros); combComLitros += v; }
+      }
+    });
+    var gan = this.ganhos();
+    var lucro = gan.recebido - total;
+
+    // O que a meta previa de custos variáveis para o faturamento de hoje
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    var previsto = gan.recebido * pct / 100 + porDia;
+    var dif = total - previsto;
+    var previstoFrase = previsto > 0 ? 'Sua meta previa ' + rs(previsto) + ' de gastos hoje. ' +
+      (Math.abs(dif) < 0.5 ? 'Bem no previsto.' : dif > 0 ? 'Você gastou ' + rs(dif) + ' a mais.' : 'Você gastou ' + rs(-dif) + ' a menos.') : '';
+
+    var combFrase = '';
+    if (comb > 0) {
+      var partes = [];
+      if (litros > 0) partes.push(rs(combComLitros / litros) + ' por litro');
+      if (gan.km) partes.push(rs(comb / gan.km) + ' por km rodado');
+      if (partes.length) combFrase = 'Combustível hoje: ' + partes.join(' · ') + '.';
+    }
+
+    var fv = this.num(f.valor), fl = this.num(f.litros);
+    var c = this.cat(f.categoria);
+    var ehComb = f.categoria === 'combustivel';
+    var previa = this.state.erroForm || (fv > 0 ? 'Vai sair ' + rs(fv) + ' do lucro de hoje' + (ehComb && fl > 0 ? ' (' + rs(fv / fl) + ' por litro).' : '.') : 'Lance cada gasto na hora para não esquecer.');
+
+    // Contas do mês (despesas fixas do plano)
+    var mes = this.mesChave(), pagas = g.pagas[mes] || [];
+    var contasTotal = 0, contasPago = 0;
+    p.fixas.forEach(function (x) { var v = self.num(x.valor); contasTotal += v; if (pagas.indexOf(x.nome) >= 0) contasPago += v; });
+    var diasMes = p.dias.reduce(function (a, b) { return a + b; }, 0) * 52 / 12;
+    var contasPct = contasTotal > 0 ? Math.round(contasPago / contasTotal * 100) : 0;
+    var cv = this.num(ct.valor);
+    var contaPrevia = this.state.erroConta || (cv > 0 && diasMes > 0 ? 'Soma ' + rs(cv / diasMes) + ' por dia trabalhado na sua meta.' : 'IPVA e seguro anual: divida por 12.');
+
+    return {
+      abas: [{ id: 'dia', nome: 'Gastos do dia' }, { id: 'mes', nome: 'Contas do mês' }].map(function (t) {
+        var on = t.id === self.state.aba;
+        return { nome: t.nome, on: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', corTexto: on ? '#1A1E26' : '#C9CED7',
+          escolher: function () { self.setState({ aba: t.id }); } };
+      }),
+      abaDia: this.state.aba === 'dia', abaMes: this.state.aba === 'mes',
+
+      total: nf.format(total), totalRs: rs(total),
+      fatiaFrase: gan.recebido > 0 ? n0.format(total / gan.recebido * 100) + '% do que você faturou hoje' : 'nada faturado hoje ainda',
+      temCats: total > 0,
+      porCat: this.CATS.filter(function (x) { return porCat[x.id] > 0; }).map(function (x) {
+        return { nome: x.nome, cor: x.cor, peso: porCat[x.id], valor: rs(porCat[x.id]) };
+      }),
+      faturamento: rs(gan.recebido),
+      lucro: (lucro < 0 ? '−' : '') + rs(Math.abs(lucro)), lucroCor: lucro < 0 ? '#FF7A7E' : '#3DD598',
+      temPrevisto: previsto > 0, previstoFrase: previstoFrase,
+      temComb: combFrase !== '', combFrase: combFrase,
+
+      cats: this.CATS.map(function (x) {
+        var on = x.id === f.categoria;
+        return { curto: x.curto, icone: x.icone, on: on ? 'true' : 'false',
+          fundo: on ? '#FFC629' : '#1A1E26', corTexto: on ? '#1A1E26' : '#C9CED7', borda: on ? '#FFC629' : '#3A414D',
+          escolher: function () { self.mudarForm('categoria', x.id); } };
+      }),
+      dicaCat: c.dica, descExemplo: c.exemplo, ehComb: ehComb,
+      fValor: f.valor, fLitros: f.litros, fDesc: f.desc,
+      onValor: function (e) { self.mudarForm('valor', e.target.value); },
+      onLitros: function (e) { self.mudarForm('litros', e.target.value); },
+      onDesc: function (e) { self.mudarForm('desc', e.target.value); },
+      previa: previa, previaCor: this.state.erroForm ? '#FF7A7E' : '#9AA2B1',
+      adicionar: function () {
+        if (self.num(f.valor) <= 0) { self.setState({ erroForm: 'Informe o valor do gasto.' }); return; }
+        var agora = new Date();
+        var hora = String(agora.getHours()).padStart(2, '0') + ':' + String(agora.getMinutes()).padStart(2, '0');
+        self.mudar(function (q) {
+          var id = q.lancamentos.reduce(function (m, l) { return Math.max(m, l.id || 0); }, 0) + 1;
+          q.lancamentos.push({ id: id, categoria: f.categoria, valor: f.valor, litros: ehComb ? f.litros : '', desc: f.desc.trim(), hora: hora });
+        });
+        self.setState({ form: { categoria: f.categoria, valor: '', litros: '', desc: '' }, erroForm: '' });
+      },
+
+      qtdLanc: g.lancamentos.length + (g.lancamentos.length === 1 ? ' gasto' : ' gastos'),
+      semLanc: g.lancamentos.length === 0,
+      lancamentos: g.lancamentos.slice().reverse().map(function (l) {
+        var x = self.cat(l.categoria), lt = self.num(l.litros);
+        return {
+          icone: x.icone,
+          titulo: l.desc || x.nome,
+          detalhe: (l.desc ? x.nome + ' · ' : '') + l.hora + (lt > 0 ? ' · ' + n1.format(lt) + ' L' : ''),
+          valor: rs(self.num(l.valor)),
+          remover: function () { self.mudar(function (q) { q.lancamentos = q.lancamentos.filter(function (y) { return y.id !== l.id; }); }); }
+        };
+      }),
+      fechado: !!this.state.fechado,
+      // Fecha o dia (gastos daqui + ganhos da tela Ganhos do dia) no histórico do Painel e zera as duas telas
+      novoDia: function () {
+        var gd = self.ganhosDoDia();
+        var fechou = self.fecharDia(gd, self.state.gastos.lancamentos, self.state.plano);
+        try { window.localStorage.setItem('meucorre.ganhos', JSON.stringify({ turno: { inicio: '', fim: '', kmInicial: (gd.turno && gd.turno.kmFinal) || '', kmFinal: '' }, lancamentos: [] })); } catch (e) {}
+        self.mudar(function (q) { q.lancamentos = []; });
+        self.setState({ fechado: fechou });
+      },
+
+      mesNome: this.MESES[new Date().getMonth()],
+      contasTotal: nf.format(contasTotal), contasPago: rs(contasPago), contasFalta: rs(contasTotal - contasPago), contasPct: contasPct,
+      porDiaFrase: diasMes > 0 && contasTotal > 0 ?
+        'Pesam ' + rs(contasTotal / diasMes) + ' por dia trabalhado. Essas contas já estão na sua meta diária, por isso não saem de novo do lucro do dia.' :
+        'Essas contas entram na sua meta diária.',
+      semContas: p.fixas.length === 0,
+      contas: p.fixas.map(function (x, i) {
+        var paga = pagas.indexOf(x.nome) >= 0;
+        return {
+          nome: x.nome || 'Sem nome', valor: rs(self.num(x.valor)),
+          on: paga ? 'true' : 'false', rotulo: (paga ? 'Paga: ' : 'Marcar como paga: ') + (x.nome || 'conta'),
+          fundo: paga ? '#3DD598' : '#1A1E26', borda: paga ? '#3DD598' : '#4A5261', marca: paga ? '#1A1E26' : '#4A5261',
+          estado: paga ? 'paga em ' + self.MESES[new Date().getMonth()] : 'a pagar', estadoCor: paga ? '#3DD598' : '#9AA2B1',
+          alternar: function () {
+            self.mudar(function (q) {
+              var l = (q.pagas[mes] || []).slice(), k = l.indexOf(x.nome);
+              if (k >= 0) l.splice(k, 1); else l.push(x.nome);
+              q.pagas[mes] = l;
+            });
+          },
+          remover: function () { self.mudarPlano(function (q) { q.fixas.splice(i, 1); }); }
+        };
+      }),
+      sugestoes: this.SUGESTOES.map(function (s) { return { nome: s, usar: function () { self.mudarConta('nome', s); } }; }),
+      cNome: ct.nome, cValor: ct.valor,
+      onCNome: function (e) { self.mudarConta('nome', e.target.value); },
+      onCValor: function (e) { self.mudarConta('valor', e.target.value); },
+      contaPrevia: contaPrevia, contaPreviaCor: this.state.erroConta ? '#FF7A7E' : '#9AA2B1',
+      addConta: function () {
+        var nome = ct.nome.trim();
+        if (!nome) { self.setState({ erroConta: 'Dê um nome para a conta.' }); return; }
+        if (self.num(ct.valor) <= 0) { self.setState({ erroConta: 'Informe quanto ela custa por mês.' }); return; }
+        if (p.fixas.some(function (x) { return x.nome === nome; })) { self.setState({ erroConta: 'Já existe uma conta com esse nome.' }); return; }
+        self.mudarPlano(function (q) { q.fixas.push({ nome: nome, valor: ct.valor }); });
+        self.setState({ conta: { nome: '', valor: '' }, erroConta: '' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

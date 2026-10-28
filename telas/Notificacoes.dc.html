@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Notificações</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+input::placeholder{color:#7E8696}
+input:focus{outline:2px solid #FFC629;outline-offset:1px}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+button:disabled{cursor:default}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+    <a href="Dashboard.dc.html" aria-label="Voltar para o início" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-size: 13px; color: #9AA2B1">Avisos do seu corre</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Notificações</h1>
+    </div>
+  </div>
+  <div role="group" aria-label="Seção" class="mc-topo" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 0 20px 10px; padding: 4px; background: #262B35; border-radius: 14px">
+    <sc-for list="{{abas}}" as="t" hint-placeholder-count="2">
+      <button type="button" aria-pressed="{{t.on}}" onClick="{{t.escolher}}" style="height: 38px; border: 0; border-radius: 10px; background: {{t.fundo}}; color: {{t.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">{{t.nome}}</button>
+    </sc-for>
+  </div>
+
+  <div style="flex-grow: 1; min-height: 0; overflow-y: auto; padding: 4px 20px 20px">
+
+    <sc-if value="{{abaAvisos}}" hint-placeholder-val="{{ true }}">
+      <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px">
+          <span style="font-size: 13.5px; color: #C9CED7">{{naoLidasFrase}}</span>
+          <button type="button" onClick="{{lerTodas}}" disabled="{{semNaoLidas}}" style="height: 44px; padding: 0 4px; border: 0; background: transparent; color: {{lerTodasCor}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13.5px; cursor: pointer">Marcar todas como lidas</button>
+        </div>
+        <div class="mc-linhas" style="display: flex; flex-direction: column; gap: 8px">
+          <sc-for list="{{avisos}}" as="n" hint-placeholder-count="5">
+            <a href="{{n.href}}" onClick="{{n.ler}}" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 10px; gap: 12px; align-items: start; padding: 14px; border-radius: 16px; background: {{n.fundo}}; border: 1px solid {{n.borda}}; text-decoration: none">
+              <span style="width: 40px; height: 40px; border-radius: 12px; background: {{n.iconeFundo}}; color: {{n.iconeCor}}; display: flex; align-items: center; justify-content: center">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icone}}"></path></svg>
+              </span>
+              <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+                <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">{{n.titulo}}</span>
+                <span style="font-size: 13.5px; line-height: 1.4; color: #C9CED7">{{n.texto}}</span>
+                <span style="font-size: 12px; color: #9AA2B1">{{n.quando}}</span>
+              </span>
+              <span aria-label="{{n.statusRotulo}}" style="width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; background: {{n.ponto}}"></span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{abaConfig}}" hint-placeholder-val="{{ false }}">
+      <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 14px">
+
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 6px 12px 16px; background: #FFC629; color: #1A1E26; border-radius: 20px">
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0">
+            <span style="font-weight: 800; font-size: 16px">Receber notificações</span>
+            <span style="font-size: 13px; font-weight: 600">{{geralFrase}}</span>
+          </div>
+          <button type="button" role="switch" aria-checked="{{geral.on}}" aria-label="{{geral.titulo}}" onClick="{{geral.alternar}}" disabled="{{geral.travado}}" style="flex-shrink: 0; width: 56px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <span style="width: 50px; height: 30px; box-sizing: border-box; padding: 3px; border-radius: 999px; background: {{geral.trilho}}; display: flex; justify-content: {{geral.lado}}; transition: background 0.2s"><span style="width: 24px; height: 24px; border-radius: 50%; background: {{geral.bola}}"></span></span>
+            </button>
+        </div>
+
+        <sc-for list="{{grupos}}" as="gr" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 8px; opacity: {{opacidade}}">
+            <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">{{gr.titulo}}</h2>
+            <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 20px; overflow: hidden">
+              <sc-for list="{{gr.itens}}" as="i" hint-placeholder-count="2">
+                <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px 6px 12px 16px; border-bottom: 1px solid #333A46">
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0">
+                      <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">{{i.titulo}}</span>
+                      <span style="font-size: 12.5px; line-height: 1.4; color: #9AA2B1">{{i.detalhe}}</span>
+                    </div>
+                    <button type="button" role="switch" aria-checked="{{i.on}}" aria-label="{{i.titulo}}" onClick="{{i.alternar}}" disabled="{{i.travado}}" style="flex-shrink: 0; width: 56px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <span style="width: 50px; height: 30px; box-sizing: border-box; padding: 3px; border-radius: 999px; background: {{i.trilho}}; display: flex; justify-content: {{i.lado}}; transition: background 0.2s"><span style="width: 24px; height: 24px; border-radius: 50%; background: {{i.bola}}"></span></span>
+            </button>
+                  </div>
+                  <sc-if value="{{i.mostraHora}}" hint-placeholder-val="{{ true }}">
+                    <div style="display: flex; align-items: center; gap: 10px; padding-right: 10px">
+                      <label for="{{i.idHora}}" style="font-size: 13px; color: #C9CED7">Horário</label>
+                      <input id="{{i.idHora}}" type="time" value="{{i.hora}}" onChange="{{i.onHora}}" style="height: 40px; box-sizing: border-box; padding: 0 10px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; color-scheme: dark; font-family: 'DM Mono', monospace; font-size: 15px">
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{i.mostraDias}}" hint-placeholder-val="{{ false }}">
+                    <div role="group" aria-label="Quantos dias antes" style="display: flex; align-items: center; gap: 6px; padding-right: 10px">
+                      <span style="font-size: 13px; color: #C9CED7; margin-right: 4px">Avisar</span>
+                      <sc-for list="{{i.dias}}" as="d" hint-placeholder-count="3">
+                        <button type="button" aria-pressed="{{d.on}}" onClick="{{d.escolher}}" style="height: 40px; padding: 0 6px; border-radius: 10px; border: 1px solid {{d.borda}}; background: {{d.fundo}}; color: {{d.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13.5px; cursor: pointer; padding: 0 10px">{{d.nome}}</button>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; opacity: {{opacidade}}">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Não perturbe</h2>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px 6px 14px 16px; background: #262B35; border-radius: 20px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0">
+                <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Silenciar à noite</span>
+                <span style="font-size: 12.5px; line-height: 1.4; color: #9AA2B1">Nesse horário nada toca. Os avisos esperam você acordar.</span>
+              </div>
+              <button type="button" role="switch" aria-checked="{{silencio.on}}" aria-label="{{silencio.titulo}}" onClick="{{silencio.alternar}}" disabled="{{silencio.travado}}" style="flex-shrink: 0; width: 56px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <span style="width: 50px; height: 30px; box-sizing: border-box; padding: 3px; border-radius: 999px; background: {{silencio.trilho}}; display: flex; justify-content: {{silencio.lado}}; transition: background 0.2s"><span style="width: 24px; height: 24px; border-radius: 50%; background: {{silencio.bola}}"></span></span>
+            </button>
+            </div>
+            <sc-if value="{{silencio.mostraHora}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-right: 10px">
+                <label for="n-de" style="font-size: 13px; color: #C9CED7">Das</label>
+                <input id="n-de" type="time" value="{{silencio.de}}" onChange="{{silencio.onDe}}" style="height: 40px; box-sizing: border-box; padding: 0 10px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; color-scheme: dark; font-family: 'DM Mono', monospace; font-size: 15px">
+                <label for="n-ate" style="font-size: 13px; color: #C9CED7">às</label>
+                <input id="n-ate" type="time" value="{{silencio.ate}}" onChange="{{silencio.onAte}}" style="height: 40px; box-sizing: border-box; padding: 0 10px; border-radius: 10px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; color-scheme: dark; font-family: 'DM Mono', monospace; font-size: 15px">
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; opacity: {{opacidade}}">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Onde receber</h2>
+          <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 20px; overflow: hidden">
+            <sc-for list="{{canais}}" as="c" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 10px 6px 10px 16px; border-bottom: 1px solid #333A46">
+                <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0">
+                  <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">{{c.titulo}}</span>
+                  <span style="font-size: 12.5px; color: #9AA2B1">{{c.detalhe}}</span>
+                </div>
+                <button type="button" role="switch" aria-checked="{{c.on}}" aria-label="{{c.titulo}}" onClick="{{c.alternar}}" disabled="{{c.travado}}" style="flex-shrink: 0; width: 56px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <span style="width: 50px; height: 30px; box-sizing: border-box; padding: 3px; border-radius: 999px; background: {{c.trilho}}; display: flex; justify-content: {{c.lado}}; transition: background 0.2s"><span style="width: 24px; height: 24px; border-radius: 50%; background: {{c.bola}}"></span></span>
+            </button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+    </sc-if>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Configuração e avisos lidos ficam em meucorre.notificacoes. O Início mostra no sininho quantos faltam ler.
+  PADRAO = {
+    ativo: true,
+    itens: {
+      turno: { on: true, hora: '07:00' }, lancar: { on: true, hora: '20:00' }, resumoDia: { on: true, hora: '22:00' },
+      metaPerto: { on: true }, metaBatida: { on: true },
+      contas: { on: true, dias: 3 }, online: { on: true }, semanal: { on: true }
+    },
+    silencio: { on: true, de: '23:00', ate: '06:00' },
+    canais: { push: true, whatsapp: false, email: false }
+  };
+  GRUPOS = [
+    { titulo: 'Seu dia', itens: [
+      { id: 'turno', titulo: 'Hora de abrir o turno', detalhe: 'Lembra de anotar o km inicial e o horário.', hora: true },
+      { id: 'lancar', titulo: 'Lançar ganhos e gastos', detalhe: 'Para não esquecer nenhuma corrida nem o combustível.', hora: true },
+      { id: 'resumoDia', titulo: 'Resumo do dia', detalhe: 'Faturamento, gastos e lucro do dia.', hora: true }
+    ] },
+    { titulo: 'Meta', itens: [
+      { id: 'metaPerto', titulo: 'Quando faltar pouco', detalhe: 'Avisa quando você passar de 80% da meta do dia.' },
+      { id: 'metaBatida', titulo: 'Meta batida', detalhe: 'Comemora quando o faturamento passar da meta.' }
+    ] },
+    { titulo: 'Contas e cuidados', itens: [
+      { id: 'contas', titulo: 'Contas do mês', detalhe: 'Aluguel, financiamento, seguro: aviso antes de vencer.', dias: true },
+      { id: 'online', titulo: 'Muito tempo rodando', detalhe: 'Alerta com 10h online. Depois de 12h a Uber pede 6h de pausa.' },
+      { id: 'semanal', titulo: 'Resumo da semana', detalhe: 'No começo da semana: como foi e qual o melhor dia.' }
+    ] }
+  ];
+  CANAIS = [
+    { id: 'push', titulo: 'No celular', detalhe: 'Notificação na tela do celular' },
+    { id: 'whatsapp', titulo: 'WhatsApp', detalhe: 'Mensagem no seu número' },
+    { id: 'email', titulo: 'E-mail', detalhe: 'Só os resumos do dia e da semana' }
+  ];
+  ICONES = {
+    meta: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+    conta: 'M4 4h16v16H4zM4 9h16M9 4v5',
+    turno: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+    resumo: 'M3 17l6-6 4 4 8-8M15 7h6v6',
+    semana: 'M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4'
+  };
+  // Avisos de exemplo, os mesmos ids que o Início usa para contar os não lidos
+  AVISOS = [
+    { id: 1, tipo: 'meta', titulo: 'Falta pouco para a meta', texto: 'Faltam R$ 16,60 para bater a meta de hoje. Mais uma corrida resolve.', quando: 'Agora', href: 'Dashboard.dc.html' },
+    { id: 2, tipo: 'conta', titulo: 'Aluguel da moto vence em 3 dias', texto: 'R$ 450,00 no dia 30. Marque como paga na tela Gastos.', quando: 'Hoje, 08:00', href: 'Gastos.dc.html' },
+    { id: 3, tipo: 'turno', titulo: 'Turno aberto às 07:30', texto: 'Km inicial 12.340 anotado. Bom corre!', quando: 'Hoje, 07:31', href: 'GanhosDia.dc.html' },
+    { id: 4, tipo: 'resumo', titulo: 'Resumo de ontem', texto: 'Faturou R$ 214,30, gastou R$ 58,00 e o lucro foi R$ 156,30.', quando: 'Ontem, 22:00', href: 'Dias.dc.html' },
+    { id: 5, tipo: 'semana', titulo: 'Sua semana', texto: 'Sábado foi o seu melhor dia. Veja os detalhes no Painel.', quando: 'Segunda, 09:00', href: 'Painel.dc.html' }
+  ];
+
+  carregar() {
+    var d = { config: JSON.parse(JSON.stringify(this.PADRAO)), lidas: [4, 5] };
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.notificacoes') || 'null');
+      if (s && s.config) {
+        d.config = Object.assign(d.config, s.config);
+        d.config.itens = Object.assign({}, this.PADRAO.itens, s.config.itens);
+        if (Array.isArray(s.lidas)) d.lidas = s.lidas;
+      }
+    } catch (e) {}
+    return d;
+  }
+
+  // O popup do Início pode pedir para abrir direto em Configurar
+  abaInicial() {
+    try {
+      var a = window.localStorage.getItem('meucorre.notifAba');
+      window.localStorage.removeItem('meucorre.notifAba');
+      if (a === 'config') return 'config';
+    } catch (e) {}
+    return 'avisos';
+  }
+
+  state = { mcAnim: true, mcK: 0, dados: this.carregar(), aba: this.abaInicial() };
+
+  salvar(dados) {
+    try { window.localStorage.setItem('meucorre.notificacoes', JSON.stringify(dados)); } catch (e) {}
+    this.setState({ dados: dados });
+  }
+  mudarConfig(fn) {
+    var d = JSON.parse(JSON.stringify(this.state.dados));
+    fn(d.config);
+    this.salvar(d);
+  }
+
+  chave(on, travado) {
+    return {
+      on: on ? 'true' : 'false', travado: !!travado,
+      trilho: on ? (travado ? '#7A6420' : '#FFC629') : '#4A5261',
+      bola: on ? '#1A1E26' : '#C9CED7', lado: on ? 'flex-end' : 'flex-start'
+    };
+  }
+
+  componentDidMount() { this.mcIniciar(); }
+  componentWillUnmount() { this.mcParar(); }
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    [].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, d = this.state.dados, c = d.config, aba = this.state.aba, off = !c.ativo;
+    var chip = function (on) { return { on: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', borda: on ? '#FFC629' : '#4A5261', corTexto: on ? '#1A1E26' : '#C9CED7' }; };
+    var naoLidas = this.AVISOS.filter(function (a) { return d.lidas.indexOf(a.id) < 0; });
+    var ligados = Object.keys(c.itens).filter(function (k) { return c.itens[k].on; }).length;
+    var geral = this.chave(c.ativo);
+    // O interruptor geral fica escuro em cima do cartão amarelo
+    geral.trilho = c.ativo ? '#1A1E26' : '#B88F12'; geral.bola = c.ativo ? '#FFC629' : '#1A1E26';
+    geral.titulo = 'Receber notificações';
+    geral.alternar = function () { self.mudarConfig(function (k) { k.ativo = !k.ativo; }); };
+    var sil = this.chave(c.silencio.on, off);
+    Object.assign(sil, {
+      titulo: 'Silenciar à noite', mostraHora: c.silencio.on && !off, de: c.silencio.de, ate: c.silencio.ate,
+      alternar: function () { self.mudarConfig(function (k) { k.silencio.on = !k.silencio.on; }); },
+      onDe: function (e) { var v = e.target.value; self.mudarConfig(function (k) { k.silencio.de = v; }); },
+      onAte: function (e) { var v = e.target.value; self.mudarConfig(function (k) { k.silencio.ate = v; }); }
+    });
+    return {
+      abas: [{ id: 'avisos', nome: 'Avisos' + (naoLidas.length ? ' (' + naoLidas.length + ')' : '') }, { id: 'config', nome: 'Configurar' }].map(function (t) {
+        var on = aba === t.id;
+        return { nome: t.nome, on: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', corTexto: on ? '#1A1E26' : '#C9CED7', escolher: function () { self.setState({ aba: t.id }); } };
+      }),
+      abaAvisos: aba === 'avisos', abaConfig: aba === 'config',
+      naoLidasFrase: naoLidas.length ? naoLidas.length + (naoLidas.length === 1 ? ' aviso novo' : ' avisos novos') : 'Tudo lido por aqui',
+      semNaoLidas: naoLidas.length === 0, lerTodasCor: naoLidas.length ? '#FFC629' : '#7E8696',
+      lerTodas: function () { self.salvar({ config: d.config, lidas: self.AVISOS.map(function (a) { return a.id; }) }); },
+      avisos: this.AVISOS.map(function (a) {
+        var nova = d.lidas.indexOf(a.id) < 0;
+        return {
+          titulo: a.titulo, texto: a.texto, quando: a.quando, href: a.href, icone: self.ICONES[a.tipo],
+          fundo: nova ? '#2A2718' : '#262B35', borda: nova ? '#7A6420' : '#262B35',
+          iconeFundo: nova ? '#FFC629' : '#1A1E26', iconeCor: nova ? '#1A1E26' : '#C9CED7',
+          ponto: nova ? '#FFC629' : 'transparent', statusRotulo: nova ? 'Não lido' : 'Lido',
+          ler: function () { if (nova) self.salvar({ config: d.config, lidas: d.lidas.concat([a.id]) }); }
+        };
+      }),
+      geral: geral,
+      geralFrase: c.ativo ? ligados + ' de 8 avisos ligados' : 'Tudo desligado. Você não vai receber nada.',
+      opacidade: off ? '0.45' : '1',
+      grupos: this.GRUPOS.map(function (g) {
+        return { titulo: g.titulo, itens: g.itens.map(function (it) {
+          var cfg = c.itens[it.id], ch = self.chave(cfg.on, off);
+          return Object.assign(ch, {
+            titulo: it.titulo, detalhe: it.detalhe,
+            mostraHora: !!it.hora && cfg.on && !off, idHora: 'hora-' + it.id, hora: cfg.hora,
+            onHora: function (e) { var v = e.target.value; self.mudarConfig(function (k) { k.itens[it.id].hora = v; }); },
+            mostraDias: !!it.dias && cfg.on && !off,
+            dias: [1, 3, 5].map(function (n) {
+              return Object.assign(chip(cfg.dias === n), { nome: n + (n === 1 ? ' dia antes' : ' dias'), escolher: function () { self.mudarConfig(function (k) { k.itens[it.id].dias = n; }); } });
+            }),
+            alternar: function () { if (!off) self.mudarConfig(function (k) { k.itens[it.id].on = !k.itens[it.id].on; }); }
+          });
+        }) };
+      }),
+      silencio: sil,
+      canais: this.CANAIS.map(function (cn) {
+        return Object.assign(self.chave(c.canais[cn.id], off), {
+          titulo: cn.titulo, detalhe: cn.detalhe,
+          alternar: function () { if (!off) self.mudarConfig(function (k) { k.canais[cn.id] = !k.canais[cn.id]; }); }
+        });
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

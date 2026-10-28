@@ -1,0 +1,463 @@
+<title>Meta Diária · Meu Corre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: app de uma coluna no celular (resultado no topo + barra fixa embaixo); no desktop, formulário à esquerda e resultado fixo à direita. */
+:root {
+  --asfalto: #1A1E26;
+  --bg: #1A1E26;
+  --surface: #262B35;
+  --surface-2: #2F3540;
+  --line: #3A414D;
+  --fg: #EEF0F3;
+  --muted: #9AA3B2;
+  --faixa: #FFC629;
+  --faixa-ink: #FFC629;
+  --on-faixa: #1A1E26;
+  --lucro: #3DD598;
+  --gasto: #FF7A7E;
+  --gasto-2: #B85A5E;
+  --font-display: "Archivo", "Arial Black", system-ui, sans-serif;
+  --font-ui: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 14px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #EEF0F3; --surface: #FFFFFF; --surface-2: #F5F6F8; --line: #D9DDE4;
+    --fg: #1A1E26; --muted: #5B6474; --faixa-ink: #8A6400;
+    --lucro: #17A673; --gasto: #E5484D; --gasto-2: #F0A2A4;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #EEF0F3; --surface: #FFFFFF; --surface-2: #F5F6F8; --line: #D9DDE4;
+  --fg: #1A1E26; --muted: #5B6474; --faixa-ink: #8A6400;
+  --lucro: #17A673; --gasto: #E5484D; --gasto-2: #F0A2A4;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 110px;
+}
+.app { max-width: 1040px; margin: 0 auto; display: grid; gap: 20px; }
+
+/* Cabeçalho */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--faixa); display: grid; place-items: center; }
+.wordmark { display: flex; flex-direction: column; line-height: .9; }
+.wordmark small { font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+.wordmark b { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: 18px; letter-spacing: -.01em; }
+.vehicle { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.vehicle button { font: 600 13px var(--font-ui); color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.vehicle button[aria-pressed="true"] { background: var(--faixa); color: var(--on-faixa); }
+
+h1 { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: clamp(24px, 5vw, 34px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lede { color: var(--muted); margin: 6px 0 0; max-width: 60ch; }
+.sample { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font: 500 12px var(--font-mono); color: var(--faixa-ink); border: 1px dashed var(--faixa-ink); border-radius: 6px; padding: 3px 8px; }
+.sample[hidden] { display: none !important; }
+
+.cols { display: grid; gap: 20px; grid-template-columns: 1fr; }
+.cols > * { min-width: 0; }
+@media (min-width: 880px) {
+  .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); align-items: start; }
+  .result { position: sticky; top: calc(16px + env(safe-area-inset-top, 0px)); order: 2; }
+  .bottom-bar { display: none !important; }
+}
+
+/* Formulário */
+.form { display: grid; gap: 14px; }
+.form > *, .two > *, .block > * { min-width: 0; }
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.block h2 { font-size: 15px; font-weight: 700; margin: 0; }
+.hint { font-size: 13px; color: var(--muted); margin: 0; }
+.total { font: 500 13px var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.money { display: flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; }
+.money:focus-within { border-color: var(--faixa); }
+.money span { font: 500 14px var(--font-mono); color: var(--muted); }
+.money input { flex: 1; width: 0; min-width: 0; background: none; border: 0; outline: none; color: var(--fg); font: 500 16px var(--font-mono); padding: 11px 0; font-variant-numeric: tabular-nums; }
+.money.big input { font: 900 26px var(--font-display); font-stretch: 125%; padding: 10px 0; }
+.money .suffix { white-space: nowrap; }
+
+.two { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .two { grid-template-columns: 1fr 1fr; } }
+
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.days button { font: 600 13px var(--font-ui); padding: 10px 0; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); color: var(--muted); cursor: pointer; }
+.days button[aria-pressed="true"] { background: var(--faixa); border-color: var(--faixa); color: var(--on-faixa); }
+
+.rows { display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 120px 32px; gap: 8px; align-items: center; }
+.row.var { grid-template-columns: minmax(0, 1fr) 96px 150px 32px; }
+.row input.name, .row select { width: 100%; min-width: 0; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; color: var(--fg); font: 500 14px var(--font-ui); padding: 10px 10px; }
+.row select { font-size: 13px; padding: 10px 6px; }
+.row .money { padding: 0 10px; }
+.row .money input { padding: 10px 0; font-size: 14px; }
+.row input.name:focus, .row select:focus { outline: none; border-color: var(--faixa); }
+.del { width: 32px; height: 32px; border-radius: 8px; border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; }
+.del:hover { color: var(--gasto); background: var(--surface-2); }
+.add { justify-self: start; font: 600 13px var(--font-ui); color: var(--faixa-ink); background: none; border: 1px dashed var(--line); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+.add:hover { border-color: var(--faixa-ink); }
+@media (max-width: 520px) {
+  .row.var { grid-template-columns: minmax(0, 1fr) 32px; grid-template-areas: "n d" "v d" "t d"; row-gap: 6px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+  .row.var .name { grid-area: n; } .row.var .money { grid-area: v; } .row.var select { grid-area: t; } .row.var .del { grid-area: d; align-self: start; }
+  .row { grid-template-columns: minmax(0, 1fr) 108px 32px; }
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--faixa); outline-offset: 2px; }
+
+/* Resultado */
+.result { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.hero { background: var(--asfalto); color: #EEF0F3; padding: 20px 20px 18px; position: relative; }
+.eyebrow { font: 500 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: #9AA3B2; margin: 0; }
+.hero .big { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: clamp(38px, 10vw, 52px); line-height: 1; margin: 8px 0 4px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.hero .big small { font-size: .42em; font-weight: 800; margin-right: 4px; vertical-align: .55em; }
+.hero .per { color: #9AA3B2; font-size: 14px; margin: 0; }
+.road { height: 6px; margin: 16px -20px 0; background: repeating-linear-gradient(90deg, var(--faixa) 0 22px, transparent 22px 36px); }
+.trio { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+.trio > div { padding: 14px 20px; display: grid; gap: 2px; }
+.trio > div + div { border-left: 1px solid var(--line); }
+.k { font-size: 12px; color: var(--muted); }
+.v { font-family: var(--font-display); font-stretch: 125%; font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.sub { font: 400 12px var(--font-mono); color: var(--muted); }
+
+.section { padding: 16px 20px; display: grid; gap: 10px; border-bottom: 1px solid var(--line); }
+.section:last-child { border-bottom: 0; }
+.section h3 { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+.bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--surface-2); gap: 2px; }
+.bar i { display: block; height: 100%; transition: width .3s ease; }
+.bar .fx { background: var(--gasto); }
+.bar .vr { background: var(--gasto-2); }
+.bar .lc { background: var(--lucro); }
+.legend { display: grid; gap: 6px; }
+.legend div { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; font-size: 14px; }
+.legend .dot { width: 10px; height: 10px; border-radius: 3px; }
+.legend b { font: 500 14px var(--font-mono); font-variant-numeric: tabular-nums; }
+.say { font-size: 14px; margin: 0; color: var(--fg); }
+.say strong.g { color: var(--gasto); } .say strong.l { color: var(--lucro); }
+
+.profit { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.profit .v { color: var(--lucro); font-size: 26px; }
+
+.hours { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.hours .v { font-size: 26px; }
+.clock { position: relative; height: 10px; border-radius: 5px; background: var(--surface-2); margin-top: 18px; }
+.clock i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: var(--faixa); transition: width .3s ease; }
+.clock.over i { background: var(--gasto); }
+.clock .limit { position: absolute; top: -16px; bottom: -4px; border-left: 2px dashed var(--muted); }
+.clock .limit span { position: absolute; top: -2px; left: 4px; font: 500 10px var(--font-mono); color: var(--muted); white-space: nowrap; }
+.scale { display: flex; justify-content: space-between; font: 400 10px var(--font-mono); color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.stats div { background: var(--surface-2); border-radius: 10px; padding: 8px 10px; display: grid; gap: 2px; }
+.stats b { font: 500 13px var(--font-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.warn { margin: 0; font-size: 13px; color: var(--gasto); border: 1px solid var(--gasto); border-radius: 10px; padding: 8px 10px; }
+.errors { margin: 0; padding: 16px 20px; color: var(--gasto); font-size: 14px; }
+
+.bottom-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: var(--asfalto); color: #EEF0F3; border-top: 3px solid var(--faixa);
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.bottom-bar .bb-k { font: 500 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: #9AA3B2; }
+.bottom-bar .bb-v { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: 22px; font-variant-numeric: tabular-nums; }
+.bottom-bar .bb-h { text-align: right; }
+.bottom-bar .bb-h .bb-v { font-size: 18px; color: var(--faixa); }
+
+.foot { font-size: 12px; color: var(--muted); margin: 0; max-width: 70ch; }
+.mono { font-family: var(--font-mono); }
+
+@media (prefers-reduced-motion: reduce) { .bar i, .clock i { transition: none; } }
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 20 L10 13 L14 15 L20 6" stroke="#1A1E26" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 20 L10 13 L14 15 L20 6" stroke="#FFC629" stroke-width="1" stroke-dasharray="2 2.4"/><circle cx="20" cy="6" r="2.6" fill="#1A1E26"/></svg>
+      </div>
+      <div class="wordmark"><small>meu</small><b>corre</b></div>
+    </div>
+    <div class="vehicle" role="group" aria-label="Carregar exemplo de veículo">
+      <button type="button" id="v-carro" data-v="carro">Carro</button>
+      <button type="button" id="v-moto" data-v="moto">Moto</button>
+    </div>
+  </header>
+
+  <div>
+    <h1>Quanto preciso rodar hoje?</h1>
+    <p class="lede">Coloque suas contas, os dias que vai trabalhar e quanto quer ganhar limpo no mês. A meta de cada dia aparece na hora.</p>
+    <p class="sample" id="sample">Valores de exemplo. Troque pelos seus.</p>
+  </div>
+
+  <div class="cols">
+    <aside class="result" id="result" aria-live="polite"></aside>
+
+    <form class="form" id="form" autocomplete="off">
+      <section class="block">
+        <div class="block-head"><h2>Quanto você quer ganhar limpo no mês?</h2></div>
+        <label class="money big"><span>R$</span><input id="lucro" inputmode="decimal" aria-label="Lucro desejado no mês"></label>
+        <p class="hint">É o que sobra no seu bolso depois de pagar combustível, carro e as contas do trabalho.</p>
+      </section>
+
+      <div class="two">
+        <section class="block">
+          <div class="block-head"><h2>Dias de trabalho</h2><span class="total" id="dias-total"></span></div>
+          <div class="days" id="days" role="group" aria-label="Dias da semana"></div>
+        </section>
+        <section class="block">
+          <div class="block-head"><h2>Média por hora</h2></div>
+          <label class="money"><span>R$</span><input id="porhora" inputmode="decimal" aria-label="Faturamento médio por hora"><span class="suffix">/ hora</span></label>
+          <p class="hint">Quanto entra, em média, a cada hora online nos apps.</p>
+        </section>
+      </div>
+
+      <section class="block">
+        <div class="block-head"><h2>Despesas fixas do mês</h2><span class="total" id="fixas-total"></span></div>
+        <p class="hint">Contas que vêm todo mês, rodando ou não. IPVA e seguro anual: divida por 12.</p>
+        <div class="rows" id="fixas"></div>
+        <button type="button" class="add" id="add-fixa">+ Adicionar despesa</button>
+      </section>
+
+      <section class="block">
+        <div class="block-head"><h2>Custos variáveis</h2><span class="total" id="var-total"></span></div>
+        <p class="hint">Gastos que crescem quanto mais você roda. Use % do faturamento para combustível e desgaste, e R$ por dia para comida e lavagem.</p>
+        <div class="rows" id="variaveis"></div>
+        <button type="button" class="add" id="add-var">+ Adicionar custo</button>
+      </section>
+
+      <p class="foot">O mês é contado como 52 semanas ÷ 12, cerca de 4,33 semanas. A conta parte do lucro que você quer e soma as despesas para chegar no faturamento.</p>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-bar" id="bottom-bar">
+  <div><div class="bb-k">Meta por dia</div><div class="bb-v" id="bb-dia">–</div></div>
+  <div class="bb-h"><div class="bb-k">Rodando</div><div class="bb-v" id="bb-horas">–</div></div>
+</div>
+
+<script src="meta-diaria.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DIAS = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+  var EXEMPLOS = {
+    carro: {
+      veiculo: 'carro', lucro: 4000, porHora: 38, dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [
+        { nome: 'Parcela ou aluguel do carro', valor: 1200 },
+        { nome: 'Seguro', valor: 250 },
+        { nome: 'IPVA e licenciamento (÷12)', valor: 120 },
+        { nome: 'Plano de celular', valor: 60 },
+        { nome: 'MEI (DAS)', valor: 82 }
+      ],
+      variaveis: [
+        { nome: 'Combustível', valor: 25, tipo: 'percentual' },
+        { nome: 'Manutenção e pneus', valor: 6, tipo: 'percentual' },
+        { nome: 'Alimentação', valor: 25, tipo: 'porDia' },
+        { nome: 'Lavagem', valor: 8, tipo: 'porDia' }
+      ]
+    },
+    moto: {
+      veiculo: 'moto', lucro: 3000, porHora: 28, dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [
+        { nome: 'Parcela da moto', valor: 450 },
+        { nome: 'Seguro', valor: 90 },
+        { nome: 'IPVA e licenciamento (÷12)', valor: 40 },
+        { nome: 'Plano de celular', valor: 50 },
+        { nome: 'MEI (DAS)', valor: 82 }
+      ],
+      variaveis: [
+        { nome: 'Combustível', valor: 12, tipo: 'percentual' },
+        { nome: 'Óleo, relação e pneus', valor: 6, tipo: 'percentual' },
+        { nome: 'Alimentação', valor: 20, tipo: 'porDia' }
+      ]
+    }
+  };
+  var KEY = 'meucorre.meta.v1';
+  var state, exemplo = true;
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && saved.state) { state = saved.state; exemplo = !!saved.exemplo; }
+  } catch (e) {}
+  if (!state) state = clone(EXEMPLOS.carro);
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify({ state: state, exemplo: exemplo })); } catch (e) {} }
+
+  var brl = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var brl0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+  var num = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 });
+  function money(v) { return 'R$ ' + brl.format(v); }
+  function money0(v) { return 'R$ ' + brl0.format(Math.round(v)); }
+  function horas(h) {
+    var t = Math.round(h * 60), hh = Math.floor(t / 60), mm = t % 60;
+    return hh + 'h' + (mm < 10 ? '0' : '') + mm;
+  }
+  function parse(s) {
+    s = String(s || '').replace(/[^\d.,-]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+  function show(v) { return v ? num.format(v) : ''; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function renderForm() {
+    $('lucro').value = show(state.lucro);
+    $('porhora').value = show(state.porHora);
+    $('days').innerHTML = DIAS.map(function (d, i) {
+      return '<button type="button" id="dia-' + i + '" data-i="' + i + '" aria-pressed="' + (state.dias[i] ? 'true' : 'false') + '">' + d + '</button>';
+    }).join('');
+    $('fixas').innerHTML = state.fixas.map(function (f, i) {
+      return '<div class="row" data-i="' + i + '">' +
+        '<input class="name" id="fx-n-' + i + '" data-k="nome" value="' + esc(f.nome) + '" placeholder="Nome" aria-label="Nome da despesa">' +
+        '<label class="money"><span>R$</span><input id="fx-v-' + i + '" data-k="valor" inputmode="decimal" value="' + show(f.valor) + '" aria-label="Valor mensal"></label>' +
+        '<button type="button" class="del" data-del="fixas" aria-label="Remover ' + esc(f.nome) + '">×</button></div>';
+    }).join('');
+    $('variaveis').innerHTML = state.variaveis.map(function (c, i) {
+      var pct = c.tipo === 'percentual';
+      return '<div class="row var" data-i="' + i + '">' +
+        '<input class="name" id="vr-n-' + i + '" data-k="nome" value="' + esc(c.nome) + '" placeholder="Nome" aria-label="Nome do custo">' +
+        '<label class="money"><span>' + (pct ? '%' : 'R$') + '</span><input id="vr-v-' + i + '" data-k="valor" inputmode="decimal" value="' + show(c.valor) + '" aria-label="Valor"></label>' +
+        '<select id="vr-t-' + i + '" data-k="tipo" aria-label="Como cobrar">' +
+          '<option value="percentual"' + (pct ? ' selected' : '') + '>% do faturamento</option>' +
+          '<option value="porDia"' + (!pct ? ' selected' : '') + '>R$ por dia</option>' +
+        '</select>' +
+        '<button type="button" class="del" data-del="variaveis" aria-label="Remover ' + esc(c.nome) + '">×</button></div>';
+    }).join('');
+    ['carro', 'moto'].forEach(function (v) { $('v-' + v).setAttribute('aria-pressed', exemplo && state.veiculo === v ? 'true' : 'false'); });
+    $('sample').hidden = !exemplo;
+  }
+
+  function entrada() {
+    return {
+      lucroDesejadoMes: state.lucro,
+      faturamentoPorHora: state.porHora,
+      diasPorSemana: state.dias.reduce(function (a, b) { return a + b; }, 0),
+      despesasFixas: state.fixas,
+      custosVariaveis: state.variaveis
+    };
+  }
+
+  function renderResult() {
+    var r = MetaDiaria.calcular(entrada());
+    var ds = state.dias.reduce(function (a, b) { return a + b; }, 0);
+    $('dias-total').textContent = ds + ' dias/semana · ≈ ' + num.format(Math.round(ds * MetaDiaria.SEMANAS_POR_MES)) + ' no mês';
+    $('fixas-total').textContent = money(state.fixas.reduce(function (t, f) { return t + (f.valor || 0); }, 0)) + '/mês';
+    var pct = 0, dia = 0;
+    state.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += c.valor || 0; else dia += c.valor || 0; });
+    $('var-total').textContent = num.format(pct) + '% + ' + money(dia) + '/dia';
+
+    if (!r.faturamento) {
+      $('result').innerHTML = '<div class="hero"><p class="eyebrow">Sua meta</p><div class="big">–</div><div class="road"></div></div>' +
+        '<p class="errors">' + r.erros.map(esc).join('<br>') + '</p>';
+      $('bb-dia').textContent = '–'; $('bb-horas').textContent = '–';
+      return;
+    }
+    var f = r.faturamento, d = r.despesas, l = r.lucro, h = r.horas;
+    var fx = f.mes ? d.fixasMes / f.mes * 100 : 0, vr = f.mes ? d.variaveisMes / f.mes * 100 : 0, lc = f.mes ? l.mes / f.mes * 100 : 0;
+    var html = '' +
+      '<div class="hero"><p class="eyebrow">Faturar por dia</p>' +
+        '<div class="big"><small>R$</small>' + brl.format(f.dia) + '</div>' +
+        '<p class="per">em cada um dos ' + r.diasPorSemana + ' dias da semana</p><div class="road"></div></div>' +
+      '<div class="trio">' +
+        '<div><span class="k">Por semana</span><span class="v">' + money0(f.semana) + '</span><span class="sub">' + money(f.semana) + '</span></div>' +
+        '<div><span class="k">No mês</span><span class="v">' + money0(f.mes) + '</span><span class="sub">≈ ' + num.format(Math.round(r.diasMes)) + ' dias rodando</span></div>' +
+      '</div>' +
+      '<div class="section"><h3>Para onde vai o faturamento do mês</h3>' +
+        '<div class="bar" role="img" aria-label="Despesas fixas ' + Math.round(fx) + '%, custos variáveis ' + Math.round(vr) + '%, lucro ' + Math.round(lc) + '%">' +
+          '<i class="fx" style="width:' + fx + '%"></i><i class="vr" style="width:' + vr + '%"></i><i class="lc" style="width:' + lc + '%"></i></div>' +
+        '<div class="legend">' +
+          '<div><span class="dot" style="background:var(--gasto)"></span><span>Despesas fixas</span><b>' + money(d.fixasMes) + '</b></div>' +
+          '<div><span class="dot" style="background:var(--gasto-2)"></span><span>Custos variáveis</span><b>' + money(d.variaveisMes) + '</b></div>' +
+          '<div><span class="dot" style="background:var(--lucro)"></span><span>Lucro</span><b>' + money(l.mes) + '</b></div>' +
+        '</div>' +
+        '<p class="say">De cada R$ 100 que entram, <strong class="g">R$ ' + Math.round(d.fatia * 100) + '</strong> pagam despesas e <strong class="l">R$ ' + (100 - Math.round(d.fatia * 100)) + '</strong> ficam com você.</p>' +
+      '</div>' +
+      '<div class="section"><h3>Destinado às despesas</h3>' +
+        '<div class="profit"><span class="v" style="color:var(--gasto)">' + money(d.mes) + '</span><span class="sub">no mês · ' + money(d.dia) + ' por dia</span></div></div>' +
+      '<div class="section"><h3>Lucro estimado</h3>' +
+        '<div class="profit"><span class="v">' + money(l.mes) + '</span><span class="sub">no mês</span></div>' +
+        '<div class="stats"><div><span class="k">Por dia</span><b>' + money(l.dia) + '</b></div><div><span class="k">Por semana</span><b>' + money(l.semana) + '</b></div><div><span class="k">Por hora</span><b>' + (h ? money(h.lucroPorHora) : '–') + '</b></div></div>' +
+      '</div>';
+    if (h) {
+      var max = Math.max(14, Math.ceil(h.dia));
+      html += '<div class="section"><h3>Horas rodando</h3>' +
+        '<div class="hours"><span class="v">' + horas(h.dia) + '</span><span class="sub">por dia, a ' + money(state.porHora) + '/hora</span></div>' +
+        '<div class="clock' + (h.acimaDoLimite ? ' over' : '') + '"><i style="width:' + Math.min(100, h.dia / max * 100) + '%"></i>' +
+          '<span class="limit" style="left:' + (MetaDiaria.LIMITE_HORAS_DIA / max * 100) + '%"><span>12h</span></span></div>' +
+        '<div class="scale"><span>0h</span><span>' + max + 'h</span></div>' +
+        '<div class="stats"><div><span class="k">Por dia</span><b>' + horas(h.dia) + '</b></div><div><span class="k">Por semana</span><b>' + horas(h.semana) + '</b></div><div><span class="k">No mês</span><b>' + Math.round(h.mes) + 'h</b></div></div>' +
+        (h.acimaDoLimite ? '<p class="warn">Passa de 12 horas por dia. Depois de 12h online a Uber pede 6h de pausa. Tente mais dias na semana, reduzir custos ou rever a meta.</p>' : '') +
+      '</div>';
+    } else {
+      html += '<p class="errors">Informe sua média por hora para ver quantas horas precisa rodar.</p>';
+    }
+    $('result').innerHTML = html;
+    $('bb-dia').textContent = money0(f.dia);
+    $('bb-horas').textContent = h ? horas(h.dia) : '–';
+  }
+
+  function changed() { if (exemplo) { exemplo = false; $('sample').hidden = true; ['carro', 'moto'].forEach(function (v) { $('v-' + v).setAttribute('aria-pressed', 'false'); }); } save(); renderResult(); }
+
+  $('form').addEventListener('submit', function (e) { e.preventDefault(); });
+  $('form').addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'lucro') state.lucro = parse(t.value);
+    else if (t.id === 'porhora') state.porHora = parse(t.value);
+    else {
+      var row = t.closest('.row'); if (!row) return;
+      var list = row.parentNode.id === 'fixas' ? state.fixas : state.variaveis;
+      var item = list[+row.dataset.i], k = t.dataset.k;
+      if (k === 'valor') item.valor = parse(t.value);
+      else if (k === 'nome') item.nome = t.value;
+      else if (k === 'tipo') { item.tipo = t.value; row.querySelector('.money span').textContent = t.value === 'percentual' ? '%' : 'R$'; }
+    }
+    changed();
+  });
+  $('form').addEventListener('focusout', function (e) {
+    var t = e.target;
+    if (t.tagName === 'INPUT' && t.getAttribute('inputmode') === 'decimal') t.value = show(parse(t.value));
+  });
+  $('form').addEventListener('click', function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.i !== undefined && t.parentNode.id === 'days') {
+      var i = +t.dataset.i; state.dias[i] = state.dias[i] ? 0 : 1;
+      t.setAttribute('aria-pressed', state.dias[i] ? 'true' : 'false'); changed();
+    } else if (t.dataset.del) {
+      state[t.dataset.del].splice(+t.closest('.row').dataset.i, 1); renderForm(); changed();
+    } else if (t.id === 'add-fixa') {
+      state.fixas.push({ nome: '', valor: 0 }); renderForm(); changed(); $('fx-n-' + (state.fixas.length - 1)).focus();
+    } else if (t.id === 'add-var') {
+      state.variaveis.push({ nome: '', valor: 0, tipo: 'porDia' }); renderForm(); changed(); $('vr-n-' + (state.variaveis.length - 1)).focus();
+    }
+  });
+  document.querySelector('.vehicle').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    state = clone(EXEMPLOS[b.dataset.v]); exemplo = true; save(); renderForm(); renderResult();
+  });
+
+  renderForm();
+  renderResult();
+})();
+</script>

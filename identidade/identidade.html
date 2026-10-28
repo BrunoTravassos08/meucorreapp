@@ -1,0 +1,643 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Meu Corre · Identidade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: faixa de asfalto no topo, depois seções em coluna única de 1080px com grades que quebram para 1 coluna no celular */
+:root{
+  /* marca (fixas, iguais nos dois temas) */
+  --asfalto:#1A1E26;
+  --asfalto-2:#262B35;
+  --faixa:#FFC629;
+  --faixa-escura:#E0A800;
+  --lucro:#17A673;
+  --gasto:#E5484D;
+  --neblina:#EEF0F3;
+  /* página */
+  --bg:#F6F7F9;
+  --surface:#FFFFFF;
+  --fg:#1A1E26;
+  --muted:#5B6270;
+  --line:#DDE1E7;
+  --chip:#EEF0F3;
+  --f-display:"Archivo","Arial Black",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111419; --surface:#1A1E26; --fg:#EEF0F3; --muted:#9AA2B1; --line:#2D333E; --chip:#262B35; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111419; --surface:#1A1E26; --fg:#EEF0F3; --muted:#9AA2B1; --line:#2D333E; --chip:#262B35; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;line-height:1.05;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700;font-stretch:100%}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);max-width:62ch;font-size:1.05rem}
+section{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:12px;margin-bottom:36px}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--asfalto);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-block:56px 64px;display:grid;gap:40px;position:relative;z-index:1}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hero-top .eyebrow{color:#9AA2B1}
+.hero-logo{display:flex;align-items:center;gap:clamp(14px,2.5vw,28px)}
+.hero-logo svg{width:clamp(76px,13vw,140px);height:auto;flex:none}
+.wordmark{font-family:var(--f-display);font-weight:900;font-stretch:125%;letter-spacing:-.02em;line-height:.9;font-size:clamp(2.6rem,9vw,6.4rem)}
+.wordmark .meu{font-weight:500;font-stretch:112%;display:block;font-size:.42em;letter-spacing:.01em;color:var(--faixa);margin-bottom:.08em}
+.hero-claim{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:end}
+.hero-claim p{font-size:clamp(1.1rem,2.2vw,1.4rem);max-width:30ch;color:#DDE1E7}
+.hero-claim strong{color:#fff}
+.lane{position:absolute;left:0;right:0;bottom:22px;height:6px;background:repeating-linear-gradient(90deg,var(--faixa) 0 44px,transparent 44px 88px);opacity:.9}
+@media (prefers-reduced-motion:no-preference){
+  .lane{animation:roll 1.6s linear infinite}
+  @keyframes roll{to{background-position:-88px 0}}
+}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;padding:6px 10px;border:1px solid #3A414D;border-radius:999px;color:#C9CED7}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--faixa);display:block}
+
+/* ---------- CONCEITO ---------- */
+.concept{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.concept-big{font-family:var(--f-display);font-weight:800;font-stretch:118%;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.12;text-wrap:balance}
+.concept-big mark{background:var(--faixa);color:var(--asfalto);padding:0 .15em;border-radius:4px}
+.concept-text{display:grid;gap:16px;color:var(--muted)}
+.concept-text p strong{color:var(--fg)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.pillar{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:8px;align-content:start}
+.pillar .k{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.pillar p{color:var(--muted);font-size:.95rem}
+
+/* ---------- SÍMBOLO ---------- */
+.anatomy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px}
+.anatomy-fig{position:relative;max-width:360px;width:100%;margin:0 auto}
+.anatomy-fig svg{width:100%;height:auto;display:block}
+.anatomy-list{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+.anatomy-list li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.anatomy-list .dot{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:.8rem;font-weight:500;background:var(--faixa);color:var(--asfalto)}
+.anatomy-list p{color:var(--muted);font-size:.95rem}
+.variants{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+.variant{border-radius:14px;overflow:hidden;border:1px solid var(--line);display:grid;grid-template-rows:180px auto}
+.variant .stage{display:grid;place-items:center;padding:20px}
+.variant .cap{padding:12px 16px;background:var(--surface);display:flex;justify-content:space-between;gap:8px;font-size:.88rem;border-top:1px solid var(--line)}
+.variant .cap span:last-child{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.lockup{display:flex;align-items:center;gap:12px}
+.lockup svg{width:52px;height:52px;flex:none}
+.lockup .wm{font-family:var(--f-display);font-weight:900;font-stretch:125%;font-size:1.7rem;line-height:.9;letter-spacing:-.02em}
+.lockup .wm small{display:block;font-weight:500;font-stretch:112%;font-size:.5em;letter-spacing:.01em;margin-bottom:2px}
+.lockup.v{flex-direction:column;gap:10px;text-align:center}
+.lockup.v svg{width:64px;height:64px}
+.on-asfalto{background:var(--asfalto);color:#fff}
+.on-faixa{background:var(--faixa);color:var(--asfalto)}
+.on-claro{background:#FFFFFF;color:var(--asfalto)}
+.on-neblina{background:var(--neblina);color:var(--asfalto)}
+.clear{margin-top:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:10px}
+.rule ul{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem;display:grid;gap:6px}
+.rule.no h3{color:var(--gasto)}
+.rule.yes h3{color:var(--lucro)}
+
+/* ---------- PALETA ---------- */
+.palette{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:16px}
+.sw{border-radius:16px;padding:20px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;border:1px solid var(--line)}
+.sw.big{grid-row:span 2;min-height:356px}
+.sw .n{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:1.35rem;line-height:1.1}
+.sw .codes{font-family:var(--f-mono);font-size:.78rem;display:grid;gap:2px;opacity:.85}
+.sw .use{font-size:.88rem;opacity:.9;max-width:34ch}
+.ratio{display:flex;height:20px;border-radius:999px;overflow:hidden;margin-top:20px;border:1px solid var(--line)}
+.ratio div{height:100%}
+.ratio-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+
+/* ---------- TIPOGRAFIA ---------- */
+.type-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.type-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:14px;align-content:start}
+.type-card .sample{font-size:3.4rem;line-height:1;overflow-wrap:anywhere}
+.type-card .meta{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.type-card p.d{color:var(--muted);font-size:.93rem}
+.scale{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.scale-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 24px;border-top:1px solid var(--line)}
+.scale-row:first-child{border-top:0}
+.scale-row .lbl{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.scale-row .ex{overflow-wrap:anywhere}
+
+/* ---------- ÍCONE ---------- */
+.icon-row{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px}
+.icon-item{display:grid;gap:10px;justify-items:center}
+.icon-item .meta{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.app-icon{display:block;border-radius:22.5%;box-shadow:0 1px 0 rgba(0,0,0,.06),0 8px 22px rgba(26,30,38,.18)}
+.homescreen{margin-top:16px;border-radius:18px;padding:28px 20px;background:linear-gradient(160deg,#3A4A63,#1A1E26 70%);display:grid;grid-template-columns:repeat(4,64px);justify-content:center;gap:22px 26px}
+.hs-app{display:grid;justify-items:center;gap:6px;font-size:.7rem;color:#fff}
+.hs-app .ph{width:56px;height:56px;border-radius:22.5%;background:rgba(255,255,255,.14)}
+
+/* ---------- TELAS ---------- */
+.screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;justify-items:center}
+.phone{width:100%;max-width:300px;border-radius:38px;background:#0B0D11;padding:10px;box-shadow:0 20px 50px rgba(17,20,25,.25)}
+.screen{border-radius:30px;overflow:hidden;height:600px;display:flex;flex-direction:column;font-family:var(--f-body);font-size:13px;line-height:1.4;position:relative}
+.screen.dark{background:var(--asfalto);color:#EEF0F3}
+.screen.light{background:#F6F7F9;color:var(--asfalto)}
+.sbar{display:flex;justify-content:space-between;padding:12px 22px 6px;font-weight:600;font-size:12px;font-variant-numeric:tabular-nums}
+.sc-body{padding:8px 18px 0;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.sc-head{display:flex;justify-content:space-between;align-items:center}
+.sc-head .hi{font-size:12px;opacity:.7}
+.sc-head .t{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:19px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--faixa);color:var(--asfalto);display:grid;place-items:center;font-weight:700;font-size:12px}
+.hero-card{background:var(--faixa);color:var(--asfalto);border-radius:20px;padding:16px;display:grid;gap:4px}
+.hero-card .l{font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.hero-card .v{font-family:var(--f-display);font-weight:900;font-stretch:118%;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.hero-card .v small{font-size:16px;font-weight:700;margin-right:3px}
+.hero-card .s{font-size:12px;display:flex;justify-content:space-between;margin-top:6px;font-variant-numeric:tabular-nums}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{background:var(--asfalto-2);border-radius:16px;padding:12px;display:grid;gap:2px}
+.mini .l{font-size:11px;opacity:.7}
+.mini .v{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:18px;font-variant-numeric:tabular-nums}
+.up{color:#3DD598}.down{color:#FF7A7E}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{border:1px solid #333A46;border-radius:14px;padding:10px;display:grid;gap:2px}
+.kpi .l{font-size:10.5px;opacity:.65}
+.kpi .v{font-family:var(--f-mono);font-weight:500;font-size:13px;font-variant-numeric:tabular-nums}
+.list-h{display:flex;justify-content:space-between;font-size:12px;opacity:.7;margin-top:2px}
+.tx{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #2D333E}
+.tx:last-child{border-bottom:0}
+.tx .ic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center}
+.tx .ic svg{width:18px;height:18px}
+.tx .n{font-weight:600;font-size:13px}
+.tx .d{font-size:11px;opacity:.6}
+.tx .a{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums}
+.tabbar{display:grid;grid-template-columns:1fr 1fr 64px 1fr 1fr;align-items:center;padding:10px 12px 18px;background:#14171D;margin-top:auto}
+.tab{display:grid;justify-items:center;gap:3px;font-size:9.5px;opacity:.55}
+.tab svg{width:20px;height:20px}
+.tab.on{opacity:1;color:var(--faixa)}
+.fab{width:50px;height:50px;border-radius:16px;background:var(--faixa);color:var(--asfalto);display:grid;place-items:center;justify-self:center;margin-top:-26px;box-shadow:0 6px 16px rgba(255,198,41,.35)}
+.fab svg{width:24px;height:24px}
+/* tela clara: registrar gasto */
+.light .sc-head .t{font-size:17px}
+.back{width:32px;height:32px;border-radius:10px;background:#E6E9EE;display:grid;place-items:center}
+.back svg{width:16px;height:16px}
+.amount{text-align:center;padding:10px 0 4px;display:grid;gap:2px}
+.amount .l{font-size:11.5px;color:#5B6270}
+.amount .v{font-family:var(--f-display);font-weight:900;font-stretch:118%;font-size:44px;line-height:1;color:var(--gasto);font-variant-numeric:tabular-nums}
+.amount .v small{font-size:20px;margin-right:4px}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font-size:11.5px;font-weight:600;padding:7px 10px;border-radius:999px;background:#E6E9EE}
+.cat.on{background:var(--asfalto);color:var(--faixa)}
+.fields{background:#fff;border-radius:16px;border:1px solid #DDE1E7}
+.field{display:flex;justify-content:space-between;padding:10px 12px;border-top:1px solid #EEF0F3;font-size:12px}
+.field:first-child{border-top:0}
+.field span:first-child{color:#5B6270}
+.field span:last-child{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto}
+.key{background:#fff;border-radius:12px;padding:9px 0;text-align:center;font-family:var(--f-display);font-weight:700;font-size:17px;border:1px solid #E6E9EE}
+.save{background:var(--asfalto);color:#fff;border-radius:14px;text-align:center;padding:13px;font-weight:700;margin:10px 0 18px;font-size:14px}
+.save b{color:var(--faixa)}
+/* relatório */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--asfalto-2);border-radius:12px;padding:3px;font-size:11.5px;text-align:center}
+.seg span{padding:6px;border-radius:9px;opacity:.7}
+.seg span.on{background:var(--faixa);color:var(--asfalto);opacity:1;font-weight:700}
+.bars{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;align-items:end;height:150px;padding-top:16px;border-bottom:1px solid #333A46;position:relative}
+.bar{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.bar .b{width:100%;border-radius:6px 6px 2px 2px;background:#3A414D}
+.bar.top .b{background:var(--faixa)}
+.bar .v{font-family:var(--f-mono);font-size:9px;opacity:.75;font-variant-numeric:tabular-nums}
+.bar.top .v{opacity:1;color:var(--faixa)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;font-size:10px;text-align:center;opacity:.6;margin-top:-6px}
+.tot{display:grid;gap:8px}
+.tot-row{display:flex;justify-content:space-between;font-size:13px;font-variant-numeric:tabular-nums}
+.tot-row b{font-family:var(--f-mono);font-weight:500}
+.tot-row.final{border-top:1px dashed #3A414D;padding-top:8px;font-weight:700}
+.tot-row.final b{color:var(--faixa);font-family:var(--f-display);font-weight:900;font-stretch:112%;font-size:18px}
+.tip{background:var(--asfalto-2);border-radius:14px;padding:11px 12px;font-size:12px;display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
+.tip svg{width:20px;height:20px;color:var(--faixa)}
+.screen-cap{text-align:center;margin-top:14px;display:grid;gap:2px}
+.screen-cap b{font-weight:600}
+.screen-cap span{color:var(--muted);font-size:.9rem}
+
+/* ---------- VOZ ---------- */
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.voice-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px;align-content:start}
+.say{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.95rem;align-items:baseline}
+.say .x{font-family:var(--f-mono);font-size:.72rem;padding:2px 7px;border-radius:6px}
+.say .x.y{background:color-mix(in srgb,var(--lucro) 18%,transparent);color:var(--lucro)}
+.say .x.n{background:color-mix(in srgb,var(--gasto) 16%,transparent);color:var(--gasto)}
+.say .t.n{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gasto) 60%,transparent)}
+
+footer{padding-block:40px 56px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+@media (max-width:900px){
+  .concept,.anatomy{grid-template-columns:1fr}
+  .pillars,.variants,.type-grid{grid-template-columns:1fr 1fr}
+  .screens{grid-template-columns:1fr 1fr}
+  .palette{grid-template-columns:1fr 1fr}
+  .sw.big{grid-column:span 2;grid-row:auto;min-height:220px}
+}
+@media (max-width:620px){
+  section{padding-block:52px}
+  .pillars,.variants,.type-grid,.clear,.voice,.screens{grid-template-columns:1fr}
+  .palette{grid-template-columns:1fr}
+  .sw.big{grid-column:auto}
+  .anatomy{padding:20px}
+  .scale-row{grid-template-columns:1fr;gap:4px;padding:14px 18px}
+  .homescreen{grid-template-columns:repeat(4,56px);gap:18px 14px}
+  .icon-row{gap:24px;padding:22px}
+}
+</style>
+
+<!-- Símbolo: a rota que sobe. Cores via variáveis para gerar as variações. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <path d="M13 53 C13 40 22 37 30 33 C39 28.5 41 19 51 13" fill="none" stroke="var(--mk-road,#1A1E26)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M13 53 C13 40 22 37 30 33 C39 28.5 41 19 51 13" fill="none" stroke="var(--mk-line,#FFC629)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="4.2 4.6"/>
+      <circle cx="51" cy="13" r="8.5" fill="var(--mk-dot,#FFC629)"/>
+      <circle cx="51" cy="13" r="3.2" fill="var(--mk-road,#1A1E26)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">Identidade visual · v1 · outubro 2026</span>
+      <span class="tag"><i></i>Para motorista e motoboy de app</span>
+    </div>
+    <div class="hero-logo">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Símbolo Meu Corre" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629"><use href="#mark"/></svg>
+      <div class="wordmark"><span class="meu">meu</span>corre</div>
+    </div>
+    <div class="hero-claim">
+      <p><strong>Seu corre, suas contas.</strong> Saiba quanto sobra de verdade depois da gasolina, da manutenção e da taxa do app.</p>
+      <span class="eyebrow" style="color:#9AA2B1">Uber · Uber Moto · 99 · iFood · Lalamove</span>
+    </div>
+  </div>
+  <div class="lane" aria-hidden="true"></div>
+</header>
+
+<main>
+  <!-- CONCEITO -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Conceito</span><h2>A rota que sobe</h2></div>
+      <div class="concept">
+        <p class="concept-big">Quem roda o dia inteiro sabe o quanto entrou. O difícil é saber <mark>quanto ficou</mark>. O Meu Corre transforma cada corrida e cada gasto em lucro líquido, em reais por km e por hora.</p>
+        <div class="concept-text">
+          <p><strong>"Corre"</strong> é como o Brasil chama o trabalho de quem se vira por conta própria. O nome já fala a língua do motorista e do motoboy, sem precisar explicar nada.</p>
+          <p>O símbolo é <strong>uma estrada com faixa tracejada</strong> que sai de baixo e sobe para a direita, terminando num ponto de chegada. Ao mesmo tempo é o trajeto da corrida e a linha de um gráfico de lucro subindo.</p>
+          <p>A paleta vem direto da rua: <strong>asfalto</strong> e <strong>amarelo de sinalização</strong>, as cores que o motorista vê o dia inteiro. Verde e vermelho ficam só para dinheiro entrando e saindo.</p>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><span class="k">Atributo 1</span><h3>Direto como a rua</h3><p>Números grandes, poucas palavras. Dá para ler num semáforo, com o celular no suporte.</p></div>
+        <div class="pillar"><span class="k">Atributo 2</span><h3>Do lado de quem roda</h3><p>Fala como colega de corre, não como banco. Sem jargão financeiro, sem julgamento.</p></div>
+        <div class="pillar"><span class="k">Atributo 3</span><h3>Conta que fecha</h3><p>Cada real tem origem. O lucro mostrado é o lucro real, com combustível, aluguel e manutenção descontados.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SÍMBOLO -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Logo</span><h2>Símbolo e variações</h2><p class="lede">O símbolo funciona sozinho a partir de 16 px. A assinatura combina símbolo e o nome em Archivo Expanded: "meu" leve e pequeno, "corre" pesado, porque o protagonista é o trabalho.</p></div>
+
+      <div class="anatomy">
+        <div class="anatomy-fig">
+          <svg viewBox="-8 -8 80 80" role="img" aria-label="Construção do símbolo sobre grade">
+            <defs><pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M8 0H0V8" fill="none" stroke="var(--line)" stroke-width=".4"/></pattern></defs>
+            <rect x="-8" y="-8" width="80" height="80" fill="url(#grid)"/>
+            <rect x="0" y="0" width="64" height="64" fill="none" stroke="var(--muted)" stroke-width=".4" stroke-dasharray="1.5 1.5"/>
+            <g style="--mk-road:var(--fg)"><use href="#mark" width="64" height="64"/></g>
+            <g font-family="DM Mono, monospace" font-size="3.6" fill="var(--fg)">
+              <circle cx="7" cy="57" r="3.4" fill="#FFC629"/><text x="7" y="58.3" text-anchor="middle" fill="#1A1E26">1</text>
+              <circle cx="25" cy="27" r="3.4" fill="#FFC629"/><text x="25" y="28.3" text-anchor="middle" fill="#1A1E26">2</text>
+              <circle cx="61" cy="5" r="3.4" fill="#FFC629"/><text x="61" y="6.3" text-anchor="middle" fill="#1A1E26">3</text>
+            </g>
+          </svg>
+        </div>
+        <ol class="anatomy-list">
+          <li><span class="dot">1</span><div><h3>Ponto de partida</h3><p>A estrada nasce embaixo, à esquerda: o começo do turno, quando a conta ainda está zerada.</p></div></li>
+          <li><span class="dot">2</span><div><h3>Faixa tracejada</h3><p>A marca de pista no meio da via. É o detalhe que faz a linha virar estrada e lembra o hodômetro contando km.</p></div></li>
+          <li><span class="dot">3</span><div><h3>Chegada</h3><p>O pino amarelo é o destino da corrida e o ponto mais alto do gráfico. Funciona como "moeda" quando aparece sozinho.</p></div></li>
+        </ol>
+      </div>
+
+      <div class="variants">
+        <div class="variant"><div class="stage on-asfalto">
+          <div class="lockup"><svg viewBox="0 0 64 64" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629" aria-hidden="true"><use href="#mark"/></svg><div class="wm"><small style="color:#FFC629">meu</small>corre</div></div>
+        </div><div class="cap"><span>Principal, fundo escuro</span><span>preferencial</span></div></div>
+
+        <div class="variant"><div class="stage on-claro">
+          <div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#mark"/></svg><div class="wm"><small>meu</small>corre</div></div>
+        </div><div class="cap"><span>Principal, fundo claro</span><span>positiva</span></div></div>
+
+        <div class="variant"><div class="stage on-faixa">
+          <div class="lockup"><svg viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26" aria-hidden="true"><use href="#mark"/></svg><div class="wm"><small>meu</small>corre</div></div>
+        </div><div class="cap"><span>Sobre amarelo</span><span>campanhas</span></div></div>
+
+        <div class="variant"><div class="stage on-neblina">
+          <div class="lockup v"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#mark"/></svg><div class="wm"><small>meu</small>corre</div></div>
+        </div><div class="cap"><span>Vertical</span><span>splash, adesivo</span></div></div>
+
+        <div class="variant"><div class="stage on-claro">
+          <div class="lockup"><svg viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFFFFF;--mk-dot:#1A1E26" aria-hidden="true"><use href="#mark"/></svg><div class="wm"><small>meu</small>corre</div></div>
+        </div><div class="cap"><span>Monocromática</span><span>1 cor, carimbo</span></div></div>
+
+        <div class="variant"><div class="stage on-asfalto" style="gap:18px;grid-auto-flow:column">
+          <svg viewBox="0 0 64 64" width="72" height="72" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629" aria-hidden="true"><use href="#mark"/></svg>
+          <svg viewBox="0 0 64 64" width="40" height="40" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629" aria-hidden="true"><use href="#mark"/></svg>
+          <svg viewBox="0 0 64 64" width="20" height="20" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629" aria-hidden="true"><use href="#mark"/></svg>
+        </div><div class="cap"><span>Só o símbolo</span><span>72 · 40 · 20 px</span></div></div>
+      </div>
+
+      <div class="clear">
+        <div class="rule yes"><h3>Faça</h3><ul>
+          <li>Deixe em volta do logo uma área livre do tamanho do pino amarelo.</li>
+          <li>Use a versão escura sempre que puder. É a cara do app.</li>
+          <li>Abaixo de 24 px, use só o símbolo, sem o nome.</li>
+        </ul></div>
+        <div class="rule no"><h3>Não faça</h3><ul>
+          <li>Não gire a estrada nem espelhe: ela sempre sobe para a direita.</li>
+          <li>Não pinte a estrada de verde ou vermelho. Essas cores são de dinheiro.</li>
+          <li>Não coloque o logo sobre foto sem uma faixa sólida por trás.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PALETA -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Cores</span><h2>Paleta da rua</h2><p class="lede">Duas cores de marca, duas cores de dinheiro e um neutro. O verde e o vermelho nunca decoram: aparecem só quando o número é ganho ou gasto.</p></div>
+      <div class="palette">
+        <div class="sw big" style="background:#1A1E26;color:#fff;border-color:#1A1E26">
+          <div class="n">Asfalto</div>
+          <p class="use">Fundo principal do app e cor do texto em telas claras. Um grafite levemente azulado, mais vivo que preto puro.</p>
+          <div class="codes"><span>#1A1E26</span><span>RGB 26 30 38</span><span>Apoio: Asfalto 2 #262B35</span></div>
+        </div>
+        <div class="sw" style="background:#FFC629;color:#1A1E26;border-color:#FFC629">
+          <div class="n">Faixa</div>
+          <p class="use">Destaques, botão principal, lucro do dia. Sempre com texto Asfalto por cima.</p>
+          <div class="codes"><span>#FFC629</span><span>RGB 255 198 41</span></div>
+        </div>
+        <div class="sw" style="background:#EEF0F3;color:#1A1E26;border-color:#DDE1E7">
+          <div class="n">Neblina</div>
+          <p class="use">Fundo do modo claro, campos e chips.</p>
+          <div class="codes"><span>#EEF0F3</span><span>RGB 238 240 243</span></div>
+        </div>
+        <div class="sw" style="background:#17A673;color:#fff;border-color:#17A673">
+          <div class="n">Lucro</div>
+          <p class="use">Valor que entrou ou sobrou. Só em números.</p>
+          <div class="codes"><span>#17A673</span><span>no escuro #3DD598</span></div>
+        </div>
+        <div class="sw" style="background:#E5484D;color:#fff;border-color:#E5484D">
+          <div class="n">Gasto</div>
+          <p class="use">Valor que saiu: gasolina, peça, aluguel.</p>
+          <div class="codes"><span>#E5484D</span><span>no escuro #FF7A7E</span></div>
+        </div>
+      </div>
+      <div class="ratio" aria-hidden="true">
+        <div style="flex:60;background:#1A1E26"></div><div style="flex:18;background:#EEF0F3"></div><div style="flex:12;background:#FFC629"></div><div style="flex:5;background:#17A673"></div><div style="flex:5;background:#E5484D"></div>
+      </div>
+      <div class="ratio-legend"><span>Proporção de uso numa tela:</span><span>Asfalto 60%</span><span>Neblina 18%</span><span>Faixa 12%</span><span>Lucro 5%</span><span>Gasto 5%</span></div>
+    </div>
+  </section>
+
+  <!-- TIPOGRAFIA -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Tipografia</span><h2>Letra de placa, número de painel</h2><p class="lede">Três famílias gratuitas do Google Fonts. A Archivo larga lembra placa de trânsito e segura bem números grandes. Figtree é clara para ler em movimento. DM Mono alinha valores em colunas, como um extrato.</p></div>
+      <div class="type-grid">
+        <div class="type-card">
+          <span class="meta">Títulos e valores · Archivo Expanded 800–900</span>
+          <div class="sample" style="font-family:var(--f-display);font-weight:900;font-stretch:125%">R$ 225</div>
+          <p class="d">Para o lucro do dia, títulos de tela e a assinatura. Use com parcimônia: um destaque por tela.</p>
+        </div>
+        <div class="type-card">
+          <span class="meta">Texto e interface · Figtree 400–700</span>
+          <div class="sample" style="font-family:var(--f-body);font-weight:600">Aa Çç</div>
+          <p class="d">Botões, listas, explicações. Formas abertas que continuam legíveis com o celular balançando no suporte.</p>
+        </div>
+        <div class="type-card">
+          <span class="meta">Dados · DM Mono 400–500</span>
+          <div class="sample" style="font-family:var(--f-mono);font-weight:500;font-size:2.6rem">48.212 km</div>
+          <p class="d">Hodômetro, litros, R$/km, extrato. Todos os dígitos têm a mesma largura, então as colunas alinham.</p>
+        </div>
+      </div>
+      <div class="scale">
+        <div class="scale-row"><span class="lbl">Valor herói · 40</span><span class="ex" style="font-family:var(--f-display);font-weight:900;font-stretch:118%;font-size:2.5rem;line-height:1">R$ 1.225,40</span></div>
+        <div class="scale-row"><span class="lbl">Título · 24</span><span class="ex" style="font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:1.5rem">Resumo da semana</span></div>
+        <div class="scale-row"><span class="lbl">Texto · 16</span><span class="ex" style="font-size:1rem">Você rodou 148 km hoje e gastou R$ 42,00 de gasolina.</span></div>
+        <div class="scale-row"><span class="lbl">Dado · 14</span><span class="ex" style="font-family:var(--f-mono);font-size:.875rem">R$ 1,94/km · R$ 24,55/h · 23 corridas</span></div>
+        <div class="scale-row"><span class="lbl">Rótulo · 12</span><span class="ex" style="font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">Lucro líquido hoje</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÍCONE -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Ícone do app</span><h2>Amarelo na tela inicial</h2><p class="lede">Na tela do celular, o fundo amarelo faz o ícone ser achado de relance entre o app da Uber (preto) e o do 99 (amarelo-alaranjado com logo grande). A estrada fica em asfalto com a faixa vazada.</p></div>
+      <div class="icon-row">
+        <div class="icon-item">
+          <svg class="app-icon" width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="Ícone do app Meu Corre, 180 px">
+            <rect width="180" height="180" fill="#FFC629"/>
+            <svg x="34" y="34" width="112" height="112" viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26"><use href="#mark"/></svg>
+          </svg>
+          <span class="meta">iOS 180 px</span>
+        </div>
+        <div class="icon-item">
+          <svg class="app-icon" width="120" height="120" viewBox="0 0 180 180" style="border-radius:50%" role="img" aria-label="Ícone adaptativo Android">
+            <rect width="180" height="180" fill="#FFC629"/>
+            <svg x="40" y="40" width="100" height="100" viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26"><use href="#mark"/></svg>
+          </svg>
+          <span class="meta">Android adaptativo</span>
+        </div>
+        <div class="icon-item">
+          <svg class="app-icon" width="120" height="120" viewBox="0 0 180 180" role="img" aria-label="Ícone versão escura">
+            <rect width="180" height="180" fill="#1A1E26"/>
+            <svg x="34" y="34" width="112" height="112" viewBox="0 0 64 64" style="--mk-road:#FFFFFF;--mk-line:#1A1E26;--mk-dot:#FFC629"><use href="#mark"/></svg>
+          </svg>
+          <span class="meta">iOS modo escuro</span>
+        </div>
+        <div class="icon-item">
+          <svg class="app-icon" width="60" height="60" viewBox="0 0 180 180" role="img" aria-label="Ícone 60 px">
+            <rect width="180" height="180" fill="#FFC629"/>
+            <svg x="34" y="34" width="112" height="112" viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26"><use href="#mark"/></svg>
+          </svg>
+          <span class="meta">60 px</span>
+        </div>
+        <div class="icon-item">
+          <svg class="app-icon" width="32" height="32" viewBox="0 0 180 180" role="img" aria-label="Ícone 32 px">
+            <rect width="180" height="180" fill="#FFC629"/>
+            <svg x="30" y="30" width="120" height="120" viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26"><use href="#mark"/></svg>
+          </svg>
+          <span class="meta">32 px</span>
+        </div>
+      </div>
+      <div class="homescreen" aria-label="Simulação de tela inicial">
+        <div class="hs-app"><div class="ph"></div>Mapas</div>
+        <div class="hs-app"><div class="ph"></div>Uber Driver</div>
+        <div class="hs-app"><div class="ph"></div>99 Motorista</div>
+        <div class="hs-app">
+          <svg class="app-icon" width="56" height="56" viewBox="0 0 180 180" aria-hidden="true"><rect width="180" height="180" fill="#FFC629"/><svg x="34" y="34" width="112" height="112" viewBox="0 0 64 64" style="--mk-road:#1A1E26;--mk-line:#FFC629;--mk-dot:#1A1E26"><use href="#mark"/></svg></svg>
+          Meu Corre
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELAS -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Aplicação</span><h2>As primeiras telas</h2><p class="lede">O app abre no escuro: é mais confortável à noite, gasta menos bateria em tela OLED e deixa o amarelo brilhar. O registro de gasto usa tela clara, para parecer um recibo. Os valores abaixo são exemplos de um dia de motoboy.</p></div>
+      <div class="screens">
+
+        <!-- Início -->
+        <div>
+          <div class="phone"><div class="screen dark">
+            <div class="sbar"><span>18:42</span><span>5G ▮▮▮</span></div>
+            <div class="sc-body">
+              <div class="sc-head"><div><div class="hi">Terça, 27 out</div><div class="t">Fala, Bruno</div></div><div class="avatar">BT</div></div>
+              <div class="hero-card">
+                <span class="l">Lucro líquido hoje</span>
+                <span class="v"><small>R$</small>225,90</span>
+                <div class="s"><span>Ganhou R$ 286,40</span><span>Gastou R$ 60,50</span></div>
+              </div>
+              <div class="kpis">
+                <div class="kpi"><span class="l">Por km</span><span class="v">R$ 1,94</span></div>
+                <div class="kpi"><span class="l">Por hora</span><span class="v">R$ 24,55</span></div>
+                <div class="kpi"><span class="l">Corridas</span><span class="v">23</span></div>
+              </div>
+              <div class="list-h"><span>Hoje</span><span>148 km · 9h12</span></div>
+              <div>
+                <div class="tx"><div class="ic" style="background:rgba(61,213,152,.14);color:#3DD598"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div><div><div class="n">Uber Moto</div><div class="d">14 corridas</div></div><div class="a up">+R$ 168,20</div></div>
+                <div class="tx"><div class="ic" style="background:rgba(61,213,152,.14);color:#3DD598"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div><div><div class="n">99Moto</div><div class="d">9 corridas</div></div><div class="a up">+R$ 118,20</div></div>
+                <div class="tx"><div class="ic" style="background:rgba(255,122,126,.14);color:#FF7A7E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div><div><div class="n">Gasolina</div><div class="d">Posto Ipiranga · 6,8 L</div></div><div class="a down">−R$ 42,00</div></div>
+                <div class="tx"><div class="ic" style="background:rgba(255,122,126,.14);color:#FF7A7E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v8a3 3 0 0 0 6 0V2M9 2v20M17 22V2c-2 2-3 5-3 8h3"/></svg></div><div><div class="n">Almoço</div><div class="d">Marmita</div></div><div class="a down">−R$ 18,50</div></div>
+              </div>
+            </div>
+            <div class="tabbar">
+              <div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Relatório</div>
+              <div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M10 17h4M14 7h3l3 7M7 14l3-5h4"/></svg>Veículo</div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>Perfil</div>
+            </div>
+          </div></div>
+          <div class="screen-cap"><b>Início</b><span>O lucro do dia é o herói da tela</span></div>
+        </div>
+
+        <!-- Registrar gasto -->
+        <div>
+          <div class="phone"><div class="screen light">
+            <div class="sbar"><span>18:43</span><span>5G ▮▮▮</span></div>
+            <div class="sc-body">
+              <div class="sc-head"><div class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></div><div class="t">Novo gasto</div><div style="width:32px"></div></div>
+              <div class="amount"><span class="l">Quanto saiu?</span><span class="v"><small>R$</small>42,00</span></div>
+              <div class="cats">
+                <span class="cat on">Combustível</span><span class="cat">Manutenção</span><span class="cat">Comida</span><span class="cat">Aluguel do veículo</span><span class="cat">Celular</span><span class="cat">Outros</span>
+              </div>
+              <div class="fields">
+                <div class="field"><span>Litros</span><span>6,8 L</span></div>
+                <div class="field"><span>Km no painel</span><span>48.212</span></div>
+                <div class="field"><span>Veículo</span><span>CG 160 · ABC1D23</span></div>
+              </div>
+              <div class="keypad">
+                <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+                <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+                <div class="key">7</div><div class="key">8</div><div class="key">9</div>
+                <div class="key">,</div><div class="key">0</div><div class="key">⌫</div>
+              </div>
+              <div class="save">Salvar gasto <b>·</b> R$ 42,00</div>
+            </div>
+          </div></div>
+          <div class="screen-cap"><b>Registrar gasto</b><span>Três toques, uma mão, no posto</span></div>
+        </div>
+
+        <!-- Relatório -->
+        <div>
+          <div class="phone"><div class="screen dark">
+            <div class="sbar"><span>21:05</span><span>5G ▮▮▮</span></div>
+            <div class="sc-body">
+              <div class="sc-head"><div><div class="hi">20 a 26 out</div><div class="t">Sua semana</div></div></div>
+              <div class="seg"><span>Dia</span><span class="on">Semana</span><span>Mês</span></div>
+              <div class="bars" aria-label="Ganho bruto por dia">
+                <div class="bar"><span class="v">198</span><div class="b" style="height:48.4%"></div></div>
+                <div class="bar"><span class="v">241</span><div class="b" style="height:58.9%"></div></div>
+                <div class="bar"><span class="v">176</span><div class="b" style="height:43%"></div></div>
+                <div class="bar"><span class="v">263</span><div class="b" style="height:64.3%"></div></div>
+                <div class="bar"><span class="v">312</span><div class="b" style="height:76.2%"></div></div>
+                <div class="bar top"><span class="v">348</span><div class="b" style="height:85%"></div></div>
+                <div class="bar"><span class="v">folga</span><div class="b" style="height:2%"></div></div>
+              </div>
+              <div class="days"><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span><span>dom</span></div>
+              <div class="tot">
+                <div class="tot-row"><span>Ganho bruto</span><b class="up">R$ 1.538,00</b></div>
+                <div class="tot-row"><span>Combustível</span><b class="down">−R$ 214,30</b></div>
+                <div class="tot-row"><span>Manutenção</span><b class="down">−R$ 45,00</b></div>
+                <div class="tot-row"><span>Comida</span><b class="down">−R$ 53,30</b></div>
+                <div class="tot-row final"><span>Sobrou</span><b>R$ 1.225,40</b></div>
+              </div>
+              <div class="tip"><svg viewBox="0 0 64 64" style="--mk-road:#FFFFFF;--mk-line:#262B35;--mk-dot:#FFC629" aria-hidden="true"><use href="#mark"/></svg><span>Sábado rendeu R$ 2,31/km, o melhor dia. Vale repetir o horário da tarde.</span></div>
+            </div>
+            <div class="tabbar">
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</div>
+              <div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Relatório</div>
+              <div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M10 17h4M14 7h3l3 7M7 14l3-5h4"/></svg>Veículo</div>
+              <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>Perfil</div>
+            </div>
+          </div></div>
+          <div class="screen-cap"><b>Relatório</b><span>Fecha a semana como um extrato</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VOZ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Tom de voz</span><h2>Fala como colega de corre</h2><p class="lede">Frases curtas, número na frente, sem termo de banco. O app comemora o dia bom e avisa do gasto alto sem dar sermão.</p></div>
+      <div class="voice">
+        <div class="voice-card">
+          <h3>Resumo do dia</h3>
+          <div class="say"><span class="x y">sim</span><span class="t">Hoje sobrou R$ 225,90. Bom corre!</span></div>
+          <div class="say"><span class="x n">não</span><span class="t n">Seu resultado líquido diário foi de R$ 225,90.</span></div>
+        </div>
+        <div class="voice-card">
+          <h3>Alerta de gasto</h3>
+          <div class="say"><span class="x y">sim</span><span class="t">A gasolina comeu 15% do que você ganhou hoje.</span></div>
+          <div class="say"><span class="x n">não</span><span class="t n">Atenção! Suas despesas com combustível estão elevadas.</span></div>
+        </div>
+        <div class="voice-card">
+          <h3>Botões</h3>
+          <div class="say"><span class="x y">sim</span><span class="t">Salvar gasto · Fechar o dia · Ver semana</span></div>
+          <div class="say"><span class="x n">não</span><span class="t n">Confirmar lançamento · Processar</span></div>
+        </div>
+        <div class="voice-card">
+          <h3>Lembrete</h3>
+          <div class="say"><span class="x y">sim</span><span class="t">Abasteceu? Anota aqui antes de sair do posto.</span></div>
+          <div class="say"><span class="x n">não</span><span class="t n">Não se esqueça de registrar suas transações.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="lockup"><svg viewBox="0 0 64 64" width="32" height="32" style="width:32px;height:32px;--mk-road:var(--fg);--mk-line:var(--bg)" aria-hidden="true"><use href="#mark"/></svg><div class="wm" style="font-size:1.1rem"><small>meu</small>corre</div></div>
+    <span>Identidade visual v1 · proposta inicial para discussão</span>
+  </div>
+</footer>
+
+</body></html>

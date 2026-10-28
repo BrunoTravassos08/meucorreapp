@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Painel de desempenho</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+button:disabled{cursor:default;opacity:0.35}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 16px; padding: 56px 20px 20px; flex-grow: 1; min-height: 0; overflow-y: auto">
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 13px; color: #9AA2B1">Como o seu corre está evoluindo</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 24px; color: #FFFFFF">Desempenho</h1>
+    </div>
+
+    <sc-if value="{{exemplo}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid #FFC629; border-radius: 16px; background: #2A2718">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FFC629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.45; color: #EEF0F3"><strong style="color: #FFFFFF">Dados de exemplo.</strong> Os dias anteriores são simulados (moto, 6 dias por semana) só para mostrar o painel. Quando você fechar o primeiro dia de verdade em Ganhos ou Gastos, o exemplo some.</p>
+        </div>
+        <button type="button" onClick="{{apagarExemplo}}" style="align-self: flex-start; height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid #4A5261; background: transparent; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer">Apagar exemplo</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{historicoCurto}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px dashed #4A5261; border-radius: 16px">
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.45; color: #C9CED7">Seu histórico cresce a cada dia fechado. No fim do turno, toque em <strong style="color: #FFFFFF">Começar um dia novo</strong> em <a href="GanhosDia.dc.html">Ganhos</a> ou <a href="Gastos.dc.html">Gastos</a> e o dia entra aqui.</p>
+        <button type="button" onClick="{{verExemplo}}" style="align-self: flex-start; height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid #4A5261; background: transparent; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer">Ver com dados de exemplo</button>
+      </div>
+    </sc-if>
+
+    <div role="tablist" aria-label="Período" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #262B35; border-radius: 14px">
+      <sc-for list="{{abas}}" as="t" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{t.ativo}}" onClick="{{t.pick}}" style="height: 36px; border: 0; border-radius: 10px; background: {{t.fundo}}; color: {{t.cor}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">{{t.nome}}</button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px">
+      <button type="button" aria-label="Período anterior" onClick="{{anterior}}" disabled="{{semAnterior}}" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+      </button>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1px; text-align: center">
+        <span style="font-size: 12px; color: #9AA2B1">{{periodoLegenda}}</span>
+        <span style="font-weight: 700; font-size: 16px; color: #FFFFFF">{{periodoNome}}</span>
+      </div>
+      <button type="button" aria-label="Próximo período" onClick="{{proximo}}" disabled="{{semProximo}}" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; background: #262B35; border-radius: 22px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #C9CED7">Faturamento</span>
+        <span style="font-size: 12.5px; color: #9AA2B1">{{diasResumo}}</span>
+      </div>
+      <div style="font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 30px; line-height: 1; color: #FFFFFF"><span style="font-size: 16px; font-weight: 700; margin-right: 4px">R$</span>{{faturamento}}</div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 4px; font-size: 13.5px">
+        <div style="display: flex; justify-content: space-between; gap: 8px"><span style="color: #C9CED7">Gastos do dia</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{gastos}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 8px"><span style="color: #C9CED7">Contas do mês (parte destes dias)</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{contas}}</span></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 1px solid #3A414D">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #C9CED7">Lucro líquido estimado</span>
+        <div style="font-family: 'Archivo', sans-serif; font-stretch: 118%; font-weight: 900; font-size: 42px; line-height: 1; color: {{lucroCor}}"><span style="font-size: 20px; font-weight: 700; margin-right: 4px">{{lucroSinal}}R$</span>{{lucro}}</div>
+        <span style="font-size: 12.5px; line-height: 1.45; color: #9AA2B1">{{lucroNota}}</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px; min-width: 0">
+          <span style="font-size: 12px; color: #9AA2B1">{{k.nome}}</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 18px; color: #FFFFFF">{{k.valor}}</span>
+          <span style="font-size: 12px; color: #9AA2B1">{{k.detalhe}}</span>
+          <sc-if value="{{k.temDelta}}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 12px; font-weight: 600; color: {{k.deltaCor}}">{{k.delta}}</span>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: #262B35; border-radius: 22px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Meta x resultado</h2>
+        <a href="MetaDiaria.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">Ajustar meta</a>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: #C9CED7">
+        <span>Faturou {{metaFaturou}} de {{metaPeriodo}}</span><span style="font-family: 'DM Mono', monospace; color: #FFFFFF">{{metaPct}}%</span>
+      </div>
+      <div role="progressbar" aria-label="Meta do período" aria-valuenow="{{metaBarra}}" aria-valuemin="0" aria-valuemax="100" style="height: 10px; border-radius: 999px; background: #3A414D; overflow: hidden">
+        <div style="width: {{metaBarra}}%; height: 100%; border-radius: 999px; background: #FFC629"></div>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #C9CED7">{{metaFrase}}</p>
+
+      <sc-if value="{{temGrafico}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 6px">
+          <div aria-live="polite" style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; min-height: 22px">
+            <span style="font-size: 13px; color: #9AA2B1">{{leitura.dia}}</span>
+            <span style="font-size: 13px; color: #C9CED7; text-align: right"><strong style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FFFFFF">{{leitura.valor}}</strong> {{leitura.status}}</span>
+          </div>
+          <div style="position: relative; height: 140px">
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: #3A414D"></div>
+            <div class="mc-colunas" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; gap: 2px">
+              <sc-for list="{{barras}}" as="b" hint-placeholder-count="7">
+                <button type="button" aria-label="{{b.aria}}" disabled="{{b.futuro}}" onClick="{{b.pick}}" onMouseEnter="{{b.pick}}" onFocus="{{b.pick}}" style="flex: 1 1 0; min-width: 0; height: 100%; padding: 0; border: 0; background: transparent; display: flex; align-items: flex-end; justify-content: center; cursor: pointer">
+                  <span class="mc-sobe-barra" style="display: block; width: {{barraLargura}}; height: {{b.altura}}%; border-radius: 4px 4px 0 0; background: {{b.cor}}; outline: {{b.contorno}}; outline-offset: 2px"></span>
+                </button>
+              </sc-for>
+            </div>
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: {{metaLinha}}%; height: 1px; background: #EEF0F3; pointer-events: none"></div>
+          </div>
+          <div aria-hidden="true" style="display: flex; gap: 2px">
+            <sc-for list="{{barras}}" as="b" hint-placeholder-count="7">
+              <span style="flex: 1 1 0; min-width: 0; text-align: center; font-family: 'DM Mono', monospace; font-size: 11px; color: #9AA2B1; white-space: nowrap; overflow: visible">{{b.rotulo}}</span>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: #C9CED7">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #FFC629"></span>Bateu a meta</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #6B7385"></span>Abaixo da meta</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 1px; background: #EEF0F3"></span>Meta do dia {{metaDia}}</span>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{temDiaAberto}}" hint-placeholder-val="{{ true }}">
+        <a href="Dias.dc.html" onClick="{{abrirDia}}" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #1A1E26; font-size: 13.5px; font-weight: 600; text-decoration: none">{{abrirDiaTxt}}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+      </sc-if>
+    </div>
+
+    <a href="Dias.dc.html" onClick="{{abrirLista}}" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 18px; gap: 12px; align-items: center; padding: 14px 16px; border: 1px solid #333A46; border-radius: 18px; color: #EEF0F3; text-decoration: none">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #262B35; color: #FFC629; display: flex; align-items: center; justify-content: center">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M7 14h3M7 17h6"></path></svg>
+      </span>
+      <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Dias anteriores</span>
+        <span style="font-size: 12.5px; color: #9AA2B1">Ganhos e gastos de cada dia, um por um</span>
+      </span>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9AA2B1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+    </a>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 6px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Dias mais rentáveis</h2>
+        <span style="font-size: 12.5px; color: #9AA2B1">Lucro líquido médio por dia trabalhado, últimos 3 meses</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <sc-for list="{{semana}}" as="w" hint-placeholder-count="7">
+          <div style="display: grid; grid-template-columns: 34px minmax(0, 1fr) 96px; align-items: center; gap: 10px; min-height: 28px">
+            <span style="font-size: 13px; font-weight: 600; color: #C9CED7">{{w.nome}}</span>
+            <span style="display: flex; height: 16px"><span class="mc-cresce" style="display: block; width: {{w.pct}}%; height: 16px; border-radius: 0 4px 4px 0; background: {{w.cor}}"></span></span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #EEF0F3; text-align: right">{{w.valor}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #C9CED7">{{semanaFrase}}</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 6px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Evolução mensal</h2>
+        <span style="font-size: 12.5px; color: #9AA2B1">Faturamento de cada mês, dividido em lucro e custos</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: #C9CED7">
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #3DD598"></span>Lucro líquido</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #B8474E"></span>Custos (gastos do dia e contas do mês)</span>
+      </div>
+      <div class="mc-colunas" style="display: flex; gap: 2px; height: 170px; border-bottom: 1px solid #3A414D">
+        <sc-for list="{{meses}}" as="m" hint-placeholder-count="6">
+          <button type="button" aria-label="{{m.aria}}" aria-pressed="{{m.ativo}}" onClick="{{m.pick}}" onMouseEnter="{{m.pick}}" onFocus="{{m.pick}}" style="flex: 1 1 0; min-width: 0; height: 100%; padding: 0; border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; cursor: pointer">
+            <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #C9CED7; white-space: nowrap">{{m.rotulo}}</span>
+            <span class="mc-sobe-barra" style="display: flex; flex-direction: column; gap: 2px; width: 24px; outline: {{m.contorno}}; outline-offset: 2px; border-radius: 4px 4px 0 0">
+              <span style="display: block; height: {{m.hLucro}}px; border-radius: 4px 4px 0 0; background: #3DD598"></span>
+              <span style="display: block; height: {{m.hCustos}}px; background: #B8474E"></span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 2px; margin-top: -4px">
+        <sc-for list="{{meses}}" as="m" hint-placeholder-count="6">
+          <span style="flex: 1 1 0; min-width: 0; text-align: center; font-size: 12px; color: #9AA2B1">{{m.curto}}</span>
+        </sc-for>
+      </div>
+      <div role="table" aria-label="Evolução mensal" style="display: flex; flex-direction: column; font-size: 13px">
+        <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr)); gap: 8px; padding: 6px 8px; color: #9AA2B1; font-size: 12px">
+          <span role="columnheader">Mês</span><span role="columnheader" style="text-align: right">Faturou</span><span role="columnheader" style="text-align: right">Lucro</span><span role="columnheader" style="text-align: right">Por hora</span>
+        </div>
+        <sc-for list="{{mesesTabela}}" as="m" hint-placeholder-count="6">
+          <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr)); gap: 8px; padding: 8px; border-radius: 10px; background: {{m.fundo}}; font-variant-numeric: tabular-nums">
+            <span role="cell" style="color: #FFFFFF; font-weight: {{m.peso}}">{{m.nome}}</span>
+            <span role="cell" style="text-align: right; font-family: 'DM Mono', monospace; color: #EEF0F3">{{m.fat}}</span>
+            <span role="cell" style="text-align: right; font-family: 'DM Mono', monospace; color: #3DD598">{{m.lucro}}</span>
+            <span role="cell" style="text-align: right; font-family: 'DM Mono', monospace; color: #EEF0F3">{{m.porHora}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #C9CED7">{{mesFrase}}</p>
+    </div>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Mesma lógica de painel.js. O histórico de dias fica em meucorre.historico = { exemplo, dias: [...] };
+  // cada dia entra lá quando o motorista toca "Começar um dia novo" (Ganhos ou Gastos).
+  // Sem histórico salvo, o painel mostra dias de exemplo gerados a partir de hoje.
+  DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  DIAS_LONGOS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  MES_CURTO = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+
+  state = { mcAnim: true, mcK: 0, periodo: this.periodoSalvo(), offset: 0, sel: null, selMes: null, versao: 0 };
+
+  // O Início abre o painel já na aba tocada lá (Semana ou Mês)
+  periodoSalvo() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.painel') || 'null');
+      if (s && ['dia', 'semana', 'mes'].indexOf(s.periodo) >= 0) return s.periodo;
+    } catch (e) {}
+    return 'semana';
+  }
+
+  num(s) {
+    if (typeof s === 'number') return isFinite(s) ? s : 0;
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+  arred(v) { return Math.round(v * 100) / 100; }
+  minutos(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || ''));
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+  iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  data(iso) { var p = iso.split('-'); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2])); }
+  somaDias(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  hoje() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+
+  plano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', porHora: '28', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [{ valor: '450' }, { valor: '90' }, { valor: '40' }, { valor: '50' }, { valor: '82' }],
+      variaveis: [{ valor: '12', tipo: 'percentual' }, { valor: '6', tipo: 'percentual' }, { valor: '20', tipo: 'porDia' }]
+    };
+  }
+
+  // Meta do dia (mesma conta da Meta diária) e a parte das contas do mês em cada dia trabalhado
+  metas(p) {
+    var self = this;
+    var diasSemana = p.dias.reduce(function (a, b) { return a + (b ? 1 : 0); }, 0);
+    var diasMes = diasSemana * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    var ok = diasMes > 0 && pct < 1;
+    return {
+      dia: ok ? (this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes : 0,
+      contasDia: diasMes > 0 ? fixas / diasMes : 0,
+      // p.dias vai de segunda (0) a domingo (6)
+      trabalha: function (d) { return !!p.dias[(d.getDay() + 6) % 7]; }
+    };
+  }
+
+  // Ganhos e gastos de hoje, salvos nas telas Ganhos do dia e Gastos (sem nada salvo, o mesmo exemplo de lá)
+  ganhosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00' },
+        { app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60' },
+        { app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '' },
+        { app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50' },
+        { app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '' }
+      ]
+    };
+  }
+  gastosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) return s.lancamentos;
+    } catch (e) {}
+    return [{ categoria: 'combustivel', valor: '42,00' }, { categoria: 'alimentacao', valor: '18,50' }];
+  }
+
+  // Um dia do histórico, no mesmo formato que "Começar um dia novo" grava
+  diaDe(g, gastos, meta, data) {
+    var self = this, bruto = 0, taxas = 0, corridas = 0, total = 0, comb = 0;
+    g.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      bruto += b; taxas += t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    gastos.forEach(function (x) { var v = self.num(x.valor); total += v; if (x.categoria === 'combustivel') comb += v; });
+    if (bruto === 0 && total === 0) return null;
+    var ini = this.minutos(g.turno.inicio), fim = this.minutos(g.turno.fim);
+    var k0 = this.num(g.turno.kmInicial), k1 = this.num(g.turno.kmFinal);
+    return {
+      data: data, faturamento: this.arred(bruto - taxas), bruto: this.arred(bruto), taxas: this.arred(taxas),
+      gastos: this.arred(total), combustivel: this.arred(comb),
+      km: String(g.turno.kmInicial || '').trim() && String(g.turno.kmFinal || '').trim() && k1 >= k0 ? k1 - k0 : null,
+      minutos: ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null,
+      corridas: corridas, meta: this.arred(meta)
+    };
+  }
+
+  // Gerador fixo (mulberry32): o exemplo é sempre o mesmo para a mesma data
+  sorteio(semente) {
+    var a = semente >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      var t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Seis meses de exemplo até ontem: moto, segunda a sábado, sexta e sábado rendem mais, leve melhora mês a mês
+  exemplo(hoje, meta) {
+    var dias = [], MULT = [0, 0.93, 0.88, 0.95, 1, 1.14, 1.22];
+    for (var i = 182; i >= 1; i--) {
+      var d = this.somaDias(hoje, -i), wd = d.getDay();
+      var r = this.sorteio(d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate());
+      if (wd === 0 || r() < 0.05) continue;
+      var tend = 0.8 + 0.2 * (1 - i / 182);
+      var horas = 6.2 + r() * 2.4 + (wd === 6 ? 0.5 : 0);
+      var fat = horas * 26.5 * MULT[wd] * tend * (0.9 + r() * 0.2);
+      var taxa = 0.17 + r() * 0.06;
+      var km = Math.round(fat / (1.5 + r() * 0.35));
+      var comb = km / (32 + r() * 6) * (6.05 + 0.24 * (1 - i / 182));
+      var gastos = comb;
+      if (r() < 0.85) gastos += 14 + r() * 10;   // comida
+      if (r() < 0.06) gastos += 45 + r() * 115;  // óleo, relação, pneu
+      if (r() < 0.08) gastos += 15 + r() * 10;   // lavagem
+      dias.push({
+        data: this.iso(d), faturamento: this.arred(fat), bruto: this.arred(fat / (1 - taxa)), taxas: this.arred(fat / (1 - taxa) - fat),
+        gastos: this.arred(gastos), combustivel: this.arred(comb), km: km, minutos: Math.round(horas * 60),
+        corridas: Math.round(fat / 14), meta: this.arred(meta)
+      });
+    }
+    return dias;
+  }
+
+  historico(hoje, meta) {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.historico') || 'null');
+      if (s && s.exemplo === false && Array.isArray(s.dias)) return s;
+    } catch (e) {}
+    return { exemplo: true, dias: this.exemplo(hoje, meta) };
+  }
+
+  somar(a, b) {
+    var c = Object.assign({}, a);
+    ['faturamento', 'bruto', 'taxas', 'gastos', 'combustivel', 'corridas'].forEach(function (k) { c[k] = (a[k] || 0) + (b[k] || 0); });
+    ['km', 'minutos'].forEach(function (k) { c[k] = a[k] == null && b[k] == null ? null : (a[k] || 0) + (b[k] || 0); });
+    return c;
+  }
+
+  resumo(lista, m) {
+    var r = { n: 0, fat: 0, gastos: 0, comb: 0, km: 0, fatKm: 0, min: 0, fatMin: 0, corridas: 0, bateu: 0 };
+    lista.forEach(function (d) {
+      r.n++; r.fat += d.faturamento; r.gastos += d.gastos; r.comb += d.combustivel; r.corridas += d.corridas;
+      if (d.km) { r.km += d.km; r.fatKm += d.faturamento; }
+      if (d.minutos) { r.min += d.minutos; r.fatMin += d.faturamento; }
+      if (d.meta > 0 && d.faturamento >= d.meta) r.bateu++;
+    });
+    r.contas = m.contasDia * r.n;
+    r.lucro = r.fat - r.gastos - r.contas;
+    r.porHora = r.min ? r.fatMin / (r.min / 60) : null;
+    r.porKm = r.km ? r.fatKm / r.km : null;
+    return r;
+  }
+
+  faixa(periodo, offset, hoje) {
+    if (periodo === 'dia') { var d = this.somaDias(hoje, -offset); return { ini: d, fim: d }; }
+    if (periodo === 'semana') {
+      var seg = this.somaDias(hoje, -((hoje.getDay() + 6) % 7) - 7 * offset);
+      return { ini: seg, fim: this.somaDias(seg, 6) };
+    }
+    var ini = new Date(hoje.getFullYear(), hoje.getMonth() - offset, 1);
+    return { ini: ini, fim: new Date(ini.getFullYear(), ini.getMonth() + 1, 0) };
+  }
+
+  diasDaFaixa(f) {
+    var out = [];
+    for (var d = f.ini; d <= f.fim; d = this.somaDias(d, 1)) out.push(d);
+    return out;
+  }
+
+  guardar(valor) {
+    try {
+      if (valor === null) window.localStorage.removeItem('meucorre.historico');
+      else window.localStorage.setItem('meucorre.historico', JSON.stringify(valor));
+    } catch (e) {}
+    this.setState({ versao: this.state.versao + 1, sel: null, selMes: null });
+  }
+
+  componentDidMount() {
+    this.mcIniciar();
+    var self = this;
+    this.aoMudar = function (e) { if (e.key && e.key.indexOf('meucorre.') === 0) self.forceUpdate(); };
+    window.addEventListener('storage', this.aoMudar);
+  }
+  componentWillUnmount() { this.mcParar(); window.removeEventListener('storage', this.aoMudar); }
+
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    ['lucro', 'metaPct', 'metaBarra'].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, st = this.state;
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var n1 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+    var rs0 = function (v) { return (v < 0 ? '−' : '') + 'R$ ' + n0.format(Math.abs(v)); };
+    var horasTxt = function (min) { return Math.floor(min / 60) + 'h' + String(Math.round(min % 60)).padStart(2, '0'); };
+    var curtoData = function (d) { return d.getDate() + ' ' + self.MES_CURTO[d.getMonth()]; };
+
+    var hoje = this.hoje(), hojeIso = this.iso(hoje);
+    var m = this.metas(this.plano());
+    var hist = this.historico(hoje, m.dia);
+
+    // Histórico + o dia de hoje em andamento (ainda não fechado)
+    var porData = {};
+    hist.dias.forEach(function (d) { porData[d.data] = porData[d.data] ? self.somar(porData[d.data], d) : d; });
+    var vivo = this.diaDe(this.ganhosSalvos(), this.gastosSalvos(), m.dia, hojeIso);
+    if (vivo) porData[hojeIso] = porData[hojeIso] ? this.somar(porData[hojeIso], vivo) : vivo;
+    var datas = Object.keys(porData).sort();
+    var primeira = datas.length ? this.data(datas[0]) : hoje;
+
+    var periodo = st.periodo, offset = st.offset;
+    var f = this.faixa(periodo, offset, hoje);
+    var diasFaixa = this.diasDaFaixa(f);
+    var trabalhados = diasFaixa.map(function (d) { return porData[self.iso(d)]; }).filter(Boolean);
+    var r = this.resumo(trabalhados, m);
+    var fAnt = this.faixa(periodo, offset + 1, hoje);
+    var rAnt = this.resumo(this.diasDaFaixa(fAnt).map(function (d) { return porData[self.iso(d)]; }).filter(Boolean), m);
+
+    // Nome do período
+    var NOMES_P = { dia: 'Dia', semana: 'Semana', mes: 'Mês' };
+    var legenda, nome;
+    if (periodo === 'dia') {
+      legenda = offset === 0 ? 'Hoje, em andamento' : offset === 1 ? 'Ontem' : this.DIAS_LONGOS[f.ini.getDay()];
+      nome = this.DIAS[f.ini.getDay()] + ', ' + curtoData(f.ini);
+    } else if (periodo === 'semana') {
+      legenda = offset === 0 ? 'Esta semana' : offset === 1 ? 'Semana passada' : 'Semana';
+      nome = curtoData(f.ini) + ' – ' + curtoData(f.fim);
+    } else {
+      legenda = offset === 0 ? 'Este mês' : offset === 1 ? 'Mês passado' : 'Mês';
+      nome = this.MESES[f.ini.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }) + ' de ' + f.ini.getFullYear();
+    }
+    var antNome = { dia: 'dia anterior', semana: 'semana passada', mes: 'mês passado' }[periodo];
+
+    // Meta do período = meta do dia × dias de trabalho do plano dentro do período
+    var planejados = diasFaixa.filter(m.trabalha);
+    var metaPeriodo = periodo === 'dia' ? m.dia : m.dia * planejados.length;
+    var restantes = offset === 0 ? planejados.filter(function (d) { return d > hoje; }).length : 0;
+    var falta = metaPeriodo - r.fat;
+    var metaPct = metaPeriodo > 0 ? Math.round(r.fat / metaPeriodo * 100) : 0;
+    var metaFrase;
+    if (!(m.dia > 0)) metaFrase = 'Monte sua meta para comparar com o resultado.';
+    else if (falta <= 0) metaFrase = 'Meta batida. Passou ' + rs(-falta) + '.';
+    else if (restantes > 0) metaFrase = 'Faltam ' + rs(falta) + ': dá ' + rs(falta / restantes) + ' por dia nos ' + restantes + (restantes === 1 ? ' dia de trabalho que resta.' : ' dias de trabalho que restam.');
+    else if (periodo === 'dia' && offset === 0) metaFrase = 'Faltam ' + rs(falta) + ' para bater a meta de hoje.';
+    else metaFrase = 'Ficou ' + rs(falta) + ' abaixo da meta.';
+    if (periodo !== 'dia' && r.n > 0 && m.dia > 0) metaFrase = 'Bateu a meta do dia em ' + r.bateu + ' de ' + r.n + (r.n === 1 ? ' dia trabalhado. ' : ' dias trabalhados. ') + metaFrase;
+
+    // Gráfico de colunas: faturamento de cada dia do período contra a meta do dia
+    var temGrafico = periodo !== 'dia';
+    var maxFat = Math.max.apply(null, [m.dia].concat(trabalhados.map(function (d) { return d.faturamento; })));
+    var teto = maxFat > 0 ? maxFat * 1.1 : 1;
+    var selIso = st.sel;
+    if (!selIso || selIso < this.iso(f.ini) || selIso > this.iso(f.fim)) {
+      var ult = trabalhados[trabalhados.length - 1];
+      selIso = ult ? ult.data : null;
+    }
+    var barras = diasFaixa.map(function (d, i) {
+      var iso = self.iso(d), x = porData[iso], futuro = d > hoje;
+      var meta = x && x.meta > 0 ? x.meta : m.dia;
+      var bateu = x && meta > 0 && x.faturamento >= meta;
+      var rotulo = periodo === 'semana' ? self.DIAS[d.getDay()] : ([1, 5, 10, 15, 20, 25, 30].indexOf(d.getDate()) >= 0 ? String(d.getDate()) : '');
+      return {
+        altura: x ? Math.max(1.5, x.faturamento / teto * 100) : 0,
+        cor: bateu ? '#FFC629' : '#6B7385',
+        contorno: iso === selIso ? '2px solid #EEF0F3' : 'none',
+        futuro: futuro,
+        rotulo: rotulo,
+        aria: self.DIAS_LONGOS[d.getDay()] + ', ' + curtoData(d) + ': ' + (x ? rs(x.faturamento) + (bateu ? ', bateu a meta' : ', abaixo da meta') : futuro ? 'ainda não chegou' : 'folga'),
+        pick: function () { if (!futuro && st.sel !== iso) self.setState({ sel: iso }); }
+      };
+    });
+    var leitura = { dia: 'Toque numa coluna para ver o dia', valor: '', status: '' };
+    var alvo = selIso;
+    if (alvo) {
+      var dx = this.data(alvo), x = porData[alvo];
+      leitura.dia = this.DIAS[dx.getDay()] + ', ' + curtoData(dx) + (alvo === hojeIso ? ' (hoje)' : '');
+      if (x) {
+        var mm = x.meta > 0 ? x.meta : m.dia;
+        leitura.valor = rs(x.faturamento);
+        leitura.status = mm > 0 ? (x.faturamento >= mm ? 'bateu (+' + rs0(x.faturamento - mm) + ')' : 'faltaram ' + rs0(mm - x.faturamento)) : '';
+      } else { leitura.valor = '–'; leitura.status = 'folga'; }
+    }
+
+    // KPIs com comparação ao período anterior (médias, então períodos incompletos comparam de forma justa)
+    var delta = function (a, b) {
+      if (a == null || b == null || b === 0) return null;
+      var p = Math.round((a / b - 1) * 100);
+      return { txt: (p > 0 ? '▲ ' + p : p < 0 ? '▼ ' + (-p) : '= 0') + '% vs ' + antNome, cor: p > 0 ? '#3DD598' : p < 0 ? '#FF7A7E' : '#9AA2B1' };
+    };
+    var dH = delta(r.porHora, rAnt.porHora), dK = delta(r.porKm, rAnt.porKm);
+    var kpis = [
+      { nome: 'Média por hora', valor: r.porHora != null ? rs(r.porHora) : '–', detalhe: r.min ? horasTxt(r.min) + ' rodando' : 'sem horário de turno', temDelta: !!dH, delta: dH ? dH.txt : '', deltaCor: dH ? dH.cor : '' },
+      { nome: 'Média por km', valor: r.porKm != null ? rs(r.porKm) : '–', detalhe: r.km ? n0.format(r.km) + ' km rodados' : 'sem km do turno', temDelta: !!dK, delta: dK ? dK.txt : '', deltaCor: dK ? dK.cor : '' },
+      { nome: 'Combustível', valor: rs(r.comb), detalhe: r.fat > 0 ? Math.round(r.comb / r.fat * 100) + '% do faturamento' : 'nenhum abastecimento', temDelta: !!(r.km && r.comb), delta: r.km ? rs(r.comb / r.km) + ' por km rodado' : '', deltaCor: '#9AA2B1' },
+      { nome: periodo === 'dia' ? 'Corridas' : 'Média por dia', valor: periodo === 'dia' ? String(r.corridas) : (r.n ? rs(r.fat / r.n) : '–'), detalhe: periodo === 'dia' ? (r.corridas ? rs(r.fat / r.corridas) + ' por corrida' : 'nenhuma corrida') : r.corridas + ' corridas no período', temDelta: false, delta: '', deltaCor: '' }
+    ];
+
+    // Dias mais rentáveis: últimos 91 dias, por dia da semana
+    var desde = this.iso(this.somaDias(hoje, -91));
+    var porSemana = [1, 2, 3, 4, 5, 6, 0].map(function (wd) { return { wd: wd, n: 0, lucro: 0 }; });
+    datas.forEach(function (iso) {
+      if (iso < desde) return;
+      var d = porData[iso], w = porSemana[(self.data(iso).getDay() + 6) % 7];
+      w.n++; w.lucro += d.faturamento - d.gastos - m.contasDia;
+    });
+    porSemana.forEach(function (w) { w.media = w.n ? w.lucro / w.n : null; });
+    var comDados = porSemana.filter(function (w) { return w.media !== null; });
+    var melhor = comDados.slice().sort(function (a, b) { return b.media - a.media; })[0];
+    var pior = comDados.slice().sort(function (a, b) { return a.media - b.media; })[0];
+    var maxSem = Math.max.apply(null, [1].concat(comDados.map(function (w) { return w.media; })));
+    var semana = porSemana.map(function (w) {
+      return {
+        nome: self.DIAS[w.wd],
+        pct: w.media !== null && w.media > 0 ? Math.max(2, w.media / maxSem * 100) : 0,
+        cor: melhor && w.wd === melhor.wd ? '#FFC629' : '#6B7385',
+        valor: w.media === null ? 'não rodou' : rs0(w.media) + '/dia'
+      };
+    });
+    var semanaFrase = comDados.length >= 2 && melhor.media > 0 ?
+      self.DIAS_LONGOS[melhor.wd].replace(/^./, function (c) { return c.toUpperCase(); }) + ' é o seu melhor dia: ' + rs0(melhor.media) + ' de lucro em média, ' +
+      rs0(melhor.media - pior.media) + ' a mais que ' + (pior.wd === 6 || pior.wd === 0 ? 'o ' : 'a ') + self.DIAS_LONGOS[pior.wd] + '.' :
+      'Feche alguns dias para descobrir quais rendem mais.';
+
+    // Evolução mensal: últimos 6 meses
+    var mesesR = [];
+    for (var k = 5; k >= 0; k--) {
+      var fm = this.faixa('mes', k, hoje);
+      var rm = this.resumo(this.diasDaFaixa(fm).map(function (d) { return porData[self.iso(d)]; }).filter(Boolean), m);
+      mesesR.push({ k: k, ini: fm.ini, r: rm });
+    }
+    var maxMes = Math.max.apply(null, [1].concat(mesesR.map(function (x) { return x.r.fat; })));
+    var PLOT = 136;
+    var selMes = st.selMes == null ? 0 : st.selMes;
+    var meses = mesesR.map(function (x) {
+      var custos = Math.min(x.r.fat, x.r.gastos + x.r.contas), lucro = Math.max(0, x.r.fat - custos);
+      var hL = Math.round(lucro / maxMes * PLOT), hC = Math.round(custos / maxMes * PLOT);
+      return {
+        curto: self.MES_CURTO[x.ini.getMonth()] + (x.k === 0 ? '*' : ''),
+        rotulo: x.r.fat > 0 ? (x.r.fat >= 1000 ? n1.format(x.r.fat / 1000) + ' mil' : n0.format(x.r.fat)) : '',
+        hLucro: x.r.fat > 0 ? Math.max(hL, lucro > 0 ? 2 : 0) : 0,
+        hCustos: x.r.fat > 0 ? Math.max(hC, 2) : 0,
+        contorno: x.k === selMes && x.r.fat > 0 ? '2px solid #EEF0F3' : 'none',
+        ativo: x.k === selMes,
+        aria: self.MESES[x.ini.getMonth()] + ': faturou ' + rs0(x.r.fat) + ', lucro ' + rs0(x.r.lucro),
+        pick: function () { if (st.selMes !== x.k) self.setState({ selMes: x.k }); }
+      };
+    });
+    var mesesTabela = mesesR.slice().reverse().filter(function (x) { return x.r.n > 0; }).map(function (x) {
+      return {
+        nome: self.MESES[x.ini.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }) + (x.k === 0 ? '*' : ''),
+        fat: rs0(x.r.fat), lucro: rs0(x.r.lucro), porHora: x.r.porHora != null ? rs(x.r.porHora) : '–',
+        fundo: x.k === selMes ? '#2D333E' : 'transparent', peso: x.k === selMes ? 700 : 500
+      };
+    });
+    var atual = mesesR[5].r, passado = mesesR[4].r, mesFrase = '* mês em andamento.';
+    if (atual.n > 0 && passado.n > 0) {
+      var la = atual.lucro / atual.n, lp = passado.lucro / passado.n, pm = lp !== 0 ? Math.round((la / lp - 1) * 100) : 0;
+      mesFrase = 'Lucro médio por dia trabalhado em ' + self.MESES[mesesR[5].ini.getMonth()] + ': ' + rs0(la) +
+        (pm > 0 ? ', ' + pm + '% acima de ' : pm < 0 ? ', ' + (-pm) + '% abaixo de ' : ', igual a ') + self.MESES[mesesR[4].ini.getMonth()] + '. ' + mesFrase;
+    }
+
+    var nTrab = r.n === 1 ? '1 dia trabalhado' : r.n + ' dias trabalhados';
+    var diaAberto = periodo === 'dia' ? (porData[this.iso(f.ini)] ? this.iso(f.ini) : null) : (alvo && porData[alvo] ? alvo : null);
+    return {
+      exemplo: hist.exemplo,
+      historicoCurto: !hist.exemplo && hist.dias.length < 3,
+      apagarExemplo: function () { self.guardar({ exemplo: false, dias: [] }); },
+      verExemplo: function () { self.guardar(null); },
+
+      abas: ['dia', 'semana', 'mes'].map(function (p) {
+        var on = p === periodo;
+        return {
+          nome: NOMES_P[p], ativo: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', cor: on ? '#1A1E26' : '#C9CED7',
+          pick: function () {
+            try { window.localStorage.setItem('meucorre.painel', JSON.stringify({ periodo: p })); } catch (e) {}
+            self.setState({ periodo: p, offset: 0, sel: null });
+          }
+        };
+      }),
+      periodoLegenda: legenda, periodoNome: nome,
+      semAnterior: fAnt.fim < primeira,
+      semProximo: offset === 0,
+      anterior: function () { self.setState({ offset: offset + 1, sel: null }); },
+      proximo: function () { if (offset > 0) self.setState({ offset: offset - 1, sel: null }); },
+
+      diasResumo: periodo === 'dia' ? (r.n ? (r.min ? horasTxt(r.min) + ' de turno' : '') : 'sem registro') : nTrab,
+      faturamento: nf.format(r.fat),
+      gastos: rs(r.gastos),
+      contas: rs(r.contas),
+      lucro: nf.format(Math.abs(r.lucro)), lucroSinal: r.lucro < 0 ? '−' : '',
+      lucroCor: r.lucro < 0 ? '#FF7A7E' : '#3DD598',
+      lucroNota: r.n ? 'Estimado: as contas do mês entram com ' + rs(m.contasDia) + ' por dia trabalhado. Antes delas, sobraram ' + rs(r.fat - r.gastos) + '.' : 'Nenhum dia trabalhado neste período.',
+
+      kpis: kpis,
+
+      metaFaturou: rs0(r.fat), metaPeriodo: rs0(metaPeriodo), metaPct: metaPct, metaBarra: Math.min(100, metaPct), metaFrase: metaFrase,
+      metaDia: rs0(m.dia),
+      temGrafico: temGrafico,
+      barras: barras,
+      barraLargura: periodo === 'semana' ? '24px' : '70%',
+      metaLinha: m.dia > 0 ? Math.min(100, m.dia / teto * 100) : 0,
+      leitura: leitura,
+      // Abre a tela Dias anteriores na lista ou já no dia em destaque
+      temDiaAberto: !!diaAberto,
+      abrirDiaTxt: diaAberto ? 'Ver ganhos e gastos de ' + (diaAberto === hojeIso ? 'hoje' : this.DIAS[this.data(diaAberto).getDay()].toLowerCase() + ', ' + curtoData(this.data(diaAberto))) : '',
+      abrirDia: function () { try { window.localStorage.setItem('meucorre.dias', JSON.stringify({ sel: diaAberto, t: Date.now() })); } catch (e) {} },
+      abrirLista: function () { try { window.localStorage.setItem('meucorre.dias', JSON.stringify({ sel: null, t: Date.now() })); } catch (e) {} },
+
+      semana: semana, semanaFrase: semanaFrase,
+      meses: meses, mesesTabela: mesesTabela, mesFrase: mesFrase
+    };
+  }
+}
+</script>
+</body>
+</html>

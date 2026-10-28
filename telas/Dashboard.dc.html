@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Início</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+/* Entrada: os blocos sobem em sequência e a barra de baixo aparece */
+.mc-entra > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-entra > :nth-child(1){animation-delay:.05s}
+.mc-entra > :nth-child(2){animation-delay:.13s}
+.mc-entra > :nth-child(3){animation-delay:.21s;animation-name:mc-quadro}
+.mc-entra > :nth-child(4){animation-delay:.36s}
+.mc-entra > :nth-child(5){animation-delay:.44s}
+.mc-entra > :nth-child(6){animation-delay:.52s}
+.mc-nav-entra{animation:mc-nav .5s cubic-bezier(.2,.75,.25,1) .1s both}
+.mc-pop{animation:mc-pop .32s cubic-bezier(.2,.8,.25,1) backwards;transform-origin:85% 0}
+.mc-pop-fundo{animation:mc-fundo .25s ease backwards}
+@keyframes mc-pop{from{opacity:0;transform:translateY(-10px) scale(.94)}to{opacity:1}}
+@keyframes mc-fundo{from{opacity:0}to{opacity:1}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-quadro{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes mc-nav{from{transform:translateY(100%)}to{transform:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
+
+  <div class="{{classeEntrada}}" style="display: flex; flex-direction: column; gap: 14px; padding: 56px 20px 16px; flex-grow: 1; min-height: 0; overflow-y: auto">
+
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; color: #9AA2B1">Terça, 27 de outubro</span>
+        <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 24px; color: #FFFFFF">Fala, {{apelido}}</h1>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center">
+        <button type="button" aria-label="{{sinoRotulo}}" aria-expanded="{{popupExpandido}}" onClick="{{abrirPopup}}" style="position: relative; width: 44px; height: 44px; border-radius: 14px; border: 0; background: {{sinoFundo}}; color: {{sinoCor}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+          <sc-if value="{{temAvisos}}" hint-placeholder-val="{{ true }}">
+            <span aria-hidden="true" style="position: absolute; top: 6px; right: 6px; min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box; border-radius: 999px; background: #FFC629; color: #1A1E26; border: 2px solid #262B35; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; line-height: 1">{{avisosNovos}}</span>
+          </sc-if>
+        </button>
+        <a href="Perfil.dc.html" aria-label="Abrir perfil e configurações" style="width: 44px; height: 44px; border-radius: 50%; background: #FFC629; color: #1A1E26; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; text-decoration: none; overflow: hidden"><sc-if value="{{temFoto}}" hint-placeholder-val="{{ false }}"><img src="{{foto}}" alt="" style="display: block; width: 44px; height: 44px; object-fit: cover"></sc-if><sc-if value="{{semFoto}}" hint-placeholder-val="{{ true }}">{{iniciais}}</sc-if></a>
+      </div>
+    </div>
+
+    <div aria-label="Período" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #262B35; border-radius: 14px">
+      <span aria-current="true" style="display: flex; align-items: center; justify-content: center; height: 36px; border-radius: 10px; background: #FFC629; color: #1A1E26; font-weight: 700; font-size: 14px">Hoje</span>
+      <a href="Painel.dc.html" onClick="{{verSemana}}" style="display: flex; align-items: center; justify-content: center; height: 36px; border-radius: 10px; color: #C9CED7; font-weight: 600; font-size: 14px; text-decoration: none">Semana</a>
+      <a href="Painel.dc.html" onClick="{{verMes}}" style="display: flex; align-items: center; justify-content: center; height: 36px; border-radius: 10px; color: #C9CED7; font-weight: 600; font-size: 14px; text-decoration: none">Mês</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+    <div role="region" aria-roledescription="carrossel" aria-label="Resumo do dia" onPointerDown="{{arrastoInicio}}" onPointerMove="{{arrastoMove}}" onPointerUp="{{arrastoFim}}" onPointerCancel="{{arrastoFim}}" onClickCapture="{{cliqueGuarda}}" style="overflow: hidden; touch-action: pan-y; border-radius: 22px; cursor: grab; user-select: none">
+    <div style="display: flex; align-items: stretch; gap: 12px; transform: {{trilho}}; transition: {{trilhoTransicao}}">
+
+    <div aria-hidden="{{slide1Oculto}}" style="flex: 0 0 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 18px; background: #FFC629; color: #1A1E26; border-radius: 22px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase">Lucro líquido hoje</span>
+      <div style="font-family: 'Archivo', sans-serif; font-stretch: 118%; font-weight: 900; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums"><span style="font-size: 20px; font-weight: 700; margin-right: 4px">{{lucroSinal}}R$</span>{{lucro}}</div>
+      <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums">
+        <span>Faturou {{faturouCard}}</span><span>Gastou {{gastouCard}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px dashed #B88F12">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; font-weight: 600">
+          <span>Meta do dia: faturar {{metaDia}}</span><span style="font-variant-numeric: tabular-nums">{{metaPct}}%</span>
+        </div>
+        <div role="progressbar" aria-label="Meta do dia" aria-valuenow="{{metaBarra}}" aria-valuemin="0" aria-valuemax="100" style="height: 8px; border-radius: 999px; background: #E0A800; overflow: hidden">
+          <div style="width: {{metaBarra}}%; height: 100%; border-radius: 999px; background: #1A1E26"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+          <span style="font-size: 12.5px">{{metaFrase}}</span>
+          <a href="MetaDiaria.dc.html" style="flex-shrink: 0; font-size: 12.5px; font-weight: 700; color: #1A1E26; text-decoration: underline">Ajustar meta</a>
+        </div>
+      </div>
+      <button type="button" onClick="{{irFaturar}}" style="margin-top: auto; align-self: flex-start; display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border: 0; border-radius: 999px; background: #1A1E26; color: #FFC629; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer">Quanto faturar para cobrir os gastos<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+    </div>
+
+    <div aria-hidden="{{slide2Oculto}}" style="flex: 0 0 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; padding: 18px; background: #262B35; color: #EEF0F3; border: 1px solid #FFC629; border-radius: 22px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #FFC629">Quanto faturar hoje</span>
+        <span style="font-size: 13px; color: #C9CED7">Você já faturou <strong style="color: #FFFFFF">{{faturou}}</strong></span>
+      </div>
+      <sc-for list="{{alvos}}" as="a" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+            <span style="font-weight: 700; font-size: 14.5px; color: #FFFFFF">{{a.nome}}</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FFFFFF">{{a.valor}}</span>
+          </div>
+          <div role="progressbar" aria-label="{{a.nome}}" aria-valuenow="{{a.barra}}" aria-valuemin="0" aria-valuemax="100" style="height: 6px; border-radius: 999px; background: #3A414D; overflow: hidden">
+            <div style="width: {{a.barra}}%; height: 100%; border-radius: 999px; background: {{a.cor}}"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 12px">
+            <span style="color: #9AA2B1">{{a.detalhe}}</span>
+            <span style="flex-shrink: 0; font-weight: 600; color: {{a.statusCor}}">{{a.status}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    </div>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 4px">
+      <sc-for list="{{pontos}}" as="p" hint-placeholder-count="2">
+        <button type="button" aria-label="{{p.rotulo}}" aria-current="{{p.atual}}" onClick="{{p.ir}}" style="width: 32px; height: 24px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <span style="display: block; width: {{p.largura}}; height: 6px; border-radius: 999px; background: {{p.cor}}"></span>
+        </button>
+      </sc-for>
+    </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px">
+        <span style="font-size: 12px; color: #9AA2B1">Por km</span>
+        <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FFFFFF">{{porKm}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px">
+        <span style="font-size: 12px; color: #9AA2B1">Por hora</span>
+        <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FFFFFF">{{porHora}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px">
+        <span style="font-size: 12px; color: #9AA2B1">Rodou</span>
+        <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FFFFFF">{{km}}</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Ganhos por app</h2>
+        <a href="GanhosDia.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">{{turnoResumo}}</a>
+      </div>
+      <div aria-hidden="true" style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; gap: 3px; background: #262B35">
+        <sc-for list="{{porApp}}" as="a" hint-placeholder-count="4">
+          <div style="flex: {{a.peso}}; background: {{a.cor}}"></div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; font-size: 13px; font-variant-numeric: tabular-nums">
+        <sc-for list="{{porApp}}" as="a" hint-placeholder-count="4">
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{a.cor}}"></span>{{a.nome}} · {{a.valor}}</span>
+        </sc-for>
+      </div>
+      <sc-if value="{{semGanhos}}" hint-placeholder-val="{{ false }}">
+        <a href="GanhosDia.dc.html" style="font-size: 13.5px; font-weight: 600">Nenhum ganho hoje. Registrar o primeiro</a>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Gastos de hoje</h2>
+        <a href="Gastos.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">{{verGastos}}</a>
+      </div>
+      <sc-for list="{{gastos}}" as="g" hint-placeholder-count="2">
+        <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid #2D333E">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: #3A2A2F; color: #FF7A7E; display: flex; align-items: center; justify-content: center">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.icone}}"></path></svg>
+          </span>
+          <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+            <span style="font-weight: 600; font-size: 15px; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{g.titulo}}</span>
+            <span style="font-size: 12.5px; color: #9AA2B1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{g.detalhe}}</span>
+          </div>
+          <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #FF7A7E">−{{g.valor}}</span>
+        </div>
+      </sc-for>
+      <sc-if value="{{semGastos}}" hint-placeholder-val="{{ false }}">
+        <a href="Gastos.dc.html" style="padding: 10px 0; font-size: 13.5px; font-weight: 600">Nenhum gasto hoje. Registrar o primeiro</a>
+      </sc-if>
+    </div>
+  </div>
+
+  <nav class="{{classeNav}}" aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+
+  <sc-if value="{{popupAberto}}" hint-placeholder-val="{{ false }}">
+    <button type="button" class="mc-pop-fundo" aria-label="Fechar notificações" onClick="{{fecharPopup}}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 20; border: 0; padding: 0; background: rgba(10, 12, 16, {{popFundo}}); cursor: default"></button>
+    <div role="dialog" aria-label="Notificações" class="mc-pop" onPointerDown="{{popInicio}}" onPointerMove="{{popMove}}" onPointerUp="{{popFim}}" onPointerCancel="{{popFim}}" onClickCapture="{{popCliqueGuarda}}" style="position: absolute; z-index: 21; top: {{popTopo}}; left: {{popLado}}; right: {{popLado}}; height: {{popAltura}}; box-sizing: border-box; display: flex; flex-direction: column; background: #262B35; border: 1px solid #3A414D; border-radius: {{popRaio}}; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); overflow: hidden; touch-action: none; user-select: none; transform: translateY({{popSobe}}px); transition: {{popTransicao}}">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: {{popCabecalho}}">
+        <sc-if value="{{popCheio}}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="Voltar para o início" onClick="{{fecharPopup}}" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 14px; border: 0; background: #1A1E26; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
+          </button>
+        </sc-if>
+        <div style="display: flex; flex-direction: column; gap: 1px; flex-grow: 1; min-width: 0">
+          <span style="font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: {{popTituloTam}}; color: #FFFFFF">Notificações</span>
+          <span style="font-size: 12.5px; color: #9AA2B1">{{popResumo}}</span>
+        </div>
+        <a href="Notificacoes.dc.html" onClick="{{popIrConfig}}" style="display: flex; align-items: center; min-height: 44px; padding: 0 4px; font-size: 13.5px; font-weight: 700; text-decoration: none">{{popLinkTexto}}</a>
+      </div>
+      <div class="mc-linhas" style="display: flex; flex-direction: column; gap: 6px; padding: 0 10px; flex-grow: 1; min-height: 0; overflow: hidden">
+        <sc-for list="{{popAvisos}}" as="n" hint-placeholder-count="3">
+          <a href="{{n.href}}" onClick="{{n.ler}}" style="display: grid; grid-template-columns: 36px minmax(0, 1fr) 8px; gap: 10px; align-items: center; padding: 10px; border-radius: 14px; background: {{n.fundo}}; text-decoration: none">
+            <span style="width: 36px; height: 36px; border-radius: 10px; background: {{n.iconeFundo}}; color: {{n.iconeCor}}; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icone}}"></path></svg></span>
+            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+              <span style="font-weight: 700; font-size: 14px; color: #FFFFFF; white-space: {{popQuebra}}; overflow: hidden; text-overflow: ellipsis">{{n.titulo}}</span>
+              <span style="font-size: 12.5px; line-height: 1.4; color: #C9CED7; white-space: {{popQuebra}}; overflow: hidden; text-overflow: ellipsis">{{n.texto}}</span>
+              <sc-if value="{{popCheio}}" hint-placeholder-val="{{ false }}">
+                <span style="font-size: 11.5px; color: #9AA2B1">{{n.quando}}</span>
+              </sc-if>
+            </span>
+            <span aria-label="{{n.statusRotulo}}" style="width: 8px; height: 8px; border-radius: 50%; background: {{n.ponto}}"></span>
+          </a>
+        </sc-for>
+      </div>
+      <div aria-hidden="true" style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 0 12px; cursor: grab">
+        <span style="width: 44px; height: 5px; border-radius: 999px; background: {{popPegador}}"></span>
+        <span style="font-size: 12px; color: #9AA2B1">{{popDica}}</span>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Ícones das categorias da tela Gastos
+  ICONES = {
+    combustivel: 'M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 8h4',
+    manutencao: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z',
+    lavagem: 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 17V7h4a3 3 0 0 1 0 6H9',
+    pedagio: 'M4 21V7M20 21V7M2 7h20M4 12h16M8 7l-4 5M14 7l-4 5M20 7l-4 5',
+    alimentacao: 'M6 2v8a3 3 0 0 0 6 0V2M9 2v20M17 22V2c-2 2-3 5-3 8h3',
+    pessoal: 'M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M16 14h2'
+  };
+  NOMES = { combustivel: 'Combustível', manutencao: 'Manutenção', lavagem: 'Lavagem e estacionamento', pedagio: 'Pedágio', alimentacao: 'Alimentação', pessoal: 'Pessoais e outras' };
+
+  // Gastos salvos na tela Gastos; sem nada salvo, usa o mesmo exemplo de lá.
+  gastosDia() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) return s.lancamentos;
+    } catch (e) {}
+    return [
+      { id: 1, categoria: 'combustivel', valor: '42,00', litros: '6,8', desc: 'Posto Ipiranga', hora: '07:40' },
+      { id: 2, categoria: 'alimentacao', valor: '18,50', litros: '', desc: 'Marmita', hora: '12:15' }
+    ];
+  }
+  APPS = [
+    { id: 'uber', nome: 'Uber', cor: '#FFC629' },
+    { id: '99', nome: '99', cor: '#EEF0F3' },
+    { id: 'indrive', nome: 'InDrive', cor: '#8E97A8' },
+    { id: 'particular', nome: 'Particular', cor: '#C98F00' }
+  ];
+
+  // Ganhos salvos na tela Ganhos do dia; sem nada salvo, usa o mesmo exemplo de lá.
+  dia() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00' },
+        { app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60' },
+        { app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '' },
+        { app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50' },
+        { app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '' }
+      ]
+    };
+  }
+
+  minutos(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || ''));
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+
+  // Mesma lógica de ganhos-dia.js: bruto − taxas = faturamento (o lucro só vem depois dos gastos)
+  ganhos() {
+    var self = this, d = this.dia(), porApp = {}, recebido = 0, corridas = 0;
+    d.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      porApp[l.app] = (porApp[l.app] || 0) + b - t;
+      recebido += b - t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    var ini = this.minutos(d.turno.inicio), fim = this.minutos(d.turno.fim);
+    var min = ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null;
+    var k0 = this.num(d.turno.kmInicial), k1 = this.num(d.turno.kmFinal);
+    var km = String(d.turno.kmInicial).trim() && String(d.turno.kmFinal).trim() && k1 >= k0 ? k1 - k0 : null;
+    return { recebido: recebido, corridas: corridas, minutos: min, km: km, porApp: porApp };
+  }
+
+  // A meta vem do plano salvo na tela Meta diária; sem plano salvo, usa o mesmo exemplo de lá.
+  plano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [{ valor: '450' }, { valor: '90' }, { valor: '40' }, { valor: '50' }, { valor: '82' }],
+      variaveis: [{ valor: '12', tipo: 'percentual' }, { valor: '6', tipo: 'percentual' }, { valor: '20', tipo: 'porDia' }]
+    };
+  }
+
+  num(s) {
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+
+  metaDiaria() {
+    var self = this, p = this.plano();
+    var diasMes = p.dias.reduce(function (a, b) { return a + b; }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    if (diasMes <= 0 || pct >= 1) return null;
+    return (this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes;
+  }
+
+  // Contas do mês por dia trabalhado e custos variáveis do plano (% do faturamento e R$ por dia)
+  custosPlano() {
+    var self = this, p = this.plano();
+    var diasMes = p.dias.reduce(function (a, b) { return a + b; }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    return { contasDia: diasMes > 0 ? fixas / diasMes : 0, pct: Math.min(pct / 100, 0.95), porDia: porDia };
+  }
+
+  // Carrossel do quadro amarelo: arrasta com o dedo ou o mouse, ou toca nos pontinhos
+  state = { slide: 0, dx: 0, arrastando: false, anim: true, conta: 0, popup: false, puxar: 0, puxando: false, cheio: false };
+  arrastoInicio = (e) => { this.x0 = e.clientX; this.moveu = false; this.largura = e.currentTarget.offsetWidth || 350; this.alvo = e.currentTarget; this.ponteiro = e.pointerId; };
+  arrastoMove = (e) => {
+    if (this.x0 == null) return;
+    var dx = e.clientX - this.x0;
+    if (!this.moveu && Math.abs(dx) < 8) return;
+    if (!this.moveu) { this.moveu = true; try { this.alvo.setPointerCapture(this.ponteiro); } catch (er) {} }
+    // resistência nas pontas
+    if ((this.state.slide === 0 && dx > 0) || (this.state.slide === 1 && dx < 0)) dx = dx / 3;
+    this.setState({ dx: dx, arrastando: true });
+  };
+  arrastoFim = () => {
+    if (this.x0 == null) return;
+    var dx = this.state.dx, s = this.state.slide;
+    if (this.moveu && Math.abs(dx) > this.largura * 0.2) s = dx < 0 ? Math.min(1, s + 1) : Math.max(0, s - 1);
+    this.x0 = null;
+    this.setState({ slide: s, dx: 0, arrastando: false });
+  };
+  // Depois de arrastar, o clique que o navegador dispara não abre o link "Ajustar meta"
+  cliqueGuarda = (e) => { if (this.moveu) { e.preventDefault(); e.stopPropagation(); this.moveu = false; } };
+
+  componentDidMount() {
+    var self = this;
+    this.observarTela();
+    this.contar();
+    this.aoMudar = function (e) { if (e.key === 'meucorre.plano' || e.key === 'meucorre.ganhos' || e.key === 'meucorre.gastos' || e.key === 'meucorre.perfil' || e.key === 'meucorre.notificacoes') self.forceUpdate(); };
+    window.addEventListener('storage', this.aoMudar);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('storage', this.aoMudar);
+    if (this.quadro) cancelAnimationFrame(this.quadro);
+    this.pararDeObservar();
+  }
+
+  // Popup de notificações: o sininho abre por cima do Início. Puxar para baixo estica o popup;
+  // soltando depois de 130 px ele ocupa a tela e abre a tela cheia de Notificações. Puxar para cima fecha.
+  AVISOS = [
+    { id: 1, quando: 'Agora', tipo: 'meta', titulo: 'Falta pouco para a meta', texto: 'Faltam R$ 16,60 para bater a meta de hoje.', href: 'Dashboard.dc.html' },
+    { id: 2, quando: 'Hoje, 08:00', tipo: 'conta', titulo: 'Aluguel da moto vence em 3 dias', texto: 'R$ 450,00 no dia 30. Marque como paga em Gastos.', href: 'Gastos.dc.html' },
+    { id: 3, quando: 'Hoje, 07:31', tipo: 'turno', titulo: 'Turno aberto às 07:30', texto: 'Km inicial 12.340 anotado. Bom corre!', href: 'GanhosDia.dc.html' },
+    { id: 4, quando: 'Ontem, 22:00', tipo: 'resumo', titulo: 'Resumo de ontem', texto: 'Lucro de R$ 156,30 com R$ 214,30 faturados.', href: 'Dias.dc.html' },
+    { id: 5, quando: 'Segunda, 09:00', tipo: 'semana', titulo: 'Sua semana', texto: 'Sábado foi o seu melhor dia.', href: 'Painel.dc.html' }
+  ];
+  ICONES_AVISO = {
+    meta: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+    conta: 'M4 4h16v16H4zM4 9h16M9 4v5',
+    turno: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+    resumo: 'M3 17l6-6 4 4 8-8M15 7h6v6',
+    semana: 'M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4'
+  };
+  POP_ALTURA = 296;
+  POP_ABRIR = 130;
+  marcarLido(id) {
+    try {
+      var n = JSON.parse(window.localStorage.getItem('meucorre.notificacoes') || 'null') || {};
+      var lidas = Array.isArray(n.lidas) ? n.lidas : [4, 5];
+      if (lidas.indexOf(id) < 0) lidas = lidas.concat([id]);
+      n.lidas = lidas;
+      window.localStorage.setItem('meucorre.notificacoes', JSON.stringify(n));
+    } catch (e) {}
+    this.forceUpdate();
+  }
+  abrirPopup = () => { this.setState({ popup: !this.state.popup, puxar: 0, puxando: false, cheio: false }); };
+  fecharPopup = () => { this.setState({ popup: false, puxar: 0, puxando: false, cheio: false }); };
+  // Na tela cheia o link leva direto para a aba Configurar da tela Notificações
+  popIrConfig = () => { if (this.state.cheio) { try { window.localStorage.setItem('meucorre.notifAba', 'config'); } catch (e) {} } };
+  popInicio = (e) => { this.py0 = e.clientY; this.pyMoveu = false; this.popAlvo = e.currentTarget; this.popPonteiro = e.pointerId; };
+  popMove = (e) => {
+    if (this.py0 == null) return;
+    var dy = e.clientY - this.py0;
+    if (!this.pyMoveu && Math.abs(dy) < 8) return;
+    if (!this.pyMoveu) { this.pyMoveu = true; try { this.popAlvo.setPointerCapture(this.popPonteiro); } catch (er) {} }
+    if (this.state.cheio && dy > 0) dy = dy / 4;
+    this.setState({ puxar: dy, puxando: true });
+  };
+  popFim = () => {
+    if (this.py0 == null) return;
+    var dy = this.state.puxar, self = this;
+    this.py0 = null;
+    if (!this.state.cheio && dy > this.POP_ABRIR) {
+      // Vira a tela cheia de avisos, ainda no Início; arrastar para cima volta
+      this.setState({ cheio: true, puxar: 0, puxando: false });
+    } else if (dy < -60) {
+      this.fecharPopup();
+    } else {
+      this.setState({ puxar: 0, puxando: false });
+    }
+  };
+  popCliqueGuarda = (e) => { if (this.pyMoveu) { e.preventDefault(); e.stopPropagation(); this.pyMoveu = false; } };
+
+  popupVals(lidas) {
+    var self = this, st = this.state, aberto = !!st.popup;
+    var dy = st.puxar || 0, cheio = !!st.cheio;
+    var baixo = Math.max(0, dy), cima = Math.min(0, dy);
+    var novos = this.AVISOS.filter(function (a) { return lidas.indexOf(a.id) < 0; });
+    // Não lidos primeiro; no popup cabem 3, esticado aparecem todos
+    var ordem = novos.concat(this.AVISOS.filter(function (a) { return lidas.indexOf(a.id) >= 0; }));
+    var passou = baixo > this.POP_ABRIR;
+    return {
+      popupAberto: aberto, popupExpandido: aberto ? 'true' : 'false',
+      sinoFundo: aberto ? '#FFC629' : '#262B35', sinoCor: aberto ? '#1A1E26' : '#EEF0F3',
+      abrirPopup: this.abrirPopup, fecharPopup: this.fecharPopup, popIrConfig: this.popIrConfig,
+      popInicio: this.popInicio, popMove: this.popMove, popFim: this.popFim, popCliqueGuarda: this.popCliqueGuarda,
+      popTopo: cheio ? '0px' : '104px', popLado: cheio ? '0px' : '14px',
+      popAltura: cheio ? '100%' : (this.POP_ALTURA + baixo) + 'px',
+      popRaio: cheio ? '0px' : '22px', popSobe: Math.round(cima),
+      popCheio: cheio, popQuebra: cheio ? 'normal' : 'nowrap', popTituloTam: cheio ? '22px' : '17px',
+      popLinkTexto: cheio ? 'Configurar' : 'Ver todas',
+      popCabecalho: cheio ? '56px 16px 8px 20px' : '12px 12px 8px 16px',
+      popTransicao: st.puxando ? 'none' : 'all 0.3s cubic-bezier(.2,.8,.25,1)',
+      popFundo: String(Math.min(0.85, 0.55 + baixo / 900)),
+      popResumo: novos.length ? novos.length + (novos.length === 1 ? ' aviso novo' : ' avisos novos') : 'Tudo lido por aqui',
+      popPegador: passou || cima < -60 ? '#FFC629' : '#4A5261',
+      popDica: cheio ? (cima < -60 ? 'Solte para voltar ao início' : 'Arraste para cima para voltar') : (passou ? 'Solte para abrir tudo' : (cima < -60 ? 'Solte para fechar' : 'Puxe para baixo para ver tudo')),
+      popAvisos: ordem.slice(0, cheio || baixo > 60 ? 5 : 3).map(function (a) {
+        var nova = lidas.indexOf(a.id) < 0;
+        return {
+          titulo: a.titulo, texto: a.texto, quando: a.quando, href: a.href, icone: self.ICONES_AVISO[a.tipo],
+          fundo: nova ? '#2A2718' : '#1F232B', iconeFundo: nova ? '#FFC629' : '#1A1E26', iconeCor: nova ? '#1A1E26' : '#C9CED7',
+          ponto: nova ? '#FFC629' : 'transparent', statusRotulo: nova ? 'Não lido' : 'Lido',
+          ler: function () { self.marcarLido(a.id); }
+        };
+      })
+    };
+  }
+
+  // Apelido e iniciais vêm do Perfil; avisos não lidos vêm das Notificações (mesmos ids e padrão de lá)
+  perfilENotificacoes() {
+    var nome = 'Bruno Travassos', apelido = 'Bruno', lidas = [4, 5], foto = '';
+    try {
+      var p = JSON.parse(window.localStorage.getItem('meucorre.perfil') || 'null');
+      if (p) { foto = typeof p.foto === 'string' && p.foto.indexOf('data:image/') === 0 ? p.foto : ''; if (String(p.nome || '').trim()) nome = p.nome; if (String(p.apelido || '').trim()) apelido = p.apelido; else if (p.nome) apelido = String(p.nome).trim().split(/\s+/)[0]; }
+      var n = JSON.parse(window.localStorage.getItem('meucorre.notificacoes') || 'null');
+      if (n && Array.isArray(n.lidas)) lidas = n.lidas;
+    } catch (e) {}
+    var partes = String(nome).trim().split(/\s+/);
+    var ini = (partes[0][0] + (partes.length > 1 ? partes[partes.length - 1][0] : '')).toUpperCase();
+    var novos = [1, 2, 3, 4, 5].filter(function (id) { return lidas.indexOf(id) < 0; }).length;
+    return Object.assign(this.popupVals(lidas), {
+      apelido: apelido, iniciais: ini, foto: foto, temFoto: !!foto, semFoto: !foto, avisosNovos: novos, temAvisos: novos > 0,
+      sinoRotulo: novos ? 'Notificações, ' + novos + (novos === 1 ? ' nova' : ' novas') : 'Notificações'
+    });
+  }
+
+  // Animação de entrada: os blocos sobem e o lucro e a meta contam de zero até o valor
+  aoTocar = () => this.contar();
+  contar() {
+    var self = this, inicio = null, ATRASO = 600, DURACAO = 1800;
+    if (this.quadro) cancelAnimationFrame(this.quadro);
+    this.setState({ conta: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ conta: 1 - Math.pow(1 - x, 3) });
+      self.quadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.quadro = requestAnimationFrame(passo);
+  }
+
+  // Toca a animação sempre que a tela aparece: ao abrir (Play), ao voltar a ficar visível
+  // ou quando o tamanho da janela muda (tela cheia). Tirar e pôr a classe reinicia o CSS.
+  observarTela() {
+    var self = this;
+    this.ultimoToque = Date.now();
+    this.aoVer = function () { if (document.visibilityState === 'visible') self.tocar(); };
+    document.addEventListener('visibilitychange', this.aoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.aoRedimensionar = function () {
+      clearTimeout(self.esperaTam);
+      self.esperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.tocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.aoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.io = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.tocar();
+        visivel = v;
+      });
+      this.io.observe(document.body);
+    }
+  }
+  pararDeObservar() {
+    document.removeEventListener('visibilitychange', this.aoVer);
+    window.removeEventListener('resize', this.aoRedimensionar);
+    clearTimeout(this.esperaTam);
+    if (this.io) this.io.disconnect();
+  }
+  tocar = () => {
+    var agora = Date.now(), self = this;
+    if (agora - (this.ultimoToque || 0) < 1500) return;
+    this.ultimoToque = agora;
+    this.setState({ anim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ anim: true }); self.aoTocar && self.aoTocar(); }); });
+  };
+
+
+  renderVals() {
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+    var self = this, g = this.ganhos();
+    var lista = this.gastosDia();
+    var gastosHoje = lista.reduce(function (t, l) { return t + self.num(l.valor); }, 0);
+    var lucro = g.recebido - gastosHoje;
+    var porApp = this.APPS.filter(function (a) { return g.porApp[a.id] > 0; }).map(function (a) {
+      return { nome: a.nome, cor: a.cor, peso: g.porApp[a.id], valor: rs(g.porApp[a.id]) };
+    });
+    // Semana e Mês abrem o Painel já nessa aba
+    var abrirPainel = function (periodo) {
+      return function () { try { window.localStorage.setItem('meucorre.painel', JSON.stringify({ periodo: periodo })); } catch (e) {} };
+    };
+    var vals = Object.assign(this.perfilENotificacoes(), {
+      verSemana: abrirPainel('semana'), verMes: abrirPainel('mes'),
+      lucro: nf.format(Math.abs(lucro) * this.state.conta),
+      classeEntrada: this.state.anim ? 'mc-entra' : '', classeNav: this.state.anim ? 'mc-nav-entra' : '', lucroSinal: lucro < 0 ? '−' : '',
+      faturou: rs(g.recebido), gastou: rs(gastosHoje),
+      faturouCard: rs(g.recebido * this.state.conta), gastouCard: rs(gastosHoje * this.state.conta),
+      gastos: lista.slice(-3).reverse().map(function (l) {
+        var nome = self.NOMES[l.categoria] || 'Outros', lt = self.num(l.litros);
+        return {
+          icone: self.ICONES[l.categoria] || self.ICONES.pessoal,
+          titulo: l.desc || nome,
+          detalhe: (l.desc ? nome + ' · ' : '') + l.hora + (lt > 0 ? ' · ' + String(l.litros).replace('.', ',') + ' L' : ''),
+          valor: rs(self.num(l.valor))
+        };
+      }),
+      semGastos: lista.length === 0,
+      verGastos: lista.length > 3 ? 'Ver todos (' + lista.length + ')' : 'Ver gastos',
+      porKm: g.km ? rs(g.recebido / g.km) : '–',
+      porHora: g.minutos ? rs(g.recebido / (g.minutos / 60)) : '–',
+      km: g.km !== null ? n0.format(g.km) + ' km' : '–',
+      porApp: porApp, semGanhos: porApp.length === 0,
+      turnoResumo: g.corridas + (g.corridas === 1 ? ' corrida' : ' corridas') +
+        (g.minutos !== null ? ' · ' + Math.floor(g.minutos / 60) + 'h' + String(g.minutos % 60).padStart(2, '0') : '')
+    });
+    var meta = this.metaDiaria();
+
+    // Segundo quadro: quanto faturar hoje para cobrir só as contas fixas, todos os gastos e a meta inteira.
+    // "Todos os gastos" usa os gastos já lançados ou, se for mais, o que o plano prevê para o dia.
+    var c = this.custosPlano(), self2 = this;
+    var equilibrioPlano = (c.contasDia + c.porDia) / (1 - c.pct);
+    var gastosDia = Math.max(gastosHoje, c.porDia + c.pct * equilibrioPlano);
+    var alvo = function (nome, valor, detalhe) {
+      var falta = valor - g.recebido, pctA = valor > 0 ? Math.min(100, Math.round(g.recebido / valor * 100)) : 100;
+      return {
+        nome: nome, valor: rs(valor), detalhe: detalhe, barra: pctA,
+        cor: falta <= 0 ? '#3DD598' : '#FFC629',
+        status: falta <= 0 ? 'Coberto ✓' : 'Faltam ' + rs(falta),
+        statusCor: falta <= 0 ? '#3DD598' : '#FFFFFF'
+      };
+    };
+    var slide = this.state.slide, NOMES_SLIDE = ['Lucro de hoje', 'Quanto faturar hoje'];
+    Object.assign(vals, {
+      alvos: [
+        alvo('Só as contas fixas', c.contasDia, 'Parte do dia nas contas do mês'),
+        alvo('Todos os gastos', c.contasDia + gastosDia, 'Contas ' + rs(c.contasDia) + ' + gastos ' + rs(gastosDia)),
+        alvo('Meta completa', meta || 0, meta ? 'Gastos + o lucro que você quer' : 'Monte sua meta na tela Meta')
+      ],
+      trilho: 'translateX(calc(' + (-100 * slide) + '% - ' + (12 * slide) + 'px + ' + Math.round(this.state.dx) + 'px))',
+      trilhoTransicao: this.state.arrastando ? 'none' : 'transform 0.28s ease',
+      slide1Oculto: slide !== 0 ? 'true' : 'false', slide2Oculto: slide !== 1 ? 'true' : 'false',
+      irFaturar: function () { self2.setState({ slide: 1, dx: 0 }); },
+      arrastoInicio: this.arrastoInicio, arrastoMove: this.arrastoMove, arrastoFim: this.arrastoFim, cliqueGuarda: this.cliqueGuarda,
+      pontos: [0, 1].map(function (i) {
+        return {
+          rotulo: 'Mostrar ' + NOMES_SLIDE[i].toLowerCase(), atual: i === slide ? 'true' : 'false',
+          largura: i === slide ? '22px' : '8px', cor: i === slide ? '#FFC629' : '#4A5261',
+          ir: function () { self2.setState({ slide: i, dx: 0 }); }
+        };
+      })
+    });
+    if (!meta) return Object.assign(vals, { metaDia: '–', metaPct: 0, metaBarra: 0, metaFrase: 'Monte sua meta para acompanhar o dia.' });
+    // Durante a entrada, o faturamento conta de zero e a barra da meta enche junto
+    var recebidoAgora = g.recebido * this.state.conta;
+    var pct = Math.round(recebidoAgora / meta * 100);
+    var falta = meta - recebidoAgora;
+    return Object.assign(vals, {
+      metaDia: 'R$ ' + nf.format(meta),
+      metaPct: pct,
+      metaBarra: Math.min(100, recebidoAgora / meta * 100),
+      metaFrase: falta > 0 ? 'Faltam R$ ' + nf.format(falta) + ' de faturamento.' : 'Meta batida. Passou R$ ' + nf.format(-falta) + '.'
+    });
+  }
+}
+</script>
+</body>
+</html>

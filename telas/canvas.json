@@ -1,0 +1,118 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Dashboard.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Dashboard",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    },
+    "Dias.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Dias anteriores",
+      "w": 390,
+      "x": 2820,
+      "y": 0
+    },
+    "GanhosDia.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Ganhos do dia",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "Gastos.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Gastos",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Login",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "MetaDiaria.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Meta diária",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "Notificacoes.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Notificações",
+      "w": 390,
+      "x": 3760,
+      "y": 0
+    },
+    "Painel.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Painel de desempenho",
+      "w": 390,
+      "x": 2350,
+      "y": 0
+    },
+    "Perfil.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Perfil e configurações",
+      "w": 390,
+      "x": 3290,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-27T19:22:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "titulo": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "Meu Corre · primeiras telas",
+      "w": 240,
+      "x": 1596,
+      "y": -320
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Dashboard.dc.html",
+    "MetaDiaria.dc.html",
+    "GanhosDia.dc.html",
+    "Gastos.dc.html",
+    "Painel.dc.html",
+    "Dias.dc.html",
+    "Perfil.dc.html",
+    "Notificacoes.dc.html"
+  ],
+  "pages": [],
+  "title": "Meu Corre · Login e Dashboard"
+}

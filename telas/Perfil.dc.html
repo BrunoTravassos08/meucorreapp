@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Perfil</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+input::placeholder{color:#7E8696}
+input:focus{outline:2px solid #FFC629;outline-offset:1px}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+button:disabled{cursor:default}
+.foto-input:focus-visible + .foto-alvo{outline:2px solid #1A1E26;outline-offset:3px;border-radius:50%}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+    <a href="Dashboard.dc.html" aria-label="Voltar para o início" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-size: 13px; color: #9AA2B1">Sua conta e o app</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Perfil</h1>
+    </div>
+  </div>
+  <div class="mc-cascata" style="flex-grow: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+
+    <div style="position: relative; display: flex; align-items: center; gap: 14px; padding: 16px; background: #FFC629; color: #1A1E26; border-radius: 22px">
+      <input id="p-foto" class="foto-input" type="file" accept="image/*" onChange="{{escolherFoto}}" style="position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none">
+      <label for="p-foto" class="foto-alvo" style="position: relative; flex-shrink: 0; width: 72px; height: 72px; cursor: pointer">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">{{fotoRotulo}}</span>
+        <sc-if value="{{temFoto}}" hint-placeholder-val="{{ false }}">
+          <img src="{{foto}}" alt="" style="display: block; width: 72px; height: 72px; box-sizing: border-box; border-radius: 50%; border: 3px solid #1A1E26; object-fit: cover">
+        </sc-if>
+        <sc-if value="{{semFoto}}" hint-placeholder-val="{{ true }}">
+          <span aria-hidden="true" style="width: 72px; height: 72px; border-radius: 50%; background: #1A1E26; color: #FFC629; display: flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 900; font-size: 26px">{{iniciais}}</span>
+        </sc-if>
+        <span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 30px; height: 30px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFC629; background: #1A1E26; color: #FFC629; display: flex; align-items: center; justify-content: center">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+        </span>
+      </label>
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <span style="font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 20px; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{nomeMostrar}}</span>
+        <span style="font-size: 13.5px; font-weight: 600">{{resumo}}</span>
+        <span style="font-size: 12.5px">{{salvoFrase}}</span>
+        <sc-if value="{{temFoto}}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{removerFoto}}" style="align-self: flex-start; min-height: 44px; margin: -10px 0 -14px; padding: 0; border: 0; background: transparent; color: #1A1E26; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 12.5px; text-decoration: underline; cursor: pointer">Remover foto</button>
+        </sc-if>
+        <sc-if value="{{temErroFoto}}" hint-placeholder-val="{{ false }}">
+          <span role="alert" style="font-size: 12.5px; font-weight: 700; color: #7A1F22">{{erroFoto}}</span>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Seus dados</h2>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-nome" style="font-size: 13px; font-weight: 600">Nome completo</label>
+          <input id="p-nome" value="{{nome}}" onChange="{{on_nome}}" autocomplete="name" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-apelido" style="font-size: 13px; font-weight: 600">Como quer ser chamado</label>
+          <input id="p-apelido" value="{{apelido}}" onChange="{{on_apelido}}" autocomplete="nickname" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-cel" style="font-size: 13px; font-weight: 600">Celular</label>
+          <div style="display: flex; gap: 8px">
+            <span style="display: flex; align-items: center; height: 48px; padding: 0 12px; border-radius: 12px; background: #1A1E26; font-family: 'DM Mono', monospace; font-size: 15px; color: #C9CED7">+55</span>
+            <input id="p-cel" type="tel" inputmode="tel" value="{{celular}}" onChange="{{on_celular}}" placeholder="(11) 98765-4321" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%; font-family: 'DM Mono', monospace">
+          </div>
+          <span style="font-size: 12.5px; color: #9AA2B1">É com ele que você entra no app.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-email" style="font-size: 13px; font-weight: 600">E-mail</label>
+          <input id="p-email" value="{{email}}" onChange="{{on_email}}" type="email" inputmode="email" autocomplete="email" placeholder="voce@email.com" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-cidade" style="font-size: 13px; font-weight: 600">Cidade onde roda</label>
+          <input id="p-cidade" value="{{cidade}}" onChange="{{on_cidade}}" autocomplete="address-level2" placeholder="Ex.: Recife, PE" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Seu veículo</h2>
+      <div role="group" aria-label="Tipo de veículo" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #1A1E26; border-radius: 12px">
+        <sc-for list="{{veiculos}}" as="v" hint-placeholder-count="2">
+          <button type="button" aria-pressed="{{v.on}}" onClick="{{v.escolher}}" style="height: 40px; border: 0; border-radius: 9px; background: {{v.fundo}}; color: {{v.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">{{v.nome}}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-modelo" style="font-size: 13px; font-weight: 600">Modelo</label>
+          <input id="p-modelo" value="{{modelo}}" onChange="{{on_modelo}}" placeholder="Ex.: Honda CG 160" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="p-consumo" style="font-size: 13px; font-weight: 600">Consumo (km/l)</label>
+          <input id="p-consumo" value="{{consumo}}" onChange="{{on_consumo}}" inputmode="decimal" placeholder="40" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'Figtree', sans-serif; font-size: 16px; width: 100%">
+        </div>
+      </div>
+      <span style="font-size: 12.5px; color: #9AA2B1">{{consumoFrase}}</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Apps que você roda</h2>
+        <span style="font-size: 12.5px; color: #9AA2B1">Toque para marcar ou desmarcar.</span>
+      </div>
+      <div role="group" aria-label="Apps que você roda" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{apps}}" as="a" hint-placeholder-count="4">
+          <button type="button" aria-pressed="{{a.on}}" onClick="{{a.alternar}}" style="height: 40px; padding: 0 6px; border-radius: 10px; border: 1px solid {{a.borda}}; background: {{a.fundo}}; color: {{a.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13.5px; cursor: pointer">{{a.nome}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Configurações do app</h2>
+      <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 20px; overflow: hidden">
+        <a href="Notificacoes.dc.html" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 18px; gap: 12px; align-items: center; padding: 12px 16px; text-decoration: none; border-bottom: 1px solid #333A46">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: #1A1E26; color: #FFC629; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Notificações</span><span style="font-size: 12.5px; color: #9AA2B1">{{notifResumo}}</span></span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9AA2B1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </a>
+        <a href="MetaDiaria.dc.html" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 18px; gap: 12px; align-items: center; padding: 12px 16px; text-decoration: none; border-bottom: 1px solid #333A46">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: #1A1E26; color: #FFC629; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Meta e contas do mês</span><span style="font-size: 12.5px; color: #9AA2B1">Quanto quer tirar e seus dias de trabalho</span></span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#9AA2B1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </a>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-bottom: 1px solid #333A46">
+          <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">A semana começa no</span>
+          <div role="group" aria-label="Primeiro dia da semana" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{semanas}}" as="s" hint-placeholder-count="2">
+              <button type="button" aria-pressed="{{s.on}}" onClick="{{s.escolher}}" style="height: 40px; padding: 0 6px; border-radius: 10px; border: 1px solid {{s.borda}}; background: {{s.fundo}}; color: {{s.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13.5px; cursor: pointer">{{s.nome}}</button>
+            </sc-for>
+          </div>
+          <span style="font-size: 12.5px; color: #9AA2B1">Vale para o resumo da semana e para o Painel.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px">
+          <span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Aparência</span>
+          <div role="group" aria-label="Tema" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{temas}}" as="t" hint-placeholder-count="3">
+              <button type="button" aria-pressed="{{t.on}}" disabled="{{t.bloqueado}}" onClick="{{t.escolher}}" style="height: 40px; padding: 0 6px; border-radius: 10px; border: 1px solid {{t.borda}}; background: {{t.fundo}}; color: {{t.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13.5px; cursor: pointer">{{t.nome}}</button>
+            </sc-for>
+          </div>
+          <span style="font-size: 12.5px; color: #9AA2B1">O tema claro ainda não está pronto. Por enquanto o app fica no escuro.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; border: 1px solid #4A5261; color: #FF7A7E; font-weight: 700; font-size: 15px; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg>
+        Sair da conta
+      </a>
+      <span style="font-size: 12px; color: #7E8696; text-align: center">Meu Corre · versão de teste 0.1</span>
+    </div>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Perfil salvo no aparelho (meucorre.perfil). O Início lê o apelido e as iniciais daqui.
+  PADRAO = { nome: 'Bruno Travassos', apelido: 'Bruno', celular: '(11) 98765-4321', email: '', cidade: '', veiculo: 'moto', modelo: 'Honda CG 160', consumo: '40', apps: ['uber', '99', 'indrive', 'particular'], semana: 'segunda', tema: 'escuro', foto: '' };
+  APPS = [{ id: 'uber', nome: 'Uber' }, { id: '99', nome: '99' }, { id: 'indrive', nome: 'InDrive' }, { id: 'particular', nome: 'Particular' }];
+
+  carregar() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.perfil') || 'null');
+      if (s && typeof s === 'object') return Object.assign({}, this.PADRAO, s);
+    } catch (e) {}
+    return Object.assign({}, this.PADRAO);
+  }
+
+  state = { mcAnim: true, mcK: 0, perfil: this.carregar(), salvoEm: null, erroFoto: '' };
+
+  // Foto de perfil: recorta o meio da imagem num quadrado de 256 px e guarda junto do perfil
+  escolherFoto = (e) => {
+    var self = this, input = e.target, arq = input.files && input.files[0];
+    if (!arq) return;
+    if (!/^image\//.test(arq.type)) { this.setState({ erroFoto: 'Escolha um arquivo de imagem.' }); input.value = ''; return; }
+    var leitor = new FileReader();
+    leitor.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var t = 256, c = document.createElement('canvas'), lado = Math.min(img.width, img.height);
+        c.width = t; c.height = t;
+        c.getContext('2d').drawImage(img, (img.width - lado) / 2, (img.height - lado) / 2, lado, lado, 0, 0, t, t);
+        self.setState({ erroFoto: '' });
+        self.mudar({ foto: c.toDataURL('image/jpeg', 0.82) });
+      };
+      img.onerror = function () { self.setState({ erroFoto: 'Não deu para abrir essa imagem. Tente outra.' }); };
+      img.src = leitor.result;
+    };
+    leitor.readAsDataURL(arq);
+    input.value = '';
+  };
+  removerFoto = () => { this.mudar({ foto: '' }); };
+
+  // Cada mudança já fica salva; não tem botão de salvar
+  mudar(campos) {
+    var p = Object.assign({}, this.state.perfil, campos);
+    try { window.localStorage.setItem('meucorre.perfil', JSON.stringify(p)); } catch (e) {}
+    this.setState({ perfil: p, salvoEm: new Date() });
+  }
+
+  iniciais(nome) {
+    var partes = String(nome || '').trim().split(/\s+/).filter(Boolean);
+    if (!partes.length) return '?';
+    var ini = partes[0][0] + (partes.length > 1 ? partes[partes.length - 1][0] : '');
+    return ini.toUpperCase();
+  }
+
+  // Resumo das notificações ligadas, lido da tela Notificações
+  notifResumo() {
+    try {
+      var n = JSON.parse(window.localStorage.getItem('meucorre.notificacoes') || 'null');
+      if (n && n.config) {
+        if (!n.config.ativo) return 'Desligadas';
+        var on = Object.keys(n.config.itens || {}).filter(function (k) { return n.config.itens[k].on; }).length;
+        return 'Ligadas · ' + on + (on === 1 ? ' aviso' : ' avisos');
+      }
+    } catch (e) {}
+    return 'Ligadas · 8 avisos';
+  }
+
+  componentDidMount() { this.mcIniciar(); }
+  componentWillUnmount() { this.mcParar(); }
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    [].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, p = this.state.perfil;
+    var fotoOk = typeof p.foto === 'string' && p.foto.indexOf('data:image/') === 0 ? p.foto : '';
+    var chip = function (on) { return { on: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', borda: on ? '#FFC629' : '#4A5261', corTexto: on ? '#1A1E26' : '#C9CED7' }; };
+    var campo = function (k) { return function (e) { var o = {}; o[k] = e.target.value; self.mudar(o); }; };
+    var consumo = Number(String(p.consumo).replace(',', '.'));
+    var cidade = String(p.cidade || '').trim();
+    var vals = {
+      iniciais: this.iniciais(p.nome),
+      foto: fotoOk, temFoto: !!fotoOk, semFoto: !fotoOk,
+      fotoRotulo: fotoOk ? 'Trocar foto de perfil' : 'Adicionar foto de perfil',
+      escolherFoto: this.escolherFoto, removerFoto: this.removerFoto,
+      erroFoto: this.state.erroFoto, temErroFoto: !!this.state.erroFoto,
+      nomeMostrar: String(p.nome || '').trim() || 'Seu nome',
+      resumo: (p.veiculo === 'carro' ? 'Motorista de carro' : 'Motoboy') + (cidade ? ' · ' + cidade : ''),
+      salvoFrase: !fotoOk && !this.state.salvoEm ? 'Toque na bolinha para pôr sua foto' : this.state.salvoEm ? 'Alterações salvas às ' + String(this.state.salvoEm.getHours()).padStart(2, '0') + ':' + String(this.state.salvoEm.getMinutes()).padStart(2, '0') : 'Tudo o que você muda aqui já fica salvo',
+      veiculos: [{ id: 'moto', nome: 'Moto' }, { id: 'carro', nome: 'Carro' }].map(function (v) {
+        var on = p.veiculo === v.id;
+        return { nome: v.nome, on: on ? 'true' : 'false', fundo: on ? '#FFC629' : 'transparent', corTexto: on ? '#1A1E26' : '#C9CED7', escolher: function () { self.mudar({ veiculo: v.id }); } };
+      }),
+      consumoFrase: consumo > 0 ? 'Com a gasolina a R$ 6,00, cada km custa uns R$ ' + new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(6 / consumo) + ' de combustível.' : 'Informe quantos km o veículo faz por litro.',
+      apps: this.APPS.map(function (a) {
+        var on = p.apps.indexOf(a.id) >= 0;
+        return Object.assign(chip(on), { nome: a.nome, alternar: function () {
+          self.mudar({ apps: on ? p.apps.filter(function (x) { return x !== a.id; }) : p.apps.concat([a.id]) });
+        } });
+      }),
+      semanas: [{ id: 'domingo', nome: 'Domingo' }, { id: 'segunda', nome: 'Segunda' }].map(function (s) {
+        return Object.assign(chip(p.semana === s.id), { nome: s.nome, escolher: function () { self.mudar({ semana: s.id }); } });
+      }),
+      temas: [{ id: 'escuro', nome: 'Escuro' }, { id: 'claro', nome: 'Claro' }, { id: 'auto', nome: 'Do celular' }].map(function (t) {
+        var c = chip(p.tema === t.id), bloq = t.id !== 'escuro';
+        if (bloq) { c.corTexto = '#7E8696'; c.borda = '#3A414D'; }
+        return Object.assign(c, { nome: t.nome, bloqueado: bloq, escolher: function () { if (!bloq) self.mudar({ tema: t.id }); } });
+      }),
+      notifResumo: this.notifResumo()
+    };
+    ['nome', 'apelido', 'celular', 'email', 'cidade', 'modelo', 'consumo'].forEach(function (k) { vals[k] = p[k]; vals['on_' + k] = campo(k); });
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

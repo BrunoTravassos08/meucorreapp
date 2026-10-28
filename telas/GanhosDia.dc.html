@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Ganhos do dia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+input::placeholder{color:#7E8696}
+input:focus{outline:2px solid #FFC629;outline-offset:1px}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+    <a href="Dashboard.dc.html" aria-label="Voltar para o início" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-size: 13px; color: #9AA2B1">Terça, 27 de outubro</span>
+      <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Ganhos do dia</h1>
+    </div>
+    <a href="Dias.dc.html" aria-label="Dias anteriores" title="Dias anteriores" style="margin-left: auto; width: 44px; height: 44px; border-radius: 14px; background: #262B35; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FFC629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M7 14h3M7 17h6"></path></svg>
+    </a>
+  </div>
+
+  <div class="mc-cascata" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+
+    <div style="display: flex; flex-direction: column; background: #262B35; border-radius: 22px; overflow: hidden">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 0">
+        <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Faturamento de hoje</span>
+        <div style="font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 900; font-size: 44px; line-height: 1.05; color: #FFFFFF; font-variant-numeric: tabular-nums"><span style="font-size: 20px; font-weight: 800; margin-right: 4px">R$</span>{{recebido}}</div>
+        <span style="font-size: 13px; color: #9AA2B1">o que ficou com você depois das taxas dos apps</span>
+      </div>
+      <div class="mc-estrada" aria-hidden="true" style="height: 5px; margin-top: 14px; background: repeating-linear-gradient(90deg, #FFC629 0 22px, transparent 22px 36px)"></div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 8px 10px; padding: 14px 18px; font-size: 14px; font-variant-numeric: tabular-nums; border-bottom: 1px solid #333A46">
+        <span style="color: #C9CED7">Valor bruto das corridas</span><span style="font-family: 'DM Mono', monospace; color: #FFFFFF">{{bruto}}</span>
+        <span style="color: #C9CED7">Taxas dos apps ({{taxaMedia}}%)</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{taxas}}</span>
+        <span style="color: #C9CED7">Bônus e promoções</span><span style="font-family: 'DM Mono', monospace; color: #FFFFFF">{{bonus}}</span>
+        <span style="font-weight: 700; color: #FFFFFF">Faturamento</span><span style="font-family: 'DM Mono', monospace; font-weight: 500; color: #3DD598">{{recebidoRs}}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid #333A46">
+        <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 0 12px 14px">
+          <span style="font-size: 12px; color: #9AA2B1">Corridas</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{corridas}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 0 12px 12px; border-left: 1px solid #333A46">
+          <span style="font-size: 12px; color: #9AA2B1">Rodou</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{km}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 0 12px 12px; border-left: 1px solid #333A46">
+          <span style="font-size: 12px; color: #9AA2B1">Por km</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{porKm}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 0 12px 12px; border-left: 1px solid #333A46">
+          <span style="font-size: 12px; color: #9AA2B1">Por hora</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{porHora}}</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; border-bottom: 1px solid #333A46">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px">
+          <span style="color: #C9CED7">Meta do dia: faturar {{metaDia}}</span><span style="font-family: 'DM Mono', monospace; color: #FFFFFF">{{metaPct}}%</span>
+        </div>
+        <div role="progressbar" aria-label="Meta do dia" aria-valuenow="{{metaBarra}}" aria-valuemin="0" aria-valuemax="100" style="height: 8px; border-radius: 999px; background: #1A1E26; overflow: hidden">
+          <div style="width: {{metaBarra}}%; height: 100%; border-radius: 999px; background: #FFC629"></div>
+        </div>
+        <span style="font-size: 12.5px; color: #9AA2B1">{{metaFrase}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 18px 18px; background: #20252E">
+        <span style="font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #9AA2B1">Lucro do dia</span>
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; font-size: 14px; font-variant-numeric: tabular-nums">
+          <span style="color: #C9CED7">Faturamento</span><span style="font-family: 'DM Mono', monospace; color: #3DD598">{{recebidoRs}}</span>
+          <a href="Gastos.dc.html" style="color: #C9CED7">Gastos do dia</a><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{gastos}}</span>
+          <span style="font-weight: 700; color: #FFFFFF">Lucro</span><span style="font-family: 'DM Mono', monospace; font-weight: 500; color: {{lucroCor}}">{{lucro}}</span>
+        </div>
+        <p style="margin: 0; font-size: 12px; color: #9AA2B1">Faturamento não é lucro. O lucro é o que sobra depois da gasolina, da comida e dos outros gastos do dia.</p>
+      </div>
+    </div>
+
+    <sc-if value="{{temErros}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; background: #262B35; border: 1px solid #FF7A7E; border-radius: 16px">
+        <sc-for list="{{erros}}" as="e" hint-placeholder-count="1">
+          <span style="font-size: 13.5px; color: #FF7A7E">{{e.texto}}</span>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{temApps}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Por aplicativo</h2>
+        <div aria-hidden="true" style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; gap: 3px">
+          <sc-for list="{{porApp}}" as="a" hint-placeholder-count="4">
+            <div style="flex: {{a.peso}}; background: {{a.cor}}"></div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <sc-for list="{{porApp}}" as="a" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px solid #2D333E">
+              <span style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #FFFFFF"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{a.cor}}"></span>{{a.nome}}</span>
+              <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #3DD598">{{a.recebido}}</span>
+              <span style="font-size: 12.5px; color: #9AA2B1">{{a.detalhe}}</span>
+              <span style="font-size: 12.5px; color: #9AA2B1; text-align: right">{{a.fatia}}%</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Turno</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="turno-inicio" style="font-size: 13px; font-weight: 600">Começou</label>
+          <input id="turno-inicio" type="time" value="{{inicio}}" onChange="{{onInicio}}" style="height: 48px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 1px solid #3A414D; background: #262B35; color: #FFFFFF; color-scheme: dark; font-family: 'DM Mono', monospace; font-size: 16px">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="turno-fim" style="font-size: 13px; font-weight: 600">Terminou</label>
+          <input id="turno-fim" type="time" value="{{fim}}" onChange="{{onFim}}" style="height: 48px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 1px solid #3A414D; background: #262B35; color: #FFFFFF; color-scheme: dark; font-family: 'DM Mono', monospace; font-size: 16px">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="turno-km-ini" style="font-size: 13px; font-weight: 600">Km inicial</label>
+          <input id="turno-km-ini" inputmode="numeric" value="{{kmInicial}}" onChange="{{onKmInicial}}" placeholder="12340" style="height: 48px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 1px solid #3A414D; background: #262B35; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 16px">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="turno-km-fim" style="font-size: 13px; font-weight: 600">Km final</label>
+          <input id="turno-km-fim" inputmode="numeric" value="{{kmFinal}}" onChange="{{onKmFinal}}" placeholder="12488" style="height: 48px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 1px solid #3A414D; background: #262B35; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 16px">
+        </div>
+      </div>
+      <span style="font-size: 13px; color: #9AA2B1">{{turnoFrase}}</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Registrar ganho</h2>
+      <div role="group" aria-label="Aplicativo" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{apps}}" as="a" hint-placeholder-count="4">
+          <button type="button" aria-pressed="{{a.on}}" onClick="{{a.escolher}}" style="height: 44px; padding: 0; border-radius: 12px; border: 1px solid {{a.borda}}; background: {{a.fundo}}; color: {{a.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer">{{a.nome}}</button>
+        </sc-for>
+      </div>
+      <div role="group" aria-label="Tipo de ganho" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #1A1E26; border-radius: 12px">
+        <sc-for list="{{tipos}}" as="t" hint-placeholder-count="2">
+          <button type="button" aria-pressed="{{t.on}}" onClick="{{t.escolher}}" style="height: 36px; border: 0; border-radius: 9px; background: {{t.fundo}}; color: {{t.corTexto}}; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer">{{t.nome}}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 8px">
+        <sc-if value="{{ehCorrida}}" hint-placeholder-val="{{ true }}">
+          <div style="flex: 0 0 64px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <label for="ganho-qtd" style="font-size: 12.5px; font-weight: 600">Corridas</label>
+            <input id="ganho-qtd" inputmode="numeric" value="{{fCorridas}}" onChange="{{onCorridas}}" placeholder="1" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+          </div>
+        </sc-if>
+        <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+          <label for="ganho-bruto" style="font-size: 12.5px; font-weight: 600">{{rotuloBruto}}</label>
+          <input id="ganho-bruto" inputmode="decimal" value="{{fBruto}}" onChange="{{onBruto}}" placeholder="R$ 0,00" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+        </div>
+        <sc-if value="{{temTaxa}}" hint-placeholder-val="{{ true }}">
+          <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <label for="ganho-taxa" style="font-size: 12.5px; font-weight: 600">Taxa do app</label>
+            <input id="ganho-taxa" inputmode="decimal" value="{{fTaxa}}" onChange="{{onTaxa}}" placeholder="R$ 0,00" style="width: 100%; height: 46px; min-width: 0; box-sizing: border-box; padding: 0 10px; border-radius: 12px; border: 1px solid #3A414D; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 15px">
+          </div>
+        </sc-if>
+      </div>
+      <span style="font-size: 13px; color: {{previaCor}}">{{previa}}</span>
+      <button type="button" onClick="{{adicionar}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; border: 0; border-radius: 14px; background: #FFC629; color: #1A1E26; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        Adicionar ganho
+      </button>
+    </div>
+
+    <div class="mc-linhas" style="display: flex; flex-direction: column">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+        <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Lançamentos de hoje</h2>
+        <span style="font-size: 12.5px; color: #9AA2B1">{{qtdLanc}}</span>
+      </div>
+      <sc-for list="{{lancamentos}}" as="l" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: 40px 1fr auto 36px; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid #2D333E">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: #1F3A31; color: #3DD598; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 12px">{{l.sigla}}</span>
+          <div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+            <span style="font-weight: 600; font-size: 15px; color: #FFFFFF">{{l.titulo}}</span>
+            <span style="font-size: 12.5px; color: #9AA2B1">{{l.detalhe}}</span>
+          </div>
+          <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #3DD598">+{{l.recebido}}</span>
+          <button type="button" aria-label="Remover lançamento" onClick="{{l.remover}}" style="width: 36px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #9AA2B1; font-size: 20px; cursor: pointer">×</button>
+        </div>
+      </sc-for>
+      <sc-if value="{{semLanc}}" hint-placeholder-val="{{ false }}">
+        <p style="margin: 0; padding: 14px 0; font-size: 14px; color: #9AA2B1">Nenhum ganho registrado hoje. Comece pelo turno e vá lançando as corridas.</p>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <button type="button" onClick="{{novoDia}}" style="align-self: flex-start; height: 44px; padding: 0 14px; border-radius: 12px; border: 1px dashed #4A5261; background: transparent; color: #C9CED7; font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer">Começar um dia novo</button>
+      <span style="font-size: 12.5px; color: #9AA2B1">Fecha o dia no Painel e zera os ganhos e os gastos.</span>
+      <sc-if value="{{fechado}}" hint-placeholder-val="{{ false }}">
+        <span style="font-size: 13.5px; color: #3DD598">Dia fechado e salvo. <a href="Painel.dc.html" style="font-weight: 600">Ver no Painel</a></span>
+      </sc-if>
+    </div>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Mesma lógica de ganhos-dia.js. Os ganhos ficam em meucorre.ganhos; a meta vem de meucorre.plano.
+  APPS = [
+    { id: 'uber', nome: 'Uber', sigla: 'UB', cor: '#FFC629' },
+    { id: '99', nome: '99', sigla: '99', cor: '#EEF0F3' },
+    { id: 'indrive', nome: 'InDrive', sigla: 'ID', cor: '#8E97A8' },
+    { id: 'particular', nome: 'Particular', sigla: 'PT', cor: '#C98F00' }
+  ];
+  // Gastos do dia salvos na tela Gastos; sem nada salvo, o mesmo exemplo de lá (R$ 60,50)
+  gastosHoje() {
+    var self = this;
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) return s.lancamentos.reduce(function (t, l) { return t + self.num(l.valor); }, 0);
+    } catch (e) {}
+    return 60.50;
+  }
+
+  padrao() {
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { id: 1, app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00', hora: '11:05' },
+        { id: 2, app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60', hora: '12:20' },
+        { id: 3, app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '', hora: '12:40' },
+        { id: 4, app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50', hora: '13:10' },
+        { id: 5, app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '', hora: '14:05' }
+      ]
+    };
+  }
+
+  carregar() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return this.padrao();
+  }
+
+  state = { mcAnim: true, mcK: 0, dia: this.carregar(), form: { app: 'uber', tipo: 'corrida', corridas: '1', bruto: '', taxa: '' }, erroForm: '' };
+
+  mudar(fn) {
+    var d = JSON.parse(JSON.stringify(this.state.dia));
+    fn(d);
+    try { window.localStorage.setItem('meucorre.ganhos', JSON.stringify(d)); } catch (e) {}
+    this.setState({ dia: d });
+  }
+
+  mudarForm(campo, valor) {
+    var f = Object.assign({}, this.state.form);
+    f[campo] = valor;
+    this.setState({ form: f, erroForm: '' });
+  }
+
+  num(s) {
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+
+  minutos(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || ''));
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+
+  plano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [{ valor: '450' }, { valor: '90' }, { valor: '40' }, { valor: '50' }, { valor: '82' }],
+      variaveis: [{ valor: '12', tipo: 'percentual' }, { valor: '6', tipo: 'percentual' }, { valor: '20', tipo: 'porDia' }]
+    };
+  }
+
+  metaDiaria() {
+    var self = this, p = this.plano();
+    var diasMes = p.dias.reduce(function (a, b) { return a + b; }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    if (diasMes <= 0 || pct >= 1) return null;
+    return (this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes;
+  }
+
+  // Fecha o dia: grava o resumo em meucorre.historico (o Painel lê de lá). O primeiro dia de verdade
+  // substitui os dias de exemplo do Painel. Mesma lógica de painel.js (fecharDia).
+  fecharDia(g, gastos, p) {
+    var self = this, bruto = 0, taxas = 0, corridas = 0, total = 0, comb = 0;
+    g.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      bruto += b; taxas += t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    gastos.forEach(function (x) { var v = self.num(x.valor); total += v; if (x.categoria === 'combustivel') comb += v; });
+    if (bruto === 0 && total === 0) return false;
+    var t0 = g.turno || {}, ini = this.hhmm(t0.inicio), fim = this.hhmm(t0.fim);
+    var k0 = this.num(t0.kmInicial), k1 = this.num(t0.kmFinal);
+    var diasMes = p.dias.reduce(function (a, b) { return a + (b ? 1 : 0); }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (s, f) { return s + self.num(f.valor); }, 0), pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    var r2 = function (v) { return Math.round(v * 100) / 100; }, d = new Date();
+    var dia = {
+      data: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'),
+      faturamento: r2(bruto - taxas), bruto: r2(bruto), taxas: r2(taxas), gastos: r2(total), combustivel: r2(comb),
+      km: String(t0.kmInicial || '').trim() && String(t0.kmFinal || '').trim() && k1 >= k0 ? k1 - k0 : null,
+      minutos: ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null,
+      corridas: corridas,
+      inicio: t0.inicio || '', fim: t0.fim || '', itensGanhos: g.lancamentos, itensGastos: gastos,
+      meta: diasMes > 0 && pct < 1 ? r2((this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes) : 0
+    };
+    var h = null;
+    try { h = JSON.parse(window.localStorage.getItem('meucorre.historico') || 'null'); } catch (e) {}
+    if (!h || h.exemplo !== false || !Array.isArray(h.dias)) h = { exemplo: false, dias: [] };
+    h.dias.push(dia);
+    try { window.localStorage.setItem('meucorre.historico', JSON.stringify(h)); } catch (e) {}
+    return true;
+  }
+  hhmm(s) { var m = /^(\d{1,2}):(\d{2})$/.exec(String(s || '')); return m ? Number(m[1]) * 60 + Number(m[2]) : null; }
+
+  // Resumo do dia: bruto − taxas = faturamento; faturamento − gastos = lucro
+  resumo(d) {
+    var self = this, erros = [];
+    var porApp = {};
+    this.APPS.forEach(function (a) { porApp[a.id] = { app: a, corridas: 0, bruto: 0, taxas: 0 }; });
+    var bruto = 0, taxas = 0, bonus = 0, corridas = 0;
+    d.lancamentos.forEach(function (l) {
+      var a = porApp[l.app];
+      if (!a) return;
+      var b = self.num(l.bruto);
+      var tx = l.app === 'particular' || l.tipo === 'bonus' ? 0 : self.num(l.taxa);
+      if (tx > b) { erros.push('Um lançamento de ' + a.app.nome + ' tem taxa maior que o valor bruto.'); tx = b; }
+      var qtd = l.tipo === 'bonus' ? 0 : Math.round(self.num(l.corridas));
+      a.bruto += b; a.taxas += tx; a.corridas += qtd;
+      if (l.tipo === 'bonus') bonus += b;
+      bruto += b; taxas += tx; corridas += qtd;
+    });
+    var ini = this.minutos(d.turno.inicio), fim = this.minutos(d.turno.fim);
+    var min = ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null;
+    var km = null;
+    if (String(d.turno.kmInicial).trim() && String(d.turno.kmFinal).trim()) {
+      var k0 = this.num(d.turno.kmInicial), k1 = this.num(d.turno.kmFinal);
+      if (k1 < k0) erros.push('A quilometragem final está menor que a inicial.');
+      else km = k1 - k0;
+    }
+    var recebido = bruto - taxas;
+    return {
+      erros: erros, bruto: bruto, taxas: taxas, bonus: bonus, recebido: recebido, corridas: corridas,
+      taxaMedia: bruto > 0 ? taxas / bruto : 0, minutos: min, km: km,
+      porKm: km ? recebido / km : null, porHora: min ? recebido / (min / 60) : null,
+      porApp: this.APPS.map(function (a) { return porApp[a.id]; }).filter(function (p) { return p.bruto > 0; })
+    };
+  }
+
+  componentDidMount() {
+    this.mcIniciar();
+    var self = this;
+    this.aoMudar = function (e) {
+      if (e.key === 'meucorre.ganhos') self.setState({ dia: self.carregar() });
+      if (e.key === 'meucorre.plano' || e.key === 'meucorre.gastos') self.forceUpdate();
+    };
+    window.addEventListener('storage', this.aoMudar);
+  }
+
+  componentWillUnmount() { this.mcParar();
+    window.removeEventListener('storage', this.aoMudar);
+  }
+
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    ['recebido'].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    var self = this, d = this.state.dia, f = this.state.form, r = this.resumo(d);
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+    var hm = function (m) { return Math.floor(m / 60) + 'h' + String(m % 60).padStart(2, '0'); };
+    var meta = this.metaDiaria();
+    var pctMeta = meta ? Math.round(r.recebido / meta * 100) : 0;
+    var gastosHoje = this.gastosHoje();
+    var lucro = r.recebido - gastosHoje;
+
+    var app = this.APPS.filter(function (a) { return a.id === f.app; })[0];
+    var ehCorrida = f.tipo === 'corrida';
+    var temTaxa = ehCorrida && f.app !== 'particular';
+    var fb = this.num(f.bruto), ft = temTaxa ? this.num(f.taxa) : 0;
+    var previa = this.state.erroForm || (fb > 0 ? 'Vai entrar ' + rs(Math.max(0, fb - ft)) + (ft > 0 ? ' (' + n0.format(ft / fb * 100) + '% de taxa)' : '') : (ehCorrida ? 'Lance uma corrida ou o total do app até agora.' : 'Bônus por meta de corridas, horário de pico ou promoção.'));
+
+    var turnoFrase = r.minutos === null ? 'Preencha o horário de início e de término.' :
+      hm(r.minutos) + ' rodando' + (r.km !== null ? ' · ' + n0.format(r.km) + ' km' : '') +
+      (this.minutos(d.turno.fim) < this.minutos(d.turno.inicio) ? ' · virou a noite' : '');
+
+    var erros = r.erros.map(function (t) { return { texto: t }; });
+
+    return {
+      recebido: nf.format(r.recebido), recebidoRs: rs(r.recebido),
+      bruto: rs(r.bruto - r.bonus), taxas: rs(r.taxas), bonus: rs(r.bonus),
+      taxaMedia: n0.format(r.taxaMedia * 100),
+      corridas: r.corridas,
+      km: r.km !== null ? n0.format(r.km) + ' km' : '–',
+      porKm: r.porKm !== null ? rs(r.porKm) : '–',
+      porHora: r.porHora !== null ? 'R$ ' + n0.format(r.porHora) : '–',
+      metaDia: meta ? rs(meta) : '–', metaPct: pctMeta, metaBarra: Math.min(100, pctMeta),
+      metaFrase: !meta ? 'Monte sua meta para acompanhar o dia.' :
+        (r.recebido < meta ? 'Faltam ' + rs(meta - r.recebido) + ' de faturamento.' : 'Meta batida. Passou ' + rs(r.recebido - meta) + '.'),
+      gastos: rs(gastosHoje),
+      lucro: (lucro < 0 ? '−' : '') + rs(Math.abs(lucro)), lucroCor: lucro < 0 ? '#FF7A7E' : '#3DD598',
+      temErros: erros.length > 0, erros: erros,
+      temApps: r.porApp.length > 0,
+      porApp: r.porApp.map(function (p) {
+        var rec = p.bruto - p.taxas;
+        return {
+          nome: p.app.nome, cor: p.app.cor, peso: rec, recebido: rs(rec),
+          fatia: r.recebido > 0 ? Math.round(rec / r.recebido * 100) : 0,
+          detalhe: p.corridas + (p.corridas === 1 ? ' corrida' : ' corridas') + ' · bruto ' + rs(p.bruto) +
+            (p.taxas > 0 ? ' · taxa ' + n0.format(p.taxas / p.bruto * 100) + '%' : ' · sem taxa')
+        };
+      }),
+      inicio: d.turno.inicio, fim: d.turno.fim, kmInicial: d.turno.kmInicial, kmFinal: d.turno.kmFinal,
+      onInicio: function (e) { var v = e.target.value; self.mudar(function (q) { q.turno.inicio = v; }); },
+      onFim: function (e) { var v = e.target.value; self.mudar(function (q) { q.turno.fim = v; }); },
+      onKmInicial: function (e) { var v = e.target.value; self.mudar(function (q) { q.turno.kmInicial = v; }); },
+      onKmFinal: function (e) { var v = e.target.value; self.mudar(function (q) { q.turno.kmFinal = v; }); },
+      turnoFrase: turnoFrase,
+
+      apps: this.APPS.map(function (a) {
+        var on = a.id === f.app;
+        return {
+          nome: a.nome, on: on ? 'true' : 'false',
+          fundo: on ? '#FFC629' : '#1A1E26', corTexto: on ? '#1A1E26' : '#C9CED7', borda: on ? '#FFC629' : '#3A414D',
+          escolher: function () { self.mudarForm('app', a.id); }
+        };
+      }),
+      tipos: [{ id: 'corrida', nome: 'Corridas' }, { id: 'bonus', nome: 'Bônus e promoções' }].map(function (t) {
+        var on = t.id === f.tipo;
+        return {
+          nome: t.nome, on: on ? 'true' : 'false',
+          fundo: on ? '#3A414D' : 'transparent', corTexto: on ? '#FFFFFF' : '#9AA2B1',
+          escolher: function () { self.mudarForm('tipo', t.id); }
+        };
+      }),
+      ehCorrida: ehCorrida, temTaxa: temTaxa,
+      rotuloBruto: ehCorrida ? 'Valor bruto' : 'Valor do bônus',
+      fCorridas: f.corridas, fBruto: f.bruto, fTaxa: f.taxa,
+      onCorridas: function (e) { self.mudarForm('corridas', e.target.value); },
+      onBruto: function (e) { self.mudarForm('bruto', e.target.value); },
+      onTaxa: function (e) { self.mudarForm('taxa', e.target.value); },
+      previa: previa, previaCor: this.state.erroForm ? '#FF7A7E' : '#9AA2B1',
+      adicionar: function () {
+        var b = self.num(f.bruto), t = temTaxa ? self.num(f.taxa) : 0;
+        if (b <= 0) { self.setState({ erroForm: 'Informe o valor.' }); return; }
+        if (t > b) { self.setState({ erroForm: 'A taxa não pode ser maior que o valor bruto.' }); return; }
+        var agora = new Date();
+        var hora = String(agora.getHours()).padStart(2, '0') + ':' + String(agora.getMinutes()).padStart(2, '0');
+        self.mudar(function (q) {
+          var id = q.lancamentos.reduce(function (m, l) { return Math.max(m, l.id || 0); }, 0) + 1;
+          q.lancamentos.push({ id: id, app: f.app, tipo: f.tipo, corridas: ehCorrida ? (f.corridas || '1') : '', bruto: f.bruto, taxa: temTaxa ? f.taxa : '', hora: hora });
+        });
+        self.setState({ form: { app: f.app, tipo: f.tipo, corridas: '1', bruto: '', taxa: '' }, erroForm: '' });
+      },
+
+      qtdLanc: d.lancamentos.length + (d.lancamentos.length === 1 ? ' lançamento' : ' lançamentos'),
+      semLanc: d.lancamentos.length === 0,
+      lancamentos: d.lancamentos.slice().reverse().map(function (l) {
+        var a = self.APPS.filter(function (x) { return x.id === l.app; })[0] || self.APPS[0];
+        var b = self.num(l.bruto);
+        var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+        var qtd = Math.round(self.num(l.corridas)) || 1;
+        return {
+          sigla: a.sigla,
+          titulo: a.nome + (l.tipo === 'bonus' ? ' · bônus' : ' · ' + qtd + (qtd === 1 ? ' corrida' : ' corridas')),
+          detalhe: l.hora + (l.tipo === 'bonus' ? ' · promoção' : ' · bruto ' + rs(b) + (t > 0 ? ' − taxa ' + rs(t) : ' · sem taxa')),
+          recebido: rs(b - t),
+          remover: function () { self.mudar(function (q) { q.lancamentos = q.lancamentos.filter(function (x) { return x.id !== l.id; }); }); }
+        };
+      }),
+      fechado: !!this.state.fechado,
+      // Fecha o dia (ganhos daqui + gastos da tela Gastos) no histórico do Painel e zera as duas telas
+      novoDia: function () {
+        var gs = null;
+        try { gs = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null'); } catch (e) {}
+        var lista = gs && gs.lancamentos ? gs.lancamentos : [
+          { categoria: 'combustivel', valor: '42,00', litros: '6,8', desc: 'Posto Ipiranga', hora: '07:40' },
+          { categoria: 'alimentacao', valor: '18,50', litros: '', desc: 'Marmita', hora: '12:15' }
+        ];
+        var fechou = self.fecharDia(self.state.dia, lista, self.plano());
+        try { window.localStorage.setItem('meucorre.gastos', JSON.stringify({ lancamentos: [], pagas: gs && gs.pagas ? gs.pagas : {} })); } catch (e) {}
+        self.mudar(function (q) { q.turno = { inicio: '', fim: '', kmInicial: q.turno.kmFinal || '', kmFinal: '' }; q.lancamentos = []; });
+        self.setState({ fechado: fechou });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

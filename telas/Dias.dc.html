@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu Corre · Dias anteriores</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Figtree:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFC629}a:hover{color:#FFD866}
+button:focus-visible,a:focus-visible{outline:2px solid #FFC629;outline-offset:2px}
+button:disabled{cursor:default;opacity:0.35}
+/* Animações de entrada: tocam sempre que a tela aparece (classe mc-on na raiz) */
+.mc-on .mc-topo{animation:mc-desce .5s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cascata > *{animation:mc-bloco .55s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-linhas > *{animation:mc-linha .45s cubic-bezier(.2,.75,.25,1) both}
+.mc-on .mc-cresce{transform-origin:0 50%;animation:mc-cresce .9s cubic-bezier(.3,.7,.2,1) .45s both}
+.mc-on .mc-sobe-barra{transform-origin:50% 100%;animation:mc-coluna .7s cubic-bezier(.3,.7,.2,1) .4s both}
+.mc-on .mc-estrada{animation:mc-estrada 1.3s cubic-bezier(.2,.6,.3,1) .25s both}
+.mc-on .mc-cascata > :nth-child(1){animation-delay:0.06s}
+.mc-on .mc-cascata > :nth-child(2){animation-delay:0.13s}
+.mc-on .mc-cascata > :nth-child(3){animation-delay:0.20s}
+.mc-on .mc-cascata > :nth-child(4){animation-delay:0.27s}
+.mc-on .mc-cascata > :nth-child(5){animation-delay:0.34s}
+.mc-on .mc-cascata > :nth-child(6){animation-delay:0.41s}
+.mc-on .mc-cascata > :nth-child(7){animation-delay:0.48s}
+.mc-on .mc-cascata > :nth-child(8){animation-delay:0.55s}
+.mc-on .mc-cascata > :nth-child(9){animation-delay:0.62s}
+.mc-on .mc-cascata > :nth-child(10){animation-delay:0.69s}
+.mc-on .mc-cascata > :nth-child(11){animation-delay:0.76s}
+.mc-on .mc-cascata > :nth-child(12){animation-delay:0.83s}
+.mc-on .mc-linhas > :nth-child(1){animation-delay:0.35s}
+.mc-on .mc-linhas > :nth-child(2){animation-delay:0.40s}
+.mc-on .mc-linhas > :nth-child(3){animation-delay:0.45s}
+.mc-on .mc-linhas > :nth-child(4){animation-delay:0.50s}
+.mc-on .mc-linhas > :nth-child(5){animation-delay:0.55s}
+.mc-on .mc-linhas > :nth-child(6){animation-delay:0.60s}
+.mc-on .mc-linhas > :nth-child(7){animation-delay:0.65s}
+.mc-on .mc-linhas > :nth-child(8){animation-delay:0.70s}
+.mc-on .mc-linhas > :nth-child(9){animation-delay:0.75s}
+.mc-on .mc-linhas > :nth-child(10){animation-delay:0.80s}
+.mc-on .mc-linhas > :nth-child(11){animation-delay:0.85s}
+.mc-on .mc-linhas > :nth-child(12){animation-delay:0.90s}
+.mc-on .mc-colunas > :nth-child(1) .mc-sobe-barra{animation-delay:0.35s}
+.mc-on .mc-colunas > :nth-child(2) .mc-sobe-barra{animation-delay:0.38s}
+.mc-on .mc-colunas > :nth-child(3) .mc-sobe-barra{animation-delay:0.41s}
+.mc-on .mc-colunas > :nth-child(4) .mc-sobe-barra{animation-delay:0.44s}
+.mc-on .mc-colunas > :nth-child(5) .mc-sobe-barra{animation-delay:0.47s}
+.mc-on .mc-colunas > :nth-child(6) .mc-sobe-barra{animation-delay:0.50s}
+.mc-on .mc-colunas > :nth-child(7) .mc-sobe-barra{animation-delay:0.53s}
+.mc-on .mc-colunas > :nth-child(8) .mc-sobe-barra{animation-delay:0.56s}
+.mc-on .mc-colunas > :nth-child(9) .mc-sobe-barra{animation-delay:0.59s}
+.mc-on .mc-colunas > :nth-child(10) .mc-sobe-barra{animation-delay:0.62s}
+.mc-on .mc-colunas > :nth-child(11) .mc-sobe-barra{animation-delay:0.65s}
+.mc-on .mc-colunas > :nth-child(12) .mc-sobe-barra{animation-delay:0.68s}
+.mc-on .mc-colunas > :nth-child(13) .mc-sobe-barra{animation-delay:0.71s}
+.mc-on .mc-colunas > :nth-child(14) .mc-sobe-barra{animation-delay:0.74s}
+.mc-on .mc-colunas > :nth-child(15) .mc-sobe-barra{animation-delay:0.77s}
+.mc-on .mc-colunas > :nth-child(16) .mc-sobe-barra{animation-delay:0.80s}
+.mc-on .mc-colunas > :nth-child(17) .mc-sobe-barra{animation-delay:0.83s}
+.mc-on .mc-colunas > :nth-child(18) .mc-sobe-barra{animation-delay:0.86s}
+.mc-on .mc-colunas > :nth-child(19) .mc-sobe-barra{animation-delay:0.89s}
+.mc-on .mc-colunas > :nth-child(20) .mc-sobe-barra{animation-delay:0.92s}
+.mc-on .mc-colunas > :nth-child(21) .mc-sobe-barra{animation-delay:0.95s}
+.mc-on .mc-colunas > :nth-child(22) .mc-sobe-barra{animation-delay:0.98s}
+.mc-on .mc-colunas > :nth-child(23) .mc-sobe-barra{animation-delay:1.01s}
+.mc-on .mc-colunas > :nth-child(24) .mc-sobe-barra{animation-delay:1.04s}
+.mc-on .mc-colunas > :nth-child(25) .mc-sobe-barra{animation-delay:1.07s}
+.mc-on .mc-colunas > :nth-child(26) .mc-sobe-barra{animation-delay:1.10s}
+.mc-on .mc-colunas > :nth-child(27) .mc-sobe-barra{animation-delay:1.13s}
+.mc-on .mc-colunas > :nth-child(28) .mc-sobe-barra{animation-delay:1.16s}
+.mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
+.mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
+.mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+@keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes mc-cresce{from{transform:scaleX(0)}to{transform:none}}
+@keyframes mc-coluna{from{transform:scaleY(0)}to{transform:none}}
+@keyframes mc-estrada{from{background-position:-180px 0}to{background-position:0 0}}
+</style>
+</helmet>
+<div class="{{classeAnim}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1E26; color: #EEF0F3; font-family: 'Figtree', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <sc-if value="{{modoLista}}" hint-placeholder-val="{{ true }}">
+    <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+      <a href="Painel.dc.html" aria-label="Voltar para o painel" style="width: 44px; height: 44px; border-radius: 14px; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="display: flex; flex-direction: column; gap: 1px">
+        <span style="font-size: 13px; color: #9AA2B1">Ganhos e gastos de cada dia</span>
+        <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 22px; color: #FFFFFF">Dias anteriores</h1>
+      </div>
+    </div>
+
+    <div class="mc-cascata" style="flex-grow: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+      <sc-if value="{{exemplo}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid #FFC629; border-radius: 14px; background: #2A2718">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FFC629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+          <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #EEF0F3"><strong style="color: #FFFFFF">Dados de exemplo.</strong> Os dias antes de hoje são simulados. Somem quando você fechar o primeiro dia de verdade.</p>
+        </div>
+      </sc-if>
+
+      <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px">
+        <button type="button" aria-label="Mês anterior" onClick="{{mesAnterior}}" disabled="{{semMesAnterior}}" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+        </button>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1px">
+          <span style="font-size: 12px; color: #9AA2B1">{{mesLegenda}}</span>
+          <span style="font-weight: 700; font-size: 16px; color: #FFFFFF">{{mesNome}}</span>
+        </div>
+        <button type="button" aria-label="Próximo mês" onClick="{{mesProximo}}" disabled="{{semMesProximo}}" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px; min-width: 0">
+          <span style="font-size: 12px; color: #9AA2B1">Faturou</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF">{{mesFat}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px; min-width: 0">
+          <span style="font-size: 12px; color: #9AA2B1">Gastos do dia</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FF7A7E">{{mesGastos}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #333A46; border-radius: 16px; min-width: 0">
+          <span style="font-size: 12px; color: #9AA2B1">Lucro do dia</span>
+          <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #3DD598">{{mesLucro}}</span>
+        </div>
+      </div>
+      <span style="font-size: 12.5px; color: #9AA2B1; margin-top: -6px">{{mesResumo}}</span>
+
+      <div class="mc-linhas" style="display: flex; flex-direction: column">
+        <sc-for list="{{linhas}}" as="l" hint-placeholder-count="6">
+          <button type="button" onClick="{{l.abrir}}" aria-label="{{l.aria}}" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 16px; gap: 12px; align-items: center; width: 100%; padding: 10px 0; border: 0; border-bottom: 1px solid #2D333E; background: transparent; color: inherit; font-family: 'Figtree', sans-serif; text-align: left; cursor: pointer">
+            <span style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 44px; height: 48px; border-radius: 12px; background: {{l.fundo}}">
+              <span style="font-size: 11px; font-weight: 600; color: #9AA2B1">{{l.semana}}</span>
+              <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 18px; line-height: 1.1; color: #FFFFFF">{{l.dia}}</span>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+              <span style="font-size: 14px; color: #EEF0F3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Faturou <strong style="font-weight: 600; color: #FFFFFF">{{l.fat}}</strong></span>
+              <span style="font-size: 12.5px; color: #9AA2B1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.sub}}</span>
+            </span>
+            <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px">
+              <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: {{l.lucroCor}}">{{l.lucro}}</span>
+              <span style="display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: #9AA2B1"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{l.metaCor}}"></span>{{l.meta}}</span>
+            </span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7E8696" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+          </button>
+        </sc-for>
+        <sc-if value="{{semDias}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 16px 0; font-size: 14px; line-height: 1.45; color: #9AA2B1">Nenhum dia fechado neste mês. No fim do turno, toque em Começar um dia novo em <a href="GanhosDia.dc.html">Ganhos</a> ou <a href="Gastos.dc.html">Gastos</a>.</p>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{modoDetalhe}}" hint-placeholder-val="{{ false }}">
+    <div class="mc-topo" style="display: flex; align-items: center; gap: 12px; padding: 56px 20px 12px">
+      <button type="button" aria-label="Voltar para a lista de dias" onClick="{{voltar}}" style="width: 44px; height: 44px; border-radius: 14px; border: 0; background: #262B35; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+      </button>
+      <div style="display: flex; flex-direction: column; gap: 1px; flex-grow: 1; min-width: 0">
+        <span style="font-size: 13px; color: #9AA2B1">{{d.legenda}}</span>
+        <h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 21px; color: #FFFFFF">{{d.titulo}}</h1>
+      </div>
+      <div style="display: flex; gap: 6px">
+        <button type="button" aria-label="Dia anterior" onClick="{{d.anterior}}" disabled="{{d.semAnterior}}" style="width: 40px; height: 44px; border-radius: 12px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+        </button>
+        <button type="button" aria-label="Dia seguinte" onClick="{{d.proximo}}" disabled="{{d.semProximo}}" style="width: 40px; height: 44px; border-radius: 12px; border: 1px solid #333A46; background: transparent; color: #EEF0F3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mc-cascata" style="flex-grow: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px">
+      <div style="display: flex; flex-wrap: wrap; gap: 6px">
+        <span style="display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: #262B35; font-size: 12.5px; font-weight: 600; color: #EEF0F3"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{d.metaCor}}"></span>{{d.metaTxt}}</span>
+        <sc-if value="{{d.exemplo}}" hint-placeholder-val="{{ false }}">
+          <span style="display: flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; border: 1px solid #FFC629; font-size: 12.5px; font-weight: 600; color: #FFC629">Dia de exemplo</span>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 18px; background: #262B35; border-radius: 22px; font-size: 14px">
+        <div style="display: flex; justify-content: space-between; gap: 8px"><span style="color: #C9CED7">Valor bruto das corridas</span><span style="font-family: 'DM Mono', monospace; color: #EEF0F3">{{d.bruto}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 8px"><span style="color: #C9CED7">Taxas dos apps</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{d.taxas}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 8px; padding-top: 8px; border-top: 1px solid #3A414D"><span style="font-weight: 700; color: #FFFFFF">Faturamento</span><span style="font-family: 'DM Mono', monospace; font-weight: 500; color: #FFFFFF">{{d.fat}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 8px"><span style="color: #C9CED7">Gastos do dia</span><span style="font-family: 'DM Mono', monospace; color: #FF7A7E">−{{d.gastos}}</span></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 1px solid #3A414D">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #C9CED7">Lucro do dia</span>
+          <span style="font-family: 'Archivo', sans-serif; font-stretch: 118%; font-weight: 900; font-size: 36px; line-height: 1; color: {{d.lucroCor}}"><span style="font-size: 18px; font-weight: 700; margin-right: 4px">{{d.lucroSinal}}R$</span>{{d.lucro}}</span>
+          <span style="font-size: 12.5px; line-height: 1.45; color: #9AA2B1">{{d.liquidoNota}}</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{d.turno}}" as="t" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border: 1px solid #333A46; border-radius: 14px; min-width: 0">
+            <span style="font-size: 12px; color: #9AA2B1">{{t.nome}}</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF; white-space: nowrap">{{t.valor}}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Ganhos por app</h2>
+          <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #3DD598">+{{d.fat}}</span>
+        </div>
+        <sc-for list="{{d.apps}}" as="a" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid #2D333E">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: #1F3A31; color: #3DD598; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 12px">{{a.sigla}}</span>
+            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+              <span style="font-weight: 600; font-size: 15px; color: #FFFFFF">{{a.titulo}}</span>
+              <span style="font-size: 12.5px; color: #9AA2B1">{{a.detalhe}}</span>
+            </span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #3DD598">+{{a.recebido}}</span>
+          </div>
+        </sc-for>
+        <sc-if value="{{d.semApps}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 12px 0; font-size: 14px; color: #9AA2B1">Nenhum ganho neste dia.</p>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px">
+          <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Gastos do dia</h2>
+          <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF7A7E">−{{d.gastos}}</span>
+        </div>
+        <sc-for list="{{d.gastosLista}}" as="g" hint-placeholder-count="2">
+          <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid #2D333E">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: #3A2A2F; color: #FF7A7E; display: flex; align-items: center; justify-content: center">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.icone}}"></path></svg>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+              <span style="font-weight: 600; font-size: 15px; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{g.titulo}}</span>
+              <span style="font-size: 12.5px; color: #9AA2B1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{g.detalhe}}</span>
+            </span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #FF7A7E">−{{g.valor}}</span>
+          </div>
+        </sc-for>
+        <sc-if value="{{d.semGastos}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 12px 0; font-size: 14px; color: #9AA2B1">Nenhum gasto neste dia.</p>
+        </sc-if>
+        <span style="padding-top: 8px; font-size: 12.5px; color: #9AA2B1">{{d.gastosNota}}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 8px 8px 26px; background: #14171D; border-top: 1px solid #262B35">
+    <a href="Dashboard.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Início
+    </a>
+    <a href="GanhosDia.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>Ganhos
+    </a>
+    <a href="Gastos.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8M15 17h6v-6"></path></svg>Gastos
+    </a>
+    <a href="Painel.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #FFC629; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px; border-radius: 999px; background: #FFC629"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"></path></svg>Painel
+    </a>
+    <a href="MetaDiaria.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 52px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #9AA2B1; text-decoration: none">
+      <span aria-hidden="true" style="width: 20px; height: 3px"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>Meta
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  // Lista dos dias do histórico (meucorre.historico, o mesmo do Painel) e o detalhe de cada dia.
+  // O dia de hoje, ainda aberto, vem das telas Ganhos do dia e Gastos. Mesma lógica de painel.js.
+  DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  DIAS_LONGOS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+  MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  APPS = [
+    { id: 'uber', nome: 'Uber', sigla: 'UB' },
+    { id: '99', nome: '99', sigla: '99' },
+    { id: 'indrive', nome: 'InDrive', sigla: 'ID' },
+    { id: 'particular', nome: 'Particular', sigla: 'PT' }
+  ];
+  CATEGORIAS = [
+    { id: 'combustivel', nome: 'Combustível', icone: 'M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7 8h4' },
+    { id: 'manutencao', nome: 'Manutenção', icone: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z' },
+    { id: 'lavagem', nome: 'Lavagem e estacionamento', icone: 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 17V7h4a3 3 0 0 1 0 6H9' },
+    { id: 'pedagio', nome: 'Pedágio', icone: 'M4 21V7M20 21V7M2 7h20M4 12h16M8 7l-4 5M14 7l-4 5M20 7l-4 5' },
+    { id: 'alimentacao', nome: 'Alimentação', icone: 'M6 2v8a3 3 0 0 0 6 0V2M9 2v20M17 22V2c-2 2-3 5-3 8h3' },
+    { id: 'pessoal', nome: 'Pessoais e outras', icone: 'M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M16 14h2' }
+  ];
+
+  state = { mcAnim: true, mcK: 0, mes: 0, sel: null };
+
+  // Painel, Ganhos e Gastos abrem esta tela na lista ou já num dia: meucorre.dias = { sel: 'AAAA-MM-DD' | null, t }
+  pedido() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.dias') || 'null');
+      if (!s || !s.t) return;
+      window.localStorage.removeItem('meucorre.dias');
+      this.state.sel = /^\d{4}-\d{2}-\d{2}$/.test(s.sel || '') ? s.sel : null;
+      this.state.mes = 0;
+    } catch (e) {}
+  }
+
+  num(s) {
+    if (typeof s === 'number') return isFinite(s) ? s : 0;
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+  arred(v) { return Math.round(v * 100) / 100; }
+  minutos(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || ''));
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+  hhmm(min) { min = ((min % 1440) + 1440) % 1440; return String(Math.floor(min / 60)).padStart(2, '0') + ':' + String(min % 60).padStart(2, '0'); }
+  iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  data(iso) { var p = iso.split('-'); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2])); }
+  somaDias(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  hoje() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+
+  plano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', porHora: '28', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [{ valor: '450' }, { valor: '90' }, { valor: '40' }, { valor: '50' }, { valor: '82' }],
+      variaveis: [{ valor: '12', tipo: 'percentual' }, { valor: '6', tipo: 'percentual' }, { valor: '20', tipo: 'porDia' }]
+    };
+  }
+  metas(p) {
+    var self = this;
+    var diasMes = p.dias.reduce(function (a, b) { return a + (b ? 1 : 0); }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    return {
+      dia: diasMes > 0 && pct < 1 ? (this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes : 0,
+      contasDia: diasMes > 0 ? fixas / diasMes : 0
+    };
+  }
+
+  ganhosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00', hora: '11:05' },
+        { app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60', hora: '12:20' },
+        { app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '', hora: '12:40' },
+        { app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50', hora: '13:10' },
+        { app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '', hora: '14:05' }
+      ]
+    };
+  }
+  gastosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) return s.lancamentos;
+    } catch (e) {}
+    return [
+      { categoria: 'combustivel', valor: '42,00', litros: '6,8', desc: 'Posto Ipiranga', hora: '07:40' },
+      { categoria: 'alimentacao', valor: '18,50', litros: '', desc: 'Marmita', hora: '12:15' }
+    ];
+  }
+
+  // Mesmo formato que "Começar um dia novo" grava, com os lançamentos do dia
+  diaDe(g, gastos, meta, data) {
+    var self = this, bruto = 0, taxas = 0, corridas = 0, total = 0, comb = 0;
+    g.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      bruto += b; taxas += t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    gastos.forEach(function (x) { var v = self.num(x.valor); total += v; if (x.categoria === 'combustivel') comb += v; });
+    if (bruto === 0 && total === 0) return null;
+    var ini = this.minutos(g.turno.inicio), fim = this.minutos(g.turno.fim);
+    var k0 = this.num(g.turno.kmInicial), k1 = this.num(g.turno.kmFinal);
+    return {
+      data: data, faturamento: this.arred(bruto - taxas), bruto: this.arred(bruto), taxas: this.arred(taxas),
+      gastos: this.arred(total), combustivel: this.arred(comb),
+      km: String(g.turno.kmInicial || '').trim() && String(g.turno.kmFinal || '').trim() && k1 >= k0 ? k1 - k0 : null,
+      minutos: ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null,
+      corridas: corridas, meta: this.arred(meta),
+      inicio: g.turno.inicio || '', fim: g.turno.fim || '', itensGanhos: g.lancamentos, itensGastos: gastos
+    };
+  }
+
+  sorteio(semente) {
+    var a = semente >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      var t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Mesmos dias de exemplo do Painel, com a divisão por app e por categoria
+  exemplo(hoje, meta) {
+    var dias = [], MULT = [0, 0.93, 0.88, 0.95, 1, 1.14, 1.22];
+    var TAXA = { uber: 0.25, '99': 0.2, indrive: 0.1, particular: 0 };
+    for (var i = 182; i >= 1; i--) {
+      var d = this.somaDias(hoje, -i), wd = d.getDay();
+      var r = this.sorteio(d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate());
+      if (wd === 0 || r() < 0.05) continue;
+      var tend = 0.8 + 0.2 * (1 - i / 182);
+      var horas = 6.2 + r() * 2.4 + (wd === 6 ? 0.5 : 0);
+      var fat = horas * 26.5 * MULT[wd] * tend * (0.9 + r() * 0.2);
+      var taxa = 0.17 + r() * 0.06;
+      var km = Math.round(fat / (1.5 + r() * 0.35));
+      var comb = km / (32 + r() * 6) * (6.05 + 0.24 * (1 - i / 182));
+      var comida = 0, manut = 0, lavagem = 0;
+      if (r() < 0.85) comida = 14 + r() * 10;
+      if (r() < 0.06) manut = 45 + r() * 115;
+      if (r() < 0.08) lavagem = 15 + r() * 10;
+      var ini = 390 + Math.round(r() * 30) * 5;
+      var fatias = { uber: 0.5 + r() * 0.2, indrive: r() < 0.3 ? 0.06 : 0, particular: r() < 0.25 ? 0.07 : 0 };
+      fatias['99'] = 1 - fatias.uber - fatias.indrive - fatias.particular;
+      var apps = [], bruto = 0;
+      ['uber', '99', 'indrive', 'particular'].forEach(function (id) {
+        if (!fatias[id]) return;
+        var rec = fat * fatias[id], b = rec / (1 - TAXA[id]);
+        bruto += b;
+        apps.push({ app: id, corridas: Math.max(1, Math.round(rec / 13.5)), bruto: Math.round(b * 100) / 100, taxas: Math.round((b - rec) * 100) / 100 });
+      });
+      var categorias = [{ categoria: 'combustivel', total: this.arred(comb), qtd: 1 }];
+      if (comida) categorias.push({ categoria: 'alimentacao', total: this.arred(comida), qtd: 1 });
+      if (manut) categorias.push({ categoria: 'manutencao', total: this.arred(manut), qtd: 1 });
+      if (lavagem) categorias.push({ categoria: 'lavagem', total: this.arred(lavagem), qtd: 1 });
+      dias.push({
+        data: this.iso(d), faturamento: this.arred(fat), bruto: this.arred(bruto), taxas: this.arred(bruto - fat),
+        gastos: this.arred(comb + comida + manut + lavagem), combustivel: this.arred(comb), km: km, minutos: Math.round(horas * 60),
+        corridas: Math.round(fat / 14), meta: this.arred(meta), inicio: this.hhmm(ini), fim: this.hhmm(ini + Math.round(horas * 60)),
+        apps: apps, categorias: categorias, exemplo: true
+      });
+    }
+    return dias;
+  }
+
+  historico(hoje, meta) {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.historico') || 'null');
+      if (s && s.exemplo === false && Array.isArray(s.dias)) return s;
+    } catch (e) {}
+    return { exemplo: true, dias: this.exemplo(hoje, meta) };
+  }
+
+  // Dois fechamentos no mesmo dia viram um só
+  somar(a, b) {
+    var c = Object.assign({}, a);
+    ['faturamento', 'bruto', 'taxas', 'gastos', 'combustivel', 'corridas'].forEach(function (k) { c[k] = (a[k] || 0) + (b[k] || 0); });
+    ['km', 'minutos'].forEach(function (k) { c[k] = a[k] == null && b[k] == null ? null : (a[k] || 0) + (b[k] || 0); });
+    ['itensGanhos', 'itensGastos', 'apps', 'categorias'].forEach(function (k) { if (a[k] || b[k]) c[k] = (a[k] || []).concat(b[k] || []); });
+    c.turnos = (a.turnos || 1) + 1;
+    return c;
+  }
+
+  // Ganhos por app e gastos do dia: dos lançamentos guardados ou, nos dias de exemplo, da divisão pronta
+  porApp(d) {
+    var self = this, mapa = {};
+    var add = function (id, corridas, bruto, taxas, bonus) {
+      var x = mapa[id] = mapa[id] || { corridas: 0, bruto: 0, taxas: 0, bonus: 0 };
+      x.corridas += corridas; x.bruto += bruto; x.taxas += taxas; x.bonus += bonus;
+    };
+    (d.apps || []).forEach(function (a) { add(a.app, a.corridas, a.bruto, a.taxas, 0); });
+    (d.itensGanhos || []).forEach(function (l) {
+      var b = self.num(l.bruto), bonus = l.tipo === 'bonus';
+      var t = l.app === 'particular' || bonus ? 0 : Math.min(b, self.num(l.taxa));
+      add(l.app, bonus ? 0 : Math.round(self.num(l.corridas)), b, t, bonus ? b : 0);
+    });
+    return this.APPS.filter(function (a) { return mapa[a.id]; }).map(function (a) { return Object.assign({ app: a }, mapa[a.id]); });
+  }
+
+  componentDidMount() {
+    this.mcIniciar();
+    var self = this;
+    this.aoMudar = function (e) { if (e.key && e.key.indexOf('meucorre.') === 0) self.forceUpdate(); };
+    window.addEventListener('storage', this.aoMudar);
+  }
+  componentWillUnmount() { this.mcParar(); window.removeEventListener('storage', this.aoMudar); }
+
+
+  // Animação de entrada: toca ao abrir (Play), ao voltar a ficar visível, quando a janela muda
+  // de tamanho ou quando a tela volta a aparecer. Tirar e pôr a classe mc-on reinicia o CSS;
+  // mcK vai de 0 a 1 e faz os números principais contarem de zero até o valor.
+  mcIniciar() {
+    var self = this;
+    this.mcUltimo = Date.now();
+    this.mcContar();
+    this.mcAoVer = function () { if (document.visibilityState === 'visible') self.mcTocar(); };
+    document.addEventListener('visibilitychange', this.mcAoVer);
+    var tam = window.innerWidth + 'x' + window.innerHeight;
+    this.mcAoRedimensionar = function () {
+      clearTimeout(self.mcEsperaTam);
+      self.mcEsperaTam = setTimeout(function () {
+        var t = window.innerWidth + 'x' + window.innerHeight;
+        if (t !== tam) { tam = t; self.mcTocar(); }
+      }, 200);
+    };
+    window.addEventListener('resize', this.mcAoRedimensionar);
+    if (window.IntersectionObserver && document.body) {
+      var visivel = true;
+      this.mcIo = new IntersectionObserver(function (es) {
+        var v = es[es.length - 1].isIntersecting;
+        if (v && !visivel) self.mcTocar();
+        visivel = v;
+      });
+      this.mcIo.observe(document.body);
+    }
+  }
+  mcParar() {
+    document.removeEventListener('visibilitychange', this.mcAoVer);
+    window.removeEventListener('resize', this.mcAoRedimensionar);
+    clearTimeout(this.mcEsperaTam);
+    if (this.mcIo) this.mcIo.disconnect();
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+  }
+  mcTocar() {
+    var agora = Date.now(), self = this;
+    if (agora - (this.mcUltimo || 0) < 1500) return;
+    this.mcUltimo = agora;
+    this.setState({ mcAnim: false });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.setState({ mcAnim: true }); self.mcContar(); }); });
+  }
+  mcContar() {
+    var self = this, inicio = null, ATRASO = 300, DURACAO = 1400;
+    if (this.mcQuadro) cancelAnimationFrame(this.mcQuadro);
+    this.setState({ mcK: 0 });
+    var passo = function (agora) {
+      if (inicio === null) inicio = agora;
+      var x = Math.min(1, Math.max(0, (agora - inicio - ATRASO) / DURACAO));
+      self.setState({ mcK: 1 - Math.pow(1 - x, 3) });
+      self.mcQuadro = x < 1 ? requestAnimationFrame(passo) : null;
+    };
+    this.mcQuadro = requestAnimationFrame(passo);
+  }
+  // Número (ou texto com um valor em reais) na fração mcK do caminho, no mesmo formato
+  mcContando(v) {
+    var k = this.state.mcK;
+    if (k >= 1 || v == null) return v;
+    if (typeof v === 'number') return Number.isInteger(v) ? Math.round(v * k) : v * k;
+    return String(v).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/, function (m) {
+      var dec = (m.split(',')[1] || '').length;
+      var n = Number(m.replace(/\./g, '').replace(',', '.')) * k;
+      return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+    });
+  }
+
+  renderVals() {
+    var v = this.renderValsBase(), self = this;
+    v.classeAnim = this.state.mcAnim ? 'mc-on' : '';
+    ['mesFat', 'mesGastos', 'mesLucro'].forEach(function (c) { if (c in v) v[c] = self.mcContando(v[c]); });
+    return v;
+  }
+
+  renderValsBase() {
+    this.pedido();
+    var self = this, st = this.state;
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var n1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+    var rs = function (v) { return 'R$ ' + nf.format(v); };
+    var sinal = function (v) { return (v < 0 ? '−' : '') + 'R$ ' + nf.format(Math.abs(v)); };
+    var horasTxt = function (min) { return Math.floor(min / 60) + 'h' + String(Math.round(min % 60)).padStart(2, '0'); };
+
+    var hoje = this.hoje(), hojeIso = this.iso(hoje);
+    var m = this.metas(this.plano());
+    var hist = this.historico(hoje, m.dia);
+    var porData = {};
+    hist.dias.forEach(function (d) { porData[d.data] = porData[d.data] ? self.somar(porData[d.data], d) : d; });
+    var vivo = this.diaDe(this.ganhosSalvos(), this.gastosSalvos(), m.dia, hojeIso);
+    if (vivo) { vivo.aberto = true; porData[hojeIso] = porData[hojeIso] ? Object.assign(this.somar(porData[hojeIso], vivo), { aberto: true }) : vivo; }
+    var datas = Object.keys(porData).sort();
+
+    var metaDe = function (d) { return d.meta > 0 ? d.meta : m.dia; };
+    var bateu = function (d) { return metaDe(d) > 0 && d.faturamento >= metaDe(d); };
+
+    // Detalhe de um dia
+    var sel = st.sel && porData[st.sel] ? st.sel : null;
+    if (sel) {
+      var d = porData[sel], dt = this.data(sel), pos = datas.indexOf(sel);
+      var lucro = d.faturamento - d.gastos, liquido = lucro - m.contasDia;
+      var irPara = function (iso) { return function () { if (iso) self.setState({ sel: iso }); }; };
+      var apps = this.porApp(d).map(function (a) {
+        var rec = a.bruto - a.taxas;
+        return {
+          sigla: a.app.sigla,
+          titulo: a.app.nome + (a.corridas ? ' · ' + a.corridas + (a.corridas === 1 ? ' corrida' : ' corridas') : ''),
+          detalhe: 'bruto ' + rs(a.bruto) + (a.taxas > 0 ? ' − taxa ' + rs(a.taxas) + ' (' + Math.round(a.taxas / a.bruto * 100) + '%)' : ' · sem taxa') + (a.bonus > 0 ? ' · bônus ' + rs(a.bonus) : ''),
+          recebido: rs(rec)
+        };
+      });
+      var gastosLista, gastosNota = '';
+      if (d.itensGastos) {
+        gastosLista = d.itensGastos.map(function (x) {
+          var c = self.CATEGORIAS.filter(function (k) { return k.id === x.categoria; })[0] || self.CATEGORIAS[5], lt = self.num(x.litros);
+          return { icone: c.icone, titulo: x.desc || c.nome, detalhe: (x.desc ? c.nome : '') + (x.hora ? (x.desc ? ' · ' : '') + x.hora : '') + (lt > 0 ? ' · ' + n1.format(lt) + ' L' : ''), valor: rs(self.num(x.valor)) };
+        });
+      } else {
+        gastosLista = (d.categorias || []).map(function (x) {
+          var c = self.CATEGORIAS.filter(function (k) { return k.id === x.categoria; })[0] || self.CATEGORIAS[5];
+          return { icone: c.icone, titulo: c.nome, detalhe: x.categoria === 'combustivel' && d.km ? rs(x.total / d.km) + ' por km rodado' : 'total do dia', valor: rs(x.total) };
+        });
+        gastosNota = 'Dia de exemplo: os gastos aparecem somados por categoria.';
+      }
+      var mt = metaDe(d);
+      var turno = [
+        { nome: 'Turno', valor: d.inicio && d.fim ? d.inicio + '–' + d.fim : '–' },
+        { nome: 'Horas', valor: d.minutos ? horasTxt(d.minutos) : '–' },
+        { nome: 'Rodou', valor: d.km != null ? n0.format(d.km) + ' km' : '–' },
+        { nome: 'Por hora', valor: d.minutos ? rs(d.faturamento / (d.minutos / 60)) : '–' },
+        { nome: 'Por km', valor: d.km ? rs(d.faturamento / d.km) : '–' },
+        { nome: 'Corridas', valor: String(d.corridas) }
+      ];
+      if (d.turnos > 1) turno[0].valor = d.turnos + ' turnos';
+      return {
+        modoLista: false, modoDetalhe: true,
+        voltar: function () { self.setState({ sel: null }); },
+        d: {
+          legenda: sel === hojeIso ? (d.aberto ? 'Hoje · dia em andamento' : 'Hoje · dia fechado') : dt.getDate() + ' de ' + this.MESES[dt.getMonth()] + ' de ' + dt.getFullYear(),
+          titulo: sel === hojeIso ? 'Hoje' : this.DIAS_LONGOS[dt.getDay()] + ', ' + dt.getDate() + '/' + String(dt.getMonth() + 1).padStart(2, '0'),
+          anterior: irPara(datas[pos - 1]), semAnterior: pos <= 0,
+          proximo: irPara(datas[pos + 1]), semProximo: pos >= datas.length - 1,
+          exemplo: !!d.exemplo,
+          metaCor: bateu(d) ? '#FFC629' : '#6B7385',
+          metaTxt: mt > 0 ? (bateu(d) ? 'Bateu a meta: +' + rs(d.faturamento - mt) : 'Abaixo da meta: faltaram ' + rs(mt - d.faturamento)) : 'Sem meta definida',
+          bruto: rs(d.bruto), taxas: rs(d.taxas), fat: rs(d.faturamento), gastos: rs(d.gastos),
+          lucro: nf.format(Math.abs(lucro)), lucroSinal: lucro < 0 ? '−' : '', lucroCor: lucro < 0 ? '#FF7A7E' : '#3DD598',
+          liquidoNota: 'Descontando a parte do dia nas contas do mês (' + rs(m.contasDia) + '), o lucro líquido estimado fica em ' + sinal(liquido) + '.',
+          turno: turno,
+          apps: apps, semApps: apps.length === 0,
+          gastosLista: gastosLista, semGastos: gastosLista.length === 0, gastosNota: gastosNota
+        }
+      };
+    }
+
+    // Lista do mês
+    var ini = new Date(hoje.getFullYear(), hoje.getMonth() - st.mes, 1);
+    var fim = new Date(ini.getFullYear(), ini.getMonth() + 1, 0);
+    var doMes = datas.filter(function (iso) { return iso >= self.iso(ini) && iso <= self.iso(fim); }).reverse();
+    var tot = { fat: 0, gastos: 0, bateu: 0 };
+    var linhas = doMes.map(function (iso) {
+      var d = porData[iso], dt = self.data(iso), lucro = d.faturamento - d.gastos, b = bateu(d);
+      tot.fat += d.faturamento; tot.gastos += d.gastos; if (b) tot.bateu++;
+      var sub = ['gastou ' + rs(d.gastos)];
+      if (d.minutos) sub.push(horasTxt(d.minutos));
+      if (d.km != null) sub.push(n0.format(d.km) + ' km');
+      return {
+        semana: iso === hojeIso ? 'Hoje' : self.DIAS[dt.getDay()],
+        dia: String(dt.getDate()),
+        fundo: iso === hojeIso ? '#3A3420' : '#262B35',
+        fat: rs(d.faturamento),
+        sub: sub.join(' · '),
+        lucro: sinal(lucro), lucroCor: lucro < 0 ? '#FF7A7E' : '#3DD598',
+        metaCor: b ? '#FFC629' : '#6B7385',
+        meta: d.aberto ? 'em andamento' : b ? 'bateu a meta' : 'abaixo da meta',
+        aria: self.DIAS_LONGOS[dt.getDay()] + ', ' + dt.getDate() + ' de ' + self.MESES[dt.getMonth()] + ': faturou ' + rs(d.faturamento) + ', gastou ' + rs(d.gastos) + ', lucro ' + sinal(lucro) + '. Abrir o dia',
+        abrir: function () { self.setState({ sel: iso }); }
+      };
+    });
+    var primeira = datas.length ? this.data(datas[0]) : hoje;
+    var nomeMes = this.MESES[ini.getMonth()];
+    return {
+      modoLista: true, modoDetalhe: false,
+      exemplo: hist.exemplo,
+      mesLegenda: st.mes === 0 ? 'Este mês' : st.mes === 1 ? 'Mês passado' : 'Mês',
+      mesNome: nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1) + ' de ' + ini.getFullYear(),
+      mesAnterior: function () { self.setState({ mes: st.mes + 1 }); },
+      mesProximo: function () { if (st.mes > 0) self.setState({ mes: st.mes - 1 }); },
+      semMesAnterior: new Date(ini.getFullYear(), ini.getMonth(), 0) < primeira,
+      semMesProximo: st.mes === 0,
+      mesFat: 'R$ ' + n0.format(tot.fat), mesGastos: 'R$ ' + n0.format(tot.gastos),
+      mesLucro: (tot.fat - tot.gastos < 0 ? '−' : '') + 'R$ ' + n0.format(Math.abs(tot.fat - tot.gastos)),
+      mesResumo: linhas.length ? linhas.length + (linhas.length === 1 ? ' dia trabalhado' : ' dias trabalhados') + ' · bateu a meta em ' + tot.bateu + '. Toque num dia para ver os detalhes.' : '',
+      linhas: linhas, semDias: linhas.length === 0,
+      d: {}
+    };
+  }
+}
+</script>
+</body>
+</html>
