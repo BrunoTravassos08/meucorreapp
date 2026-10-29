@@ -76,6 +76,8 @@ button:disabled{cursor:default;opacity:0.35}
 .mc-on .mc-colunas > :nth-child(29) .mc-sobe-barra{animation-delay:1.19s}
 .mc-on .mc-colunas > :nth-child(30) .mc-sobe-barra{animation-delay:1.22s}
 .mc-on .mc-colunas > :nth-child(31) .mc-sobe-barra{animation-delay:1.25s}
+.mc-on .mc-cal > *{animation:mc-dia .4s cubic-bezier(.2,.75,.25,1) both}
+@keyframes mc-dia{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
 @keyframes mc-desce{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
 @keyframes mc-bloco{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes mc-linha{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
@@ -134,6 +136,39 @@ button:disabled{cursor:default;opacity:0.35}
       </div>
       <span style="font-size: 12.5px; color: #9AA2B1; margin-top: -6px">{{mesResumo}}</span>
 
+      <div role="tablist" aria-label="Modo de visualização" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #262B35; border-radius: 14px">
+        <sc-for list="{{modos}}" as="o" hint-placeholder-count="2">
+          <button type="button" role="tab" aria-selected="{{o.ativo}}" onClick="{{o.pick}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 38px; border: 0; border-radius: 10px; background: {{o.fundo}}; color: {{o.cor}}; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{o.icone}}"></path></svg>{{o.nome}}
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{modoCalendario}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+            <sc-for list="{{semanaCab}}" as="w" hint-placeholder-count="7">
+              <span style="text-align: center; font-size: 11.5px; font-weight: 600; color: #9AA2B1">{{w}}</span>
+            </sc-for>
+          </div>
+          <div class="mc-cal" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+            <sc-for list="{{celulas}}" as="c" hint-placeholder-count="31">
+              <button type="button" aria-label="{{c.aria}}" disabled="{{c.semDado}}" onClick="{{c.abrir}}" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 3px; min-width: 0; height: 58px; padding: 6px 0 0; box-sizing: border-box; border: {{c.borda}}; border-radius: 10px; background: {{c.fundo}}; color: inherit; font-family: 'Figtree', sans-serif; cursor: pointer; visibility: {{c.visivel}}; animation-delay: {{c.atraso}}">
+                <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 14px; line-height: 1; color: {{c.numCor}}">{{c.dia}}</span>
+                <span style="font-family: 'DM Mono', monospace; font-size: 10.5px; line-height: 1.1; color: {{c.lucroCor}}; white-space: nowrap">{{c.lucro}}</span>
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: {{c.metaCor}}"></span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: #C9CED7">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FFC629"></span>Bateu a meta</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #6B7385"></span>Abaixo da meta</span>
+            <span>Valor: lucro do dia em R$</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{modoListaDias}}" hint-placeholder-val="{{ true }}">
       <div class="mc-linhas" style="display: flex; flex-direction: column">
         <sc-for list="{{linhas}}" as="l" hint-placeholder-count="6">
           <button type="button" onClick="{{l.abrir}}" aria-label="{{l.aria}}" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 16px; gap: 12px; align-items: center; width: 100%; padding: 10px 0; border: 0; border-bottom: 1px solid #2D333E; background: transparent; color: inherit; font-family: 'Figtree', sans-serif; text-align: left; cursor: pointer">
@@ -156,6 +191,7 @@ button:disabled{cursor:default;opacity:0.35}
           <p style="margin: 0; padding: 16px 0; font-size: 14px; line-height: 1.45; color: #9AA2B1">Nenhum dia fechado neste mês. No fim do turno, toque em Começar um dia novo em <a href="GanhosDia.dc.html">Ganhos</a> ou <a href="Gastos.dc.html">Gastos</a>.</p>
         </sc-if>
       </div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -293,7 +329,13 @@ class Component extends DCLogic {
     { id: 'pessoal', nome: 'Pessoais e outras', icone: 'M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-4h14l2 4M16 14h2' }
   ];
 
-  state = { mcAnim: true, mcK: 0, mes: 0, sel: null };
+  state = { mcAnim: true, mcK: 0, mes: 0, sel: null, modo: this.modoSalvo() };
+
+  // Lista ou calendário: a escolha fica salva em meucorre.diasModo
+  modoSalvo() {
+    try { if (window.localStorage.getItem('meucorre.diasModo') === 'calendario') return 'calendario'; } catch (e) {}
+    return 'lista';
+  }
 
   // Painel, Ganhos e Gastos abrem esta tela na lista ou já num dia: meucorre.dias = { sel: 'AAAA-MM-DD' | null, t }
   pedido() {
@@ -676,7 +718,46 @@ class Component extends DCLogic {
     });
     var primeira = datas.length ? this.data(datas[0]) : hoje;
     var nomeMes = this.MESES[ini.getMonth()];
+
+    // Calendário do mês, semana começando na segunda
+    var k0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var celulas = [];
+    for (var b = 0; b < (ini.getDay() + 6) % 7; b++) celulas.push({ visivel: 'hidden', semDado: true, dia: '', lucro: '', aria: '', borda: '0', fundo: 'transparent', numCor: '#9AA2B1', lucroCor: '#9AA2B1', metaCor: 'transparent', atraso: '0s', abrir: null });
+    for (var dd = new Date(ini); dd <= fim; dd = this.somaDias(dd, 1)) {
+      (function (dt) {
+        var iso = self.iso(dt), d = porData[iso], futuro = dt > hoje, lucro = d ? d.faturamento - d.gastos : 0, bt = d && bateu(d);
+        celulas.push({
+          visivel: 'visible', semDado: !d,
+          dia: String(dt.getDate()),
+          lucro: d ? (lucro < 0 ? '−' : '') + k0.format(Math.abs(lucro)) : futuro ? '' : 'folga',
+          aria: self.DIAS_LONGOS[dt.getDay()] + ', ' + dt.getDate() + ' de ' + self.MESES[dt.getMonth()] + (d ? ': lucro ' + sinal(lucro) + (bt ? ', bateu a meta' : ', abaixo da meta') + '. Abrir o dia' : futuro ? '' : ': folga'),
+          borda: iso === hojeIso ? '1.5px solid #FFC629' : '0',
+          fundo: d ? '#262B35' : 'transparent',
+          numCor: d ? '#FFFFFF' : '#5A6272',
+          lucroCor: d ? (lucro < 0 ? '#FF7A7E' : '#3DD598') : '#5A6272',
+          metaCor: d && !d.aberto ? (bt ? '#FFC629' : '#6B7385') : 'transparent',
+          atraso: (0.3 + celulas.length * 0.012).toFixed(3) + 's',
+          abrir: d ? function () { self.setState({ sel: iso }); } : null
+        });
+      })(dd);
+    }
+    var cal = st.modo === 'calendario';
+    var MODOS = [
+      { id: 'lista', nome: 'Lista', icone: 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01' },
+      { id: 'calendario', nome: 'Calendário', icone: 'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4' }
+    ];
     return {
+      modoCalendario: cal, modoListaDias: !cal,
+      modos: MODOS.map(function (o) {
+        var on = o.id === st.modo;
+        return {
+          nome: o.nome, icone: o.icone, ativo: on ? 'true' : 'false',
+          fundo: on ? '#FFC629' : 'transparent', cor: on ? '#1A1E26' : '#C9CED7',
+          pick: function () { try { window.localStorage.setItem('meucorre.diasModo', o.id); } catch (e) {} self.setState({ modo: o.id }); }
+        };
+      }),
+      semanaCab: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+      celulas: celulas,
       modoLista: true, modoDetalhe: false,
       exemplo: hist.exemplo,
       mesLegenda: st.mes === 0 ? 'Este mês' : st.mes === 1 ? 'Mês passado' : 'Mês',

@@ -17,7 +17,7 @@ telas/
   GanhosDia.dc.html      Ganhos do dia
   Gastos.dc.html         Gastos
   Painel.dc.html         Painel de desempenho
-  Dias.dc.html           Dias anteriores
+  Dias.dc.html           Dias anteriores (lista ou calendário)
   Perfil.dc.html         Perfil e configurações
   Notificacoes.dc.html   Notificações
 funcoes/
