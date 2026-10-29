@@ -221,6 +221,41 @@ button:disabled{cursor:default}
       </div>
     </div>
 
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 800; font-size: 17px; color: #FFFFFF">Exportar relatório</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #262B35; border-radius: 20px">
+        <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: center">
+          <span style="width: 40px; height: 40px; border-radius: 12px; background: #1A1E26; color: #FFC629; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h4"></path></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Resumo do mês em PDF</span><span style="font-size: 12.5px; color: #9AA2B1">Entradas, saídas e a lista dos dias</span></span>
+        </div>
+        <div role="group" aria-label="Mês do relatório" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 6px; align-items: center; padding: 4px; background: #1A1E26; border-radius: 14px">
+          <button type="button" aria-label="Mês anterior" disabled="{{exp.semAnterior}}" onClick="{{exp.anterior}}" style="width: 44px; height: 40px; border: 0; border-radius: 10px; background: transparent; color: {{exp.corAnterior}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+          <span aria-live="polite" style="text-align: center; font-weight: 700; font-size: 15px; color: #FFFFFF">{{exp.mes}}</span>
+          <button type="button" aria-label="Próximo mês" disabled="{{exp.semProximo}}" onClick="{{exp.proximo}}" style="width: 44px; height: 40px; border: 0; border-radius: 10px; background: transparent; color: {{exp.corProximo}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div style="display: flex; flex-direction: column; background: #1A1E26; border-radius: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid #262B35">
+            <span style="font-size: 14px; color: #C9CED7">Entradas</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #3DD598; white-space: nowrap">{{exp.entradas}}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid #262B35">
+            <span style="font-size: 14px; color: #C9CED7">Saídas</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: #FF7A7E; white-space: nowrap">{{exp.saidas}}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px">
+            <span style="font-size: 14px; color: #C9CED7">Saldo do mês</span>
+            <span style="font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; color: {{exp.saldoCor}}; white-space: nowrap">{{exp.saldo}}</span>
+          </div>
+        </div>
+        <span style="font-size: 12.5px; color: #9AA2B1">{{exp.nota}}</span>
+        <button type="button" onClick="{{exp.baixar}}" disabled="{{exp.ocupado}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border: 0; border-radius: 14px; background: #FFC629; color: #1A1E26; font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 15px; cursor: pointer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>
+          {{exp.botao}}
+        </button>
+        <span role="status" style="font-size: 12.5px; font-weight: 600; color: {{exp.msgCor}}">{{exp.msg}}</span>
+      </div>
+    </div>
+
     <div style="display: flex; flex-direction: column; gap: 10px">
       <a href="Main.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; border: 1px solid #4A5261; color: #FF7A7E; font-weight: 700; font-size: 15px; text-decoration: none">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg>
@@ -263,7 +298,457 @@ class Component extends DCLogic {
     return Object.assign({}, this.PADRAO);
   }
 
-  state = { mcAnim: true, mcK: 0, perfil: this.carregar(), salvoEm: null, erroFoto: '' };
+  state = { mcAnim: true, mcK: 0, perfil: this.carregar(), salvoEm: null, erroFoto: '', expMes: 0, exportando: false, exportMsg: '', exportErro: false };
+
+  // ---- Exportar relatório: resumo do mês em PDF ----
+  // Os dias vêm do mesmo lugar das telas Painel e Dias anteriores (meucorre.historico, ou os dias
+  // de exemplo enquanto não tem dia fechado) mais o dia de hoje ainda aberto em Ganhos e Gastos.
+  MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  CATEGORIAS = [
+    { id: 'combustivel', nome: 'Combustível' },
+    { id: 'manutencao', nome: 'Manutenção' },
+    { id: 'lavagem', nome: 'Lavagem e estacionamento' },
+    { id: 'pedagio', nome: 'Pedágio' },
+    { id: 'alimentacao', nome: 'Alimentação' },
+    { id: 'pessoal', nome: 'Pessoais e outras' }
+  ];
+
+  num(s) {
+    if (typeof s === 'number') return isFinite(s) ? s : 0;
+    s = String(s || '').replace(/[^\d.,]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = Number(s);
+    return isFinite(n) ? n : 0;
+  }
+  arred(v) { return Math.round(v * 100) / 100; }
+  minutos(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || ''));
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+  hhmm(min) { min = ((min % 1440) + 1440) % 1440; return String(Math.floor(min / 60)).padStart(2, '0') + ':' + String(min % 60).padStart(2, '0'); }
+  iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  data(iso) { var p = iso.split('-'); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2])); }
+  somaDias(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  hoje() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+
+  plano() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.plano') || 'null');
+      if (s && s.dias && s.fixas && s.variaveis) return s;
+    } catch (e) {}
+    return {
+      lucro: '3.000', porHora: '28', dias: [1, 1, 1, 1, 1, 1, 0],
+      fixas: [
+        { nome: 'Parcela da moto', valor: '450' },
+        { nome: 'Seguro', valor: '90' },
+        { nome: 'IPVA e licenciamento (÷12)', valor: '40' },
+        { nome: 'Plano de celular', valor: '50' },
+        { nome: 'MEI (DAS)', valor: '82' }
+      ],
+      variaveis: [
+        { nome: 'Combustível', valor: '12', tipo: 'percentual' },
+        { nome: 'Óleo, relação e pneus', valor: '6', tipo: 'percentual' },
+        { nome: 'Alimentação', valor: '20', tipo: 'porDia' }
+      ]
+    };
+  }
+  metas(p) {
+    var self = this;
+    var diasMes = p.dias.reduce(function (a, b) { return a + (b ? 1 : 0); }, 0) * 52 / 12;
+    var fixas = p.fixas.reduce(function (t, f) { return t + self.num(f.valor); }, 0);
+    var pct = 0, porDia = 0;
+    p.variaveis.forEach(function (c) { if (c.tipo === 'percentual') pct += self.num(c.valor); else porDia += self.num(c.valor); });
+    pct = pct / 100;
+    return { dia: diasMes > 0 && pct < 1 ? (this.num(p.lucro) + fixas + porDia * diasMes) / (1 - pct) / diasMes : 0 };
+  }
+
+  ganhosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.ganhos') || 'null');
+      if (s && s.turno && s.lancamentos) return s;
+    } catch (e) {}
+    return {
+      turno: { inicio: '07:30', fim: '14:10', kmInicial: '12340', kmFinal: '12436' },
+      lancamentos: [
+        { app: 'uber', tipo: 'corrida', corridas: '7', bruto: '112,00', taxa: '28,00', hora: '11:05' },
+        { app: '99', tipo: 'corrida', corridas: '5', bruto: '68,00', taxa: '13,60', hora: '12:20' },
+        { app: 'uber', tipo: 'bonus', corridas: '', bruto: '10,00', taxa: '', hora: '12:40' },
+        { app: 'indrive', tipo: 'corrida', corridas: '1', bruto: '15,00', taxa: '1,50', hora: '13:10' },
+        { app: 'particular', tipo: 'corrida', corridas: '1', bruto: '20,00', taxa: '', hora: '14:05' }
+      ]
+    };
+  }
+  gastosSalvos() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.gastos') || 'null');
+      if (s && s.lancamentos) return s.lancamentos;
+    } catch (e) {}
+    return [
+      { categoria: 'combustivel', valor: '42,00', litros: '6,8', desc: 'Posto Ipiranga', hora: '07:40' },
+      { categoria: 'alimentacao', valor: '18,50', litros: '', desc: 'Marmita', hora: '12:15' }
+    ];
+  }
+
+  // Mesmo formato que "Começar um dia novo" grava, com os lançamentos do dia
+  diaDe(g, gastos, meta, data) {
+    var self = this, bruto = 0, taxas = 0, corridas = 0, total = 0, comb = 0;
+    g.lancamentos.forEach(function (l) {
+      var b = self.num(l.bruto);
+      var t = l.app === 'particular' || l.tipo === 'bonus' ? 0 : Math.min(b, self.num(l.taxa));
+      bruto += b; taxas += t;
+      if (l.tipo !== 'bonus') corridas += Math.round(self.num(l.corridas));
+    });
+    gastos.forEach(function (x) { var v = self.num(x.valor); total += v; if (x.categoria === 'combustivel') comb += v; });
+    if (bruto === 0 && total === 0) return null;
+    var ini = this.minutos(g.turno.inicio), fim = this.minutos(g.turno.fim);
+    var k0 = this.num(g.turno.kmInicial), k1 = this.num(g.turno.kmFinal);
+    return {
+      data: data, faturamento: this.arred(bruto - taxas), bruto: this.arred(bruto), taxas: this.arred(taxas),
+      gastos: this.arred(total), combustivel: this.arred(comb),
+      km: String(g.turno.kmInicial || '').trim() && String(g.turno.kmFinal || '').trim() && k1 >= k0 ? k1 - k0 : null,
+      minutos: ini !== null && fim !== null ? (fim >= ini ? fim - ini : fim + 1440 - ini) : null,
+      corridas: corridas, meta: this.arred(meta),
+      inicio: g.turno.inicio || '', fim: g.turno.fim || '', itensGanhos: g.lancamentos, itensGastos: gastos
+    };
+  }
+
+  sorteio(semente) {
+    var a = semente >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      var t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Mesmos dias de exemplo do Painel e de Dias anteriores
+  exemplo(hoje, meta) {
+    var dias = [], MULT = [0, 0.93, 0.88, 0.95, 1, 1.14, 1.22];
+    var TAXA = { uber: 0.25, '99': 0.2, indrive: 0.1, particular: 0 };
+    for (var i = 182; i >= 1; i--) {
+      var d = this.somaDias(hoje, -i), wd = d.getDay();
+      var r = this.sorteio(d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate());
+      if (wd === 0 || r() < 0.05) continue;
+      var tend = 0.8 + 0.2 * (1 - i / 182);
+      var horas = 6.2 + r() * 2.4 + (wd === 6 ? 0.5 : 0);
+      var fat = horas * 26.5 * MULT[wd] * tend * (0.9 + r() * 0.2);
+      var taxa = 0.17 + r() * 0.06;
+      var km = Math.round(fat / (1.5 + r() * 0.35));
+      var comb = km / (32 + r() * 6) * (6.05 + 0.24 * (1 - i / 182));
+      var comida = 0, manut = 0, lavagem = 0;
+      if (r() < 0.85) comida = 14 + r() * 10;
+      if (r() < 0.06) manut = 45 + r() * 115;
+      if (r() < 0.08) lavagem = 15 + r() * 10;
+      var ini = 390 + Math.round(r() * 30) * 5;
+      var fatias = { uber: 0.5 + r() * 0.2, indrive: r() < 0.3 ? 0.06 : 0, particular: r() < 0.25 ? 0.07 : 0 };
+      fatias['99'] = 1 - fatias.uber - fatias.indrive - fatias.particular;
+      var apps = [], bruto = 0;
+      ['uber', '99', 'indrive', 'particular'].forEach(function (id) {
+        if (!fatias[id]) return;
+        var rec = fat * fatias[id], b = rec / (1 - TAXA[id]);
+        bruto += b;
+        apps.push({ app: id, corridas: Math.max(1, Math.round(rec / 13.5)), bruto: Math.round(b * 100) / 100, taxas: Math.round((b - rec) * 100) / 100 });
+      });
+      var categorias = [{ categoria: 'combustivel', total: this.arred(comb), qtd: 1 }];
+      if (comida) categorias.push({ categoria: 'alimentacao', total: this.arred(comida), qtd: 1 });
+      if (manut) categorias.push({ categoria: 'manutencao', total: this.arred(manut), qtd: 1 });
+      if (lavagem) categorias.push({ categoria: 'lavagem', total: this.arred(lavagem), qtd: 1 });
+      dias.push({
+        data: this.iso(d), faturamento: this.arred(fat), bruto: this.arred(bruto), taxas: this.arred(bruto - fat),
+        gastos: this.arred(comb + comida + manut + lavagem), combustivel: this.arred(comb), km: km, minutos: Math.round(horas * 60),
+        corridas: Math.round(fat / 14), meta: this.arred(meta), inicio: this.hhmm(ini), fim: this.hhmm(ini + Math.round(horas * 60)),
+        apps: apps, categorias: categorias, exemplo: true
+      });
+    }
+    return dias;
+  }
+
+  historico(hoje, meta) {
+    try {
+      var s = JSON.parse(window.localStorage.getItem('meucorre.historico') || 'null');
+      if (s && s.exemplo === false && Array.isArray(s.dias)) return s;
+    } catch (e) {}
+    return { exemplo: true, dias: this.exemplo(hoje, meta) };
+  }
+
+  // Dois fechamentos no mesmo dia viram um só
+  somar(a, b) {
+    var c = Object.assign({}, a);
+    ['faturamento', 'bruto', 'taxas', 'gastos', 'combustivel', 'corridas'].forEach(function (k) { c[k] = (a[k] || 0) + (b[k] || 0); });
+    ['km', 'minutos'].forEach(function (k) { c[k] = a[k] == null && b[k] == null ? null : (a[k] || 0) + (b[k] || 0); });
+    ['itensGanhos', 'itensGastos', 'apps', 'categorias'].forEach(function (k) { if (a[k] || b[k]) c[k] = (a[k] || []).concat(b[k] || []); });
+    return c;
+  }
+
+  // Todos os dias com movimento, por data
+  diasSalvos() {
+    var self = this, hoje = this.hoje(), hojeIso = this.iso(hoje), p = this.plano(), m = this.metas(p);
+    var hist = this.historico(hoje, m.dia), porData = {};
+    hist.dias.forEach(function (d) { porData[d.data] = porData[d.data] ? self.somar(porData[d.data], d) : d; });
+    var vivo = this.diaDe(this.ganhosSalvos(), this.gastosSalvos(), m.dia, hojeIso);
+    if (vivo) { vivo.aberto = true; porData[hojeIso] = porData[hojeIso] ? Object.assign(this.somar(porData[hojeIso], vivo), { aberto: true }) : vivo; }
+    var meses = {};
+    Object.keys(porData).forEach(function (iso) { meses[iso.slice(0, 7)] = true; });
+    meses[hojeIso.slice(0, 7)] = true;
+    return { porData: porData, exemplo: hist.exemplo, plano: p, meta: m.dia, meses: Object.keys(meses).sort().reverse() };
+  }
+
+  // Entradas e saídas de um mês (chave AAAA-MM)
+  resumoMes(base, chave) {
+    var self = this, t = { bruto: 0, taxas: 0, fat: 0, gastos: 0, km: 0, minutos: 0, corridas: 0, bateu: 0 }, apps = {}, cats = {};
+    var dias = Object.keys(base.porData).filter(function (iso) { return iso.slice(0, 7) === chave; }).sort().map(function (iso) {
+      var d = base.porData[iso], meta = d.meta > 0 ? d.meta : base.meta;
+      t.bruto += d.bruto || 0; t.taxas += d.taxas || 0; t.fat += d.faturamento || 0; t.gastos += d.gastos || 0;
+      t.km += d.km || 0; t.minutos += d.minutos || 0; t.corridas += d.corridas || 0;
+      var bateu = meta > 0 && d.faturamento >= meta;
+      if (bateu) t.bateu++;
+      var addApp = function (id, corridas, bruto, taxas) {
+        var x = apps[id] = apps[id] || { corridas: 0, bruto: 0, taxas: 0 };
+        x.corridas += corridas; x.bruto += bruto; x.taxas += taxas;
+      };
+      (d.apps || []).forEach(function (a) { addApp(a.app, a.corridas, a.bruto, a.taxas); });
+      (d.itensGanhos || []).forEach(function (l) {
+        var b = self.num(l.bruto), bonus = l.tipo === 'bonus';
+        addApp(l.app, bonus ? 0 : Math.round(self.num(l.corridas)), b, l.app === 'particular' || bonus ? 0 : Math.min(b, self.num(l.taxa)));
+      });
+      if (d.itensGastos) d.itensGastos.forEach(function (x) { cats[x.categoria] = (cats[x.categoria] || 0) + self.num(x.valor); });
+      else (d.categorias || []).forEach(function (x) { cats[x.categoria] = (cats[x.categoria] || 0) + x.total; });
+      return { iso: iso, fat: d.faturamento || 0, gastos: d.gastos || 0, lucro: (d.faturamento || 0) - (d.gastos || 0), bateu: bateu, temMeta: meta > 0, aberto: !!d.aberto };
+    });
+    var contas = base.plano.fixas.map(function (f, i) { return { nome: String(f.nome || '').trim() || 'Conta ' + (i + 1), valor: self.num(f.valor) }; }).filter(function (c) { return c.valor > 0; });
+    var contasTotal = contas.reduce(function (a, c) { return a + c.valor; }, 0);
+    var p = chave.split('-');
+    return {
+      chave: chave, titulo: this.MESES[Number(p[1]) - 1] + ' de ' + p[0], exemplo: base.exemplo,
+      dias: dias, t: t, contas: contas, contasTotal: contasTotal,
+      apps: this.APPS.filter(function (a) { return apps[a.id]; }).map(function (a) { return Object.assign({ nome: a.nome }, apps[a.id]); }),
+      cats: this.CATEGORIAS.filter(function (c) { return cats[c.id] > 0; }).map(function (c) { return { nome: c.nome, valor: cats[c.id] }; }),
+      entradas: t.fat, saidas: t.gastos + contasTotal, saldo: t.fat - t.gastos - contasTotal
+    };
+  }
+
+  // PDF montado aqui mesmo, sem biblioteca: A4, Helvetica, texto em WinAnsi
+  LARG = {
+    n: [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584],
+    b: [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584]
+  };
+  WIN = { '€': 128, '‚': 130, '„': 132, '…': 133, '‘': 145, '’': 146, '“': 147, '”': 148, '•': 149, '–': 150, '—': 151, '−': 45 };
+
+  gerarPdf(r, perfil) {
+    var self = this, W = 595, H = 842, M = 40;
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    var rs = function (v) { return (v < -0.004 ? '- ' : '') + 'R$ ' + nf.format(Math.abs(v)); };
+    var menos = function (v) { return '- R$ ' + nf.format(Math.abs(v)); };
+    var cod = function (s) {
+      var o = '';
+      for (var ch of String(s)) {
+        var c = ch.charCodeAt(0);
+        if (self.WIN[ch]) c = self.WIN[ch]; else if (c > 255 || (c >= 128 && c < 160)) c = 63;
+        o += String.fromCharCode(c);
+      }
+      return o;
+    };
+    var largura = function (s, bold, tam) {
+      var w = 0, t = bold ? self.LARG.b : self.LARG.n;
+      for (var ch of String(s)) {
+        var c = ch.normalize('NFD').charCodeAt(0);
+        w += c >= 32 && c <= 126 ? t[c - 32] : ch === '·' ? 278 : ch === '—' ? 1000 : 556;
+      }
+      return w * tam / 1000;
+    };
+    var cor = function (hex) {
+      return [1, 3, 5].map(function (i) { return (parseInt(hex.substr(i, 2), 16) / 255).toFixed(3); }).join(' ');
+    };
+    var paginas = [], ops, y;
+    var texto = function (x, yy, s, o) {
+      o = o || {};
+      var tam = o.tam || 10, bold = !!o.bold;
+      if (o.direita) x -= largura(s, bold, tam);
+      var esc = cod(s).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+      ops.push('BT /' + (bold ? 'F2' : 'F1') + ' ' + tam + ' Tf ' + cor(o.cor || '#1A1E26') + ' rg ' + x.toFixed(2) + ' ' + (H - yy).toFixed(2) + ' Td (' + esc + ') Tj ET');
+    };
+    var caixa = function (x, yy, w, h, c) { ops.push(cor(c) + ' rg ' + x.toFixed(2) + ' ' + (H - yy - h).toFixed(2) + ' ' + w.toFixed(2) + ' ' + h.toFixed(2) + ' re f'); };
+    var traco = function (yy, c, esp) { ops.push(cor(c) + ' RG ' + (esp || 0.6) + ' w ' + M + ' ' + (H - yy).toFixed(2) + ' m ' + (W - M) + ' ' + (H - yy).toFixed(2) + ' l S'); };
+    var novaPagina = function () { ops = []; paginas.push(ops); y = 56; };
+    var cabe = function (h) { if (y + h > H - 60) { novaPagina(); return false; } return true; };
+
+    var secao = function (t) {
+      cabe(64);
+      y += 10;
+      texto(M, y, t, { tam: 13, bold: true });
+      traco(y + 7, '#1A1E26', 1.2);
+      y += 26;
+    };
+    var sub = function (t) { cabe(40); texto(M, y, t.toUpperCase(), { tam: 8.5, bold: true, cor: '#6B7385' }); y += 16; };
+    var linha = function (rot, val, o) {
+      o = o || {};
+      cabe(20);
+      texto(M + (o.recuo ? 10 : 0), y, rot, { tam: 10.5, bold: o.bold, cor: o.cor });
+      texto(W - M, y, val, { tam: 10.5, bold: o.bold, cor: o.corValor || o.cor, direita: true });
+      traco(y + 7, '#E3E5E9');
+      y += 21;
+    };
+
+    // Primeira página: cabeçalho e números do mês
+    novaPagina();
+    var agora = new Date(), pad = function (n) { return String(n).padStart(2, '0'); };
+    var titulo = r.titulo.charAt(0).toUpperCase() + r.titulo.slice(1);
+    caixa(0, 0, W, 108, '#FFC629');
+    texto(M, 34, 'MEU CORRE', { tam: 10, bold: true });
+    texto(W - M, 34, 'Relatório do mês', { tam: 10, direita: true });
+    texto(M, 66, 'Entradas e saídas · ' + titulo, { tam: 22, bold: true });
+    var quem = String(perfil.nome || '').trim() || 'Motorista';
+    texto(M, 90, quem + ' · gerado em ' + pad(agora.getDate()) + '/' + pad(agora.getMonth() + 1) + '/' + agora.getFullYear() + ' às ' + pad(agora.getHours()) + ':' + pad(agora.getMinutes()), { tam: 10 });
+    y = 134;
+    if (r.exemplo) {
+      caixa(M, y - 14, W - 2 * M, 24, '#FFF3C4');
+      texto(M + 10, y + 2, 'Dados de exemplo: ainda não tem nenhum dia fechado no app. Os números mudam quando você fechar o primeiro dia.', { tam: 8.5, cor: '#5A4A00' });
+      y += 32;
+    }
+    var cw = (W - 2 * M - 20) / 3;
+    [
+      { rot: 'Entradas', val: rs(r.entradas), cor: '#13805A', nota: 'recebido dos apps' },
+      { rot: 'Saídas', val: rs(r.saidas), cor: '#C23B40', nota: 'gastos + contas do mês' },
+      { rot: 'Saldo do mês', val: rs(r.saldo), cor: r.saldo < 0 ? '#C23B40' : '#1A1E26', nota: 'entradas - saídas' }
+    ].forEach(function (k, i) {
+      var x = M + i * (cw + 10);
+      caixa(x, y - 4, cw, 70, '#F2F3F5');
+      texto(x + 12, y + 14, k.rot, { tam: 9.5, bold: true, cor: '#4A5261' });
+      texto(x + 12, y + 40, k.val, { tam: 16, bold: true, cor: k.cor });
+      texto(x + 12, y + 56, k.nota, { tam: 8, cor: '#6B7385' });
+    });
+    y += 92;
+
+    secao('Entradas');
+    linha('Valor bruto das corridas', rs(r.t.bruto));
+    linha('Taxas dos apps', menos(r.t.taxas), { corValor: '#C23B40' });
+    linha('Recebido dos apps', rs(r.t.fat), { bold: true, corValor: '#13805A' });
+    if (r.apps.length) {
+      y += 4; sub('Por app');
+      r.apps.forEach(function (a) { linha(a.nome + (a.corridas ? ' · ' + n0.format(a.corridas) + (a.corridas === 1 ? ' corrida' : ' corridas') : ''), rs(a.bruto - a.taxas), { recuo: true }); });
+    }
+
+    secao('Saídas');
+    sub('Gastos do dia a dia');
+    if (!r.cats.length) linha('Nenhum gasto lançado', rs(0), { recuo: true, cor: '#6B7385' });
+    r.cats.forEach(function (c) { linha(c.nome, rs(c.valor), { recuo: true }); });
+    linha('Total dos gastos do dia a dia', rs(r.t.gastos), { bold: true });
+    y += 4; sub('Contas do mês (do seu plano)');
+    if (!r.contas.length) linha('Nenhuma conta no plano', rs(0), { recuo: true, cor: '#6B7385' });
+    r.contas.forEach(function (c) { linha(c.nome, rs(c.valor), { recuo: true }); });
+    cabe(44);
+    linha('Total das contas do mês', rs(r.contasTotal), { bold: true });
+    linha('Total de saídas', rs(r.saidas), { bold: true, corValor: '#C23B40' });
+
+    secao('Resultado');
+    linha('Entradas', rs(r.entradas));
+    linha('Saídas', menos(r.saidas), { corValor: '#C23B40' });
+    linha('Saldo do mês', rs(r.saldo), { bold: true, corValor: r.saldo < 0 ? '#C23B40' : '#13805A' });
+    linha('Lucro do dia a dia (sem as contas do mês)', rs(r.t.fat - r.t.gastos));
+    var nd = r.dias.length;
+    linha('Dias trabalhados', String(nd));
+    linha('Dias que bateu a meta', nd ? r.t.bateu + ' de ' + nd : '-');
+    linha('Média recebida por dia', nd ? rs(r.t.fat / nd) : '-');
+    if (r.t.minutos > 0) linha('Horas rodando', Math.floor(r.t.minutos / 60) + 'h' + pad(Math.round(r.t.minutos % 60)) + ' · ' + rs(r.t.fat / (r.t.minutos / 60)) + ' por hora');
+    if (r.t.km > 0) linha('Quilômetros rodados', n0.format(r.t.km) + ' km · ' + rs(r.t.fat / r.t.km) + ' por km');
+
+    // Lista dos dias
+    var X = { fat: 330, gastos: 415, lucro: 500 };
+    var cabecalho = function () {
+      caixa(M, y - 13, W - 2 * M, 20, '#1A1E26');
+      texto(M + 8, y, 'Dia', { tam: 9, bold: true, cor: '#FFFFFF' });
+      texto(X.fat, y, 'Recebeu', { tam: 9, bold: true, cor: '#FFFFFF', direita: true });
+      texto(X.gastos, y, 'Gastou', { tam: 9, bold: true, cor: '#FFFFFF', direita: true });
+      texto(X.lucro, y, 'Lucro', { tam: 9, bold: true, cor: '#FFFFFF', direita: true });
+      texto(W - M - 8, y, 'Meta', { tam: 9, bold: true, cor: '#FFFFFF', direita: true });
+      y += 20;
+    };
+    secao('Dia a dia');
+    if (!nd) linha('Nenhum dia com movimento neste mês', '', { cor: '#6B7385' });
+    else {
+      cabe(44); cabecalho();
+      r.dias.forEach(function (d, i) {
+        if (!cabe(18)) cabecalho();
+        var dt = self.data(d.iso);
+        if (i % 2) caixa(M, y - 12.5, W - 2 * M, 18, '#F5F6F8');
+        texto(M + 8, y, self.DIAS[dt.getDay()] + ' ' + pad(dt.getDate()) + '/' + pad(dt.getMonth() + 1) + (d.aberto ? ' (hoje, em andamento)' : ''), { tam: 9.5 });
+        texto(X.fat, y, rs(d.fat), { tam: 9.5, direita: true });
+        texto(X.gastos, y, rs(d.gastos), { tam: 9.5, direita: true });
+        texto(X.lucro, y, rs(d.lucro), { tam: 9.5, bold: true, cor: d.lucro < 0 ? '#C23B40' : '#13805A', direita: true });
+        texto(W - M - 8, y, !d.temMeta ? '-' : d.bateu ? 'bateu' : 'não', { tam: 9.5, cor: d.bateu ? '#1A1E26' : '#6B7385', bold: d.bateu, direita: true });
+        y += 18;
+      });
+      if (!cabe(22)) cabecalho();
+      traco(y - 10, '#1A1E26', 1);
+      y += 4;
+      texto(M + 8, y, 'Total · ' + nd + (nd === 1 ? ' dia' : ' dias'), { tam: 9.5, bold: true });
+      texto(X.fat, y, rs(r.t.fat), { tam: 9.5, bold: true, direita: true });
+      texto(X.gastos, y, rs(r.t.gastos), { tam: 9.5, bold: true, direita: true });
+      texto(X.lucro, y, rs(r.t.fat - r.t.gastos), { tam: 9.5, bold: true, direita: true });
+      texto(W - M - 8, y, r.t.bateu + '/' + nd, { tam: 9.5, bold: true, direita: true });
+      y += 22;
+    }
+
+    // Rodapé em todas as páginas
+    paginas.forEach(function (p, i) {
+      ops = p;
+      traco(H - 44, '#E3E5E9');
+      texto(M, H - 30, 'Meu Corre · ' + titulo, { tam: 8, cor: '#6B7385' });
+      texto(W - M, H - 30, 'Página ' + (i + 1) + ' de ' + paginas.length, { tam: 8, cor: '#6B7385', direita: true });
+    });
+
+    // Objetos: 1 catálogo, 2 páginas, 3 e 4 fontes, 5 informações, depois página + conteúdo
+    var objs = [], kids = [];
+    objs[1] = '<< /Type /Catalog /Pages 2 0 R >>';
+    objs[3] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';
+    objs[4] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+    objs[5] = '<< /Title (' + cod('Meu Corre - ' + titulo).replace(/[()\\]/g, '') + ') /Producer (Meu Corre) >>';
+    paginas.forEach(function (p, i) {
+      var n = 6 + i * 2, s = p.join('\n');
+      kids.push(n + ' 0 R');
+      objs[n] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ' + (n + 1) + ' 0 R >>';
+      objs[n + 1] = '<< /Length ' + s.length + ' >>\nstream\n' + s + '\nendstream';
+    });
+    objs[2] = '<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + paginas.length + ' >>';
+    var out = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n', pos = [];
+    for (var i = 1; i < objs.length; i++) { pos[i] = out.length; out += i + ' 0 obj\n' + objs[i] + '\nendobj\n'; }
+    var xref = out.length;
+    out += 'xref\n0 ' + objs.length + '\n0000000000 65535 f \n';
+    for (i = 1; i < objs.length; i++) out += String(pos[i]).padStart(10, '0') + ' 00000 n \n';
+    out += 'trailer\n<< /Size ' + objs.length + ' /Root 1 0 R /Info 5 0 R >>\nstartxref\n' + xref + '\n%%EOF\n';
+    var bytes = new Uint8Array(out.length);
+    for (i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 255;
+    return bytes;
+  }
+
+  // Oferece o arquivo pelo app (quem vê confirma) ou, fora dele, baixa direto pelo navegador
+  baixarPdf = async () => {
+    if (this.state.exportando) return;
+    var base = this.diasSalvos(), chave = base.meses[Math.min(this.state.expMes, base.meses.length - 1)];
+    var r = this.resumoMes(base, chave), nome = 'meu-corre-' + chave + '.pdf';
+    this.setState({ exportando: true, exportMsg: 'Montando o PDF de ' + r.titulo + '…', exportErro: false });
+    try {
+      var bytes = this.gerarPdf(r, this.state.perfil), dl = null;
+      try { dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch (e) { dl = null; }
+      if (dl) {
+        await dl.save({ filename: nome, data: new Blob([bytes], { type: 'application/pdf' }) });
+      } else {
+        var url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' })), a = document.createElement('a');
+        a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+      }
+      this.setState({ exportando: false, exportMsg: 'Pronto: ' + nome + ' foi baixado.', exportErro: false });
+    } catch (e) {
+      var c = e && e.code;
+      this.setState({ exportando: false, exportErro: c !== 'declined', exportMsg: c === 'declined' ? 'Download cancelado. Toque de novo quando quiser.' : c === 'rate_limited' ? 'Já tem um download esperando sua resposta.' : 'Não deu para baixar o PDF aqui. Tente de novo.' });
+    }
+  };
 
   // Foto de perfil: recorta o meio da imagem num quadrado de 256 px e guarda junto do perfil
   escolherFoto = (e) => {
@@ -391,6 +876,26 @@ class Component extends DCLogic {
     return v;
   }
 
+  // Prévia do mês escolhido na parte "Exportar relatório"
+  exportVals() {
+    var self = this, st = this.state, base = this.diasSalvos();
+    var i = Math.min(st.expMes, base.meses.length - 1), r = this.resumoMes(base, base.meses[i]);
+    var nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var rs = function (v) { return (v < -0.004 ? '−' : '') + 'R$ ' + nf.format(Math.abs(v)); };
+    var ir = function (n) { return function () { self.setState({ expMes: n, exportMsg: '', exportErro: false }); }; };
+    var nd = r.dias.length;
+    return {
+      mes: r.titulo.charAt(0).toUpperCase() + r.titulo.slice(1),
+      semProximo: i <= 0, proximo: ir(Math.max(0, i - 1)), corProximo: i <= 0 ? '#4A5261' : '#FFC629',
+      semAnterior: i >= base.meses.length - 1, anterior: ir(Math.min(base.meses.length - 1, i + 1)), corAnterior: i >= base.meses.length - 1 ? '#4A5261' : '#FFC629',
+      entradas: rs(r.entradas), saidas: rs(r.saidas), saldo: rs(r.saldo), saldoCor: r.saldo < 0 ? '#FF7A7E' : '#FFFFFF',
+      nota: (nd ? nd + (nd === 1 ? ' dia trabalhado' : ' dias trabalhados') : 'Nenhum dia trabalhado') + ' · saídas com as contas do mês' + (r.exemplo ? ' · dados de exemplo' : ''),
+      baixar: this.baixarPdf, ocupado: st.exportando,
+      botao: st.exportando ? 'Gerando o PDF…' : 'Baixar PDF do mês',
+      msg: st.exportMsg, msgCor: st.exportErro ? '#FF7A7E' : '#3DD598'
+    };
+  }
+
   renderValsBase() {
     var self = this, p = this.state.perfil;
     var fotoOk = typeof p.foto === 'string' && p.foto.indexOf('data:image/') === 0 ? p.foto : '';
@@ -426,7 +931,8 @@ class Component extends DCLogic {
         if (bloq) { c.corTexto = '#7E8696'; c.borda = '#3A414D'; }
         return Object.assign(c, { nome: t.nome, bloqueado: bloq, escolher: function () { if (!bloq) self.mudar({ tema: t.id }); } });
       }),
-      notifResumo: this.notifResumo()
+      notifResumo: this.notifResumo(),
+      exp: this.exportVals()
     };
     ['nome', 'apelido', 'celular', 'email', 'cidade', 'modelo', 'consumo'].forEach(function (k) { vals[k] = p[k]; vals['on_' + k] = campo(k); });
     return vals;
