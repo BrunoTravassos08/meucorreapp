@@ -12,7 +12,8 @@ identidade/
 telas/
   canvas.json            Índice das telas (ordem e posição de cada uma)
   Main.dc.html           Login: Google, e-mail e criar conta (com a animação de abertura)
-  Senha.dc.html          Senha do login por e-mail (mostra o e-mail digitado)
+  Senha.dc.html          Senha de quem já tem conta (mostra o e-mail digitado)
+  Cadastro.dc.html       Criar conta em 5 passos: dados, apps, veículo, dias e meta
   Dashboard.dc.html      Início
   MetaDiaria.dc.html     Meta diária
   GanhosDia.dc.html      Ganhos do dia

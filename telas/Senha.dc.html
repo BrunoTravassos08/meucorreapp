@@ -46,23 +46,23 @@ input:focus{outline:2px solid #FFC629;outline-offset:2px}
 
   <div class="mc-cascata" style="display: flex; flex-direction: column; gap: 18px; padding: 20px 28px 0; flex-grow: 1">
     <div style="display: flex; flex-direction: column; gap: 8px">
-      <h1 style="margin: 0; font-family: 'Archivo', 'Arial Black', sans-serif; font-stretch: 112%; font-weight: 900; font-size: 32px; line-height: 1.05; color: #FFFFFF">{{titulo}}</h1>
-      <p style="margin: 0; font-size: 16px; line-height: 1.45; color: #C9CED7">{{subtitulo}}</p>
+      <h1 style="margin: 0; font-family: 'Archivo', 'Arial Black', sans-serif; font-stretch: 112%; font-weight: 900; font-size: 32px; line-height: 1.05; color: #FFFFFF">Digite sua senha</h1>
+      <p style="margin: 0; font-size: 16px; line-height: 1.45; color: #C9CED7">Bom te ver de volta. Confirme que é você.</p>
     </div>
 
     <div style="display: flex; align-items: center; gap: 12px; padding: 12px 8px 12px 14px; background: #262B35; border-radius: 16px">
       <span aria-hidden="true" style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #FFC629; color: #1A1E26; display: flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-stretch: 112%; font-weight: 900; font-size: 17px">{{inicial}}</span>
       <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex-grow: 1">
-        <span style="font-size: 12.5px; color: #9AA2B1">{{rotuloEmail}}</span>
+        <span style="font-size: 12.5px; color: #9AA2B1">Entrando como</span>
         <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #FFFFFF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{email}}</span>
       </div>
       <a href="Main.dc.html" style="flex-shrink: 0; display: flex; align-items: center; height: 44px; padding: 0 10px; font-weight: 700; font-size: 14px; text-decoration: none">Trocar</a>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 8px">
-      <label for="senha" style="font-size: 14px; font-weight: 600; color: #EEF0F3">{{rotuloSenha}}</label>
+      <label for="senha" style="font-size: 14px; font-weight: 600; color: #EEF0F3">Senha</label>
       <div style="position: relative">
-        <input id="senha" type="{{tipoSenha}}" autocomplete="{{autocompleteSenha}}" value="{{senha}}" onChange="{{on_senha}}" aria-invalid="{{temErro}}" aria-describedby="senha-dica" style="height: 52px; width: 100%; box-sizing: border-box; padding: 0 56px 0 16px; border-radius: 14px; border: 1px solid {{bordaSenha}}; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 17px">
+        <input id="senha" type="{{tipoSenha}}" autocomplete="current-password" value="{{senha}}" onChange="{{on_senha}}" aria-invalid="{{temErro}}" aria-describedby="senha-dica" style="height: 52px; width: 100%; box-sizing: border-box; padding: 0 56px 0 16px; border-radius: 14px; border: 1px solid {{bordaSenha}}; background: #1A1E26; color: #FFFFFF; font-family: 'DM Mono', monospace; font-size: 17px">
         <button type="button" onClick="{{alternarVer}}" aria-label="{{verRotulo}}" aria-pressed="{{vendo}}" style="position: absolute; top: 4px; right: 4px; width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: #C9CED7; display: flex; align-items: center; justify-content: center; cursor: pointer">
           <sc-if value="{{escondida}}" hint-placeholder-val="{{ true }}">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -75,13 +75,11 @@ input:focus{outline:2px solid #FFC629;outline-offset:2px}
       <sc-if value="{{temErro}}" hint-placeholder-val="{{ false }}">
         <span role="alert" style="font-size: 13px; font-weight: 600; color: #FF7A7E">{{erro}}</span>
       </sc-if>
-      <span id="senha-dica" style="font-size: 13px; color: #9AA2B1">{{dicaSenha}}</span>
+      <span id="senha-dica" style="font-size: 13px; color: #9AA2B1">É a senha que você criou no cadastro.</span>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 8px">
-      <sc-if value="{{podeEsquecer}}" hint-placeholder-val="{{ true }}">
-        <button type="button" onClick="{{esqueci}}" style="align-self: flex-start; height: 44px; padding: 0; border: 0; background: transparent; color: #FFC629; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer">Esqueci minha senha</button>
-      </sc-if>
+      <button type="button" onClick="{{esqueci}}" style="align-self: flex-start; height: 44px; padding: 0; border: 0; background: transparent; color: #FFC629; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer">Esqueci minha senha</button>
       <sc-if value="{{temAviso}}" hint-placeholder-val="{{ false }}">
         <p role="status" style="margin: 0; padding: 10px 14px; border-radius: 12px; background: #262B35; font-size: 13.5px; line-height: 1.45; color: #C9CED7">{{aviso}}</p>
       </sc-if>
@@ -92,7 +90,7 @@ input:focus{outline:2px solid #FFC629;outline-offset:2px}
 
   <div class="mc-rodape" style="display: flex; flex-direction: column; gap: 12px; padding: 0 28px 40px">
     <a class="cta" href="Dashboard.dc.html" onClick="{{entrar}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 16px; background: #FFC629; color: #1A1E26; font-weight: 700; font-size: 17px; text-decoration: none">
-      {{textoBotao}}
+      Entrar
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </a>
     <p style="margin: 0; font-size: 12.5px; line-height: 1.5; color: #9AA2B1; text-align: center">Ao continuar, você aceita os <a href="#termos">Termos de uso</a> e a <a href="#privacidade">Política de privacidade</a>.</p>
@@ -103,14 +101,14 @@ input:focus{outline:2px solid #FFC629;outline-offset:2px}
 class Component extends DCLogic {
   state = Object.assign({ anim: true, senha: '', ver: false, erro: '', aviso: '' }, this.carregarLogin());
 
-  // O login guarda o e-mail digitado e o modo (entrar ou criar conta). A senha nunca é guardada.
+  // Só para quem já tem conta. O login guarda o e-mail digitado; a senha nunca é guardada.
   carregarLogin() {
-    var email = '', modo = 'entrar';
+    var email = '';
     try {
       var l = JSON.parse(window.localStorage.getItem('meucorre.login') || 'null');
-      if (l && typeof l === 'object') { email = l.email || ''; if (l.modo === 'criar') modo = 'criar'; }
+      if (l && typeof l === 'object') email = l.email || '';
     } catch (e) {}
-    return { email: email || 'voce@email.com', modo: modo };
+    return { email: email || 'voce@email.com' };
   }
 
   on_senha = (e) => { this.setState({ senha: e.target.value, erro: '' }); };
@@ -118,14 +116,8 @@ class Component extends DCLogic {
   esqueci = () => { this.setState({ aviso: 'Mandamos um link para criar uma senha nova em ' + this.state.email + '. Confira a caixa de entrada e o spam.' }); };
   entrar = (e) => {
     var st = this.state, s = st.senha || '';
-    var erro = !s ? 'Digite sua senha para continuar.' : (st.modo === 'criar' && s.length < 8 ? 'A senha precisa ter pelo menos 8 caracteres.' : '');
-    if (erro) { e.preventDefault(); this.setState({ erro: erro }); return; }
-    try {
-      window.localStorage.setItem('meucorre.login', JSON.stringify({ email: st.email, modo: st.modo, entrou: true }));
-      var p = JSON.parse(window.localStorage.getItem('meucorre.perfil') || 'null');
-      if (!p || typeof p !== 'object') p = {};
-      if (!p.email) { p.email = st.email; window.localStorage.setItem('meucorre.perfil', JSON.stringify(p)); }
-    } catch (err) {}
+    if (!s) { e.preventDefault(); this.setState({ erro: 'Digite sua senha para continuar.' }); return; }
+    try { window.localStorage.setItem('meucorre.login', JSON.stringify({ email: st.email, entrou: true })); } catch (err) {}
   };
 
   // Toca a animação sempre que a tela aparece: ao abrir (Play), ao voltar a ficar visível
@@ -172,19 +164,14 @@ class Component extends DCLogic {
   componentWillUnmount() { this.pararDeObservar(); }
 
   renderVals() {
-    var st = this.state, criar = st.modo === 'criar';
+    var st = this.state;
     return {
       classeAnim: st.anim ? 'mc-on' : '',
-      titulo: criar ? 'Crie sua senha' : 'Digite sua senha',
-      subtitulo: criar ? 'Falta pouco. Escolha uma senha para proteger suas contas.' : 'Bom te ver de volta. Confirme que é você.',
-      rotuloEmail: criar ? 'Criando conta com' : 'Entrando como',
       email: st.email,
       inicial: st.email.charAt(0).toUpperCase(),
-      rotuloSenha: criar ? 'Nova senha' : 'Senha',
       senha: st.senha,
       on_senha: this.on_senha,
       tipoSenha: st.ver ? 'text' : 'password',
-      autocompleteSenha: criar ? 'new-password' : 'current-password',
       vendo: st.ver,
       escondida: !st.ver,
       verRotulo: st.ver ? 'Esconder senha' : 'Mostrar senha',
@@ -192,12 +179,9 @@ class Component extends DCLogic {
       temErro: !!st.erro,
       erro: st.erro,
       bordaSenha: st.erro ? '#FF7A7E' : '#3A414D',
-      dicaSenha: criar ? 'Pelo menos 8 caracteres. Misture letras e números.' : 'É a senha que você criou no cadastro.',
-      podeEsquecer: !criar,
       esqueci: this.esqueci,
-      temAviso: !!st.aviso && !criar,
+      temAviso: !!st.aviso,
       aviso: st.aviso,
-      textoBotao: criar ? 'Criar conta' : 'Entrar',
       entrar: this.entrar
     };
   }
