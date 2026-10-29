@@ -11,7 +11,8 @@ identidade/
   identidade.html        Identidade visual v1 (logo, cores, tipografia, ícone, tom de voz)
 telas/
   canvas.json            Índice das telas (ordem e posição de cada uma)
-  Main.dc.html           Login (com a animação de abertura)
+  Main.dc.html           Login: Google, e-mail e criar conta (com a animação de abertura)
+  Senha.dc.html          Senha do login por e-mail (mostra o e-mail digitado)
   Dashboard.dc.html      Início
   MetaDiaria.dc.html     Meta diária
   GanhosDia.dc.html      Ganhos do dia
